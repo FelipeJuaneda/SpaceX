@@ -17,7 +17,7 @@ const SearchBar = () => {
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
-              <BiSearchAlt2 style={{ color: "#ffffff78" }} />
+              <BiSearchAlt2 color="#ffffff78" />
             </InputAdornment>
           ),
           style: {
