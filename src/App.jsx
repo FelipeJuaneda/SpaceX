@@ -1,13 +1,13 @@
+import { BrowserRouter } from "react-router-dom";
 import "./App.css";
-import CardListContainer from "./components/CardListContainer/CardListContainer";
-import NavBar from "./components/NavBar/NavBar";
-import SearchBar from "./components/SearchBar/SearchBar";
+
+import RoutesContainer from "./components/RoutesContainer/RoutesContainer";
 function App() {
   return (
     <div style={{ background: "#121212" }}>
-      <NavBar />
-      <SearchBar />
-      <CardListContainer />
+      <BrowserRouter>
+        <RoutesContainer />
+      </BrowserRouter>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const API_URL = "https://api.spacexdata.com";
 export function useLaunches() {
@@ -40,6 +40,12 @@ export function useLaunches() {
     });
   };
   const combinedData = combineLaunchesAndRockets();
+
+  useEffect(() => {
+    getLaunches();
+    getRockets();
+  }, []);
+
   return {
     getLaunches,
     responseLaunches,

@@ -4,6 +4,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { IconButton, Stack } from "@mui/material";
 import { AiOutlineStar } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 const CardList = ({ launch, rocket }) => {
   const getRandomImage = () => {
@@ -41,17 +42,19 @@ const CardList = ({ launch, rocket }) => {
       )}
       <CardContent>
         <Stack height={120} direction="column" justifyContent="center">
-          <Typography
-            color="#FFFFFF"
-            gutterBottom
-            fontSize={"20px"}
-            fontStyle={"normal"}
-            fontWeight={"700"}
-            lineHeight={"32px"}
-            component="div"
-          >
-            {launch.name}
-          </Typography>
+          <Link to={`launcher/${launch.id}`}>
+            <Typography
+              color="#FFFFFF"
+              gutterBottom
+              fontSize={"20px"}
+              fontStyle={"normal"}
+              fontWeight={"700"}
+              lineHeight={"32px"}
+              component="div"
+            >
+              {launch.name}
+            </Typography>
+          </Link>
           <Typography
             sx={{
               color: "#FFFFFF",

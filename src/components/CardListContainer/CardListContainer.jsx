@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useLaunches } from "../../hooks/useLaunches";
 import CardList from "../CardList/CardList";
 import { Grid } from "@mui/material";
@@ -6,13 +5,8 @@ import { Grid } from "@mui/material";
 // import { Box } from "@mui/material";
 
 const CardListContainer = () => {
-  const { getLaunches, getRockets, combinedData, loading } = useLaunches();
-
+  const { combinedData, loading } = useLaunches();
   console.log("combinada", combinedData);
-  useEffect(() => {
-    getLaunches();
-    getRockets();
-  }, []);
 
   return (
     <Grid
