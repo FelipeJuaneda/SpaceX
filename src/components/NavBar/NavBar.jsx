@@ -1,5 +1,6 @@
 import { Typography, createTheme, ThemeProvider, Box } from "@mui/material";
 import logo from "../../assets/logoSpaceX.svg";
+import { Link } from "react-router-dom";
 
 const theme = createTheme({
   palette: {
@@ -93,14 +94,14 @@ const NavBar = () => {
             color="white"
             sx={navBarStyles.menuItem}
           >
-            All
+            <Link to={"/"}>All</Link>
           </Typography>
           <Typography
             variant="caption"
             color="white"
             sx={navBarStyles.menuItem}
           >
-            Favourites
+            <Link to={"favorites"}>Favourites</Link>
           </Typography>
         </Box>
       </Box>

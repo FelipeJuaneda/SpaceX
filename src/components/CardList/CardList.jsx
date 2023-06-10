@@ -3,10 +3,27 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { IconButton, Stack } from "@mui/material";
-import { AiOutlineStar } from "react-icons/ai";
+import { AiOutlineStar, AiFillStar } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import { useFavoriteContext } from "../../context/FavoriteContext";
+import { useState } from "react";
 
 const CardList = ({ launch, rocket }) => {
+  const { addLauncherToFavorite, removeLauncherToFavorite, favoritelauncher } =
+    useFavoriteContext();
+
+  const ifLauncherIsIn = favoritelauncher.find((e) => e.id === launch.id);
+  const [isFavorite, setIsFavorite] = useState(ifLauncherIsIn);
+
+  const handleToggleFavorite = () => {
+    if (isFavorite) {
+      removeLauncherToFavorite(launch.id);
+    } else {
+      addLauncherToFavorite(launch);
+    }
+    setIsFavorite(!isFavorite);
+  };
+
   const getRandomImage = () => {
     if (rocket?.flickr_images?.length > 0) {
       const randomIndex = Math.floor(
@@ -78,8 +95,15 @@ const CardList = ({ launch, rocket }) => {
             alignItems="center"
           >
             <Typography fontSize={"14px"}>{formattedDate}</Typography>
-            <IconButton sx={{ color: "#ffffff78" }}>
-              <AiOutlineStar fontSize={"20px"} />
+            <IconButton
+              onClick={handleToggleFavorite}
+              sx={{ color: "#ffffff78" }}
+            >
+              {ifLauncherIsIn ? (
+                <AiFillStar fontSize={"20px"} />
+              ) : (
+                <AiOutlineStar fontSize={"20px"} />
+              )}
             </IconButton>
           </Stack>
         </Stack>
