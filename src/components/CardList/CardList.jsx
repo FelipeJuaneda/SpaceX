@@ -1,28 +1,17 @@
-import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { IconButton, Stack } from "@mui/material";
+import { Card, IconButton, Stack } from "@mui/material";
 import { AiOutlineStar, AiFillStar } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { useFavoriteContext } from "../../context/FavoriteContext";
 import { useState } from "react";
+import { useFavoriteContext } from "../../context/FavoriteContext";
 
 const CardList = ({ launch, rocket }) => {
   const { addLauncherToFavorite, removeLauncherToFavorite, favoritelauncher } =
     useFavoriteContext();
-
   const ifLauncherIsIn = favoritelauncher.find((e) => e.id === launch.id);
   const [isFavorite, setIsFavorite] = useState(ifLauncherIsIn);
-
-  const handleToggleFavorite = () => {
-    if (isFavorite) {
-      removeLauncherToFavorite(launch.id);
-    } else {
-      addLauncherToFavorite(launch);
-    }
-    setIsFavorite(!isFavorite);
-  };
 
   const getRandomImage = () => {
     if (rocket?.flickr_images?.length > 0) {
@@ -42,6 +31,15 @@ const CardList = ({ launch, rocket }) => {
   };
   const formattedDate = formatDate(launch.date_local);
 
+  const handleToggleFavorite = () => {
+    if (isFavorite) {
+      removeLauncherToFavorite(launch.id);
+    } else {
+      addLauncherToFavorite(launch);
+    }
+    setIsFavorite(!isFavorite);
+  };
+
   return (
     <Card
       sx={{
@@ -59,7 +57,7 @@ const CardList = ({ launch, rocket }) => {
       )}
       <CardContent>
         <Stack height={120} direction="column" justifyContent="center">
-          <Link to={`launcher/${launch.id}`}>
+          <Link to={`/launcher/${launch.id}`}>
             <Typography
               color="#FFFFFF"
               gutterBottom
@@ -99,7 +97,7 @@ const CardList = ({ launch, rocket }) => {
               onClick={handleToggleFavorite}
               sx={{ color: "#ffffff78" }}
             >
-              {ifLauncherIsIn ? (
+              {isFavorite ? (
                 <AiFillStar fontSize={"20px"} />
               ) : (
                 <AiOutlineStar fontSize={"20px"} />

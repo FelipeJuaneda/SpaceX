@@ -1,6 +1,7 @@
 import { Typography, createTheme, ThemeProvider, Box } from "@mui/material";
 import logo from "../../assets/logoSpaceX.svg";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import "./NavBar.css";
 
 const theme = createTheme({
   palette: {
@@ -57,6 +58,7 @@ const navBarStyles = {
     fontFamily: "DIN Next LT Pro",
     fontSize: "36px",
     lineHeight: "48px",
+    gap: "20px",
   },
   menuItem: {
     width: "180px",
@@ -89,20 +91,32 @@ const NavBar = () => {
           </Typography>
         </Box>
         <Box sx={navBarStyles.menuContainer}>
-          <Typography
-            variant="caption"
-            color="white"
-            sx={navBarStyles.menuItem}
-          >
-            <Link to={"/"}>All</Link>
-          </Typography>
-          <Typography
-            variant="caption"
-            color="white"
-            sx={navBarStyles.menuItem}
-          >
-            <Link to={"favorites"}>Favourites</Link>
-          </Typography>
+          {[
+            { value: "All", to: "/all", id: 1 },
+            { value: "Favourites", to: "/favorites", id: 2 },
+          ].map((nav) => {
+            return (
+              <NavLink
+                key={nav.id}
+                className={"navLink"}
+                style={{
+                  textDecoration: "none",
+                  width: "100px",
+                  textAlign: "center",
+                }}
+                activeclassname="active"
+                to={nav.to}
+              >
+                <Typography
+                  variant="caption"
+                  color="white"
+                  sx={navBarStyles.menuItem}
+                >
+                  {nav.value}
+                </Typography>
+              </NavLink>
+            );
+          })}
         </Box>
       </Box>
     </ThemeProvider>

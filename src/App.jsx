@@ -6,11 +6,9 @@ import FavoriteContextProvider from "./context/FavoriteContext";
 function App() {
   return (
     <FavoriteContextProvider>
-      <div style={{ background: "#121212" }}>
-        <BrowserRouter>
-          <RoutesContainer />
-        </BrowserRouter>
-      </div>
+      <BrowserRouter>
+        <RoutesContainer />
+      </BrowserRouter>
     </FavoriteContextProvider>
   );
 }
