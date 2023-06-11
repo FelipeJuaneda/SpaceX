@@ -1,32 +1,15 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useLaunchDetails } from "../../hooks/useLaunchDetail";
 import { Avatar, Box, Divider, Stack, Typography } from "@mui/material";
-import { IoIosArrowBack, IoIosStarOutline, IoIosStar } from "react-icons/io";
+import { IoIosArrowBack } from "react-icons/io";
 import naveDetail from "../../assets/naveDetail.svg";
 import { Loading } from "../Loading/Loading";
-import { useFavoriteContext } from "../../context/FavoriteContext";
-import { useState } from "react";
+import FavoriteButton from "../FavoriteButton/FavoriteButton";
 
 const LauncherDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { launchDetails, rocketDetails, favoritelauncher } =
-    useLaunchDetails(id);
-  const { addLauncherToFavorite, removeLauncherToFavorite } =
-    useFavoriteContext();
-  const ifLauncherIsIn =
-    favoritelauncher && favoritelauncher.find((e) => e.id === launchDetails.id);
-
-  const [isFavorite, setIsFavorite] = useState(ifLauncherIsIn);
-
-  const handleToggleFavorite = () => {
-    if (isFavorite) {
-      removeLauncherToFavorite(launchDetails.id);
-    } else {
-      addLauncherToFavorite(launchDetails);
-    }
-    setIsFavorite(!isFavorite);
-  };
+  const { launchDetails, rocketDetails } = useLaunchDetails(id);
 
   const goBack = () => {
     navigate(-1);
@@ -42,6 +25,7 @@ const LauncherDetail = () => {
     return date.toLocaleDateString("en-US", options);
   };
   const formattedDate = formatDate(launchDetails.date_local);
+
   return (
     <Box>
       <Box>
@@ -84,16 +68,11 @@ const LauncherDetail = () => {
                 <IoIosArrowBack />
               </Avatar>
             </Link>
-            <Avatar
-              onClick={handleToggleFavorite}
-              sx={{ backgroundColor: "rgba(0, 0, 0, 0.5)", margin: "0 20px" }}
-            >
-              {isFavorite ? (
-                <IoIosStar fontSize={"20px"} />
-              ) : (
-                <IoIosStarOutline fontSize={"20px"} />
-              )}
-            </Avatar>
+            <FavoriteButton
+              id={launchDetails.id}
+              launch={launchDetails}
+              style={true}
+            />
           </Stack>
           <Stack
             justifyContent="center"

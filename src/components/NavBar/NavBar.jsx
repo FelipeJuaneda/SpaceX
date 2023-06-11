@@ -92,7 +92,7 @@ const NavBar = () => {
         </Box>
         <Box sx={navBarStyles.menuContainer}>
           {[
-            { value: "All", to: "/all", id: 1 },
+            { value: "All", to: "/", id: 1 },
             { value: "Favourites", to: "/favorites", id: 2 },
           ].map((nav) => {
             return (

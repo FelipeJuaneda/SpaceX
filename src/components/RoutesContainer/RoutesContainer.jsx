@@ -18,7 +18,7 @@ function RoutesContainer() {
           </>
         }
       >
-        <Route path="all" element={<CardListContainer />} />
+        <Route index element={<CardListContainer />} />
         <Route path="favorites" element={<Favorites />} />
       </Route>
       <Route path="launcher/:id" element={<LauncherDetailContainer />} />
