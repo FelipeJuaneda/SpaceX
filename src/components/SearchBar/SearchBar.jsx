@@ -1,7 +1,12 @@
 import { Box, InputAdornment, TextField } from "@mui/material";
 import { BiSearchAlt2 } from "react-icons/bi";
 
-const SearchBar = () => {
+const SearchBar = ({ setSearchTerm }) => {
+  const handleSearchTermChange = (event) => {
+    event.preventDefault();
+    setSearchTerm(event.target.value);
+  };
+
   return (
     <Box
       sx={{
@@ -18,6 +23,7 @@ const SearchBar = () => {
           borderRadius: "8px",
         }}
         size="small"
+        onChange={handleSearchTermChange}
         placeholder="Search all launches..."
         InputProps={{
           startAdornment: (
