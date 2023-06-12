@@ -1,16 +1,23 @@
+// Favorites.jsx
 import { Box, Grid, Typography } from "@mui/material";
 import CardList from "../CardList/CardList";
 import { useFavoriteContext } from "../../context/FavoriteContext";
 import SearchBar from "../SearchBar/SearchBar";
+import usePagination from "../../hooks/usePagination";
+import PaginationCont from "../PaginationCont/PaginationCont";
 import { useLaunches } from "../../hooks/useLaunches";
 
 const Favorites = () => {
   const { favoritelauncher } = useFavoriteContext();
   const { searchTerm, setSearchTerm } = useLaunches();
 
+  const pageSize = 9;
   const filteredLaunches = favoritelauncher.filter((launch) =>
     launch.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  const { totalPageCount, getCurrentPageData, handlePageChange, currentPage } =
+    usePagination(filteredLaunches, pageSize);
 
   return (
     <Box>
@@ -26,12 +33,12 @@ const Favorites = () => {
         backgroundColor="#121212"
         columnSpacing={{ xs: 1, sm: 2, md: 3 }}
       >
-        {filteredLaunches.length === 0 ? (
+        {getCurrentPageData().length === 0 ? (
           <Typography color={"white"} variant="body1">
             No se encontraron resultados en Favourites
           </Typography>
         ) : (
-          filteredLaunches.map((favorite) => (
+          getCurrentPageData().map((favorite) => (
             <Grid
               padding={"0"}
               xs={12}
@@ -46,6 +53,11 @@ const Favorites = () => {
           ))
         )}
       </Grid>
+      <PaginationCont
+        count={totalPageCount}
+        page={currentPage + 1}
+        onChange={handlePageChange}
+      />
     </Box>
   );
 };

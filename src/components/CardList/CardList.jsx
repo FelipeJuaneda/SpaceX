@@ -41,7 +41,10 @@ const CardList = ({ launch, rocket }) => {
       )}
       <CardContent>
         <Stack height={120} direction="column" justifyContent="center">
-          <Link to={`/launcher/${launch.id}`}>
+          <Link
+            style={{ textDecoration: "none" }}
+            to={`/launcher/${launch.id}`}
+          >
             <Typography
               color="#FFFFFF"
               gutterBottom
