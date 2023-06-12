@@ -4,6 +4,7 @@ const PaginationCont = ({ count, page, onChange }) => {
   return (
     <Stack alignItems={"end"} padding={"30px"} backgroundColor="#121212">
       <Pagination
+        size="small"
         sx={{
           "& .MuiPaginationItem-root": {
             color: "white",
