@@ -71,6 +71,11 @@ const navBarStyles = {
 };
 
 const NavBar = () => {
+  const menu = [
+    { value: "All", to: "/", id: 1 },
+    { value: "Favourites", to: "/favorites", id: 2 },
+  ];
+
   return (
     <ThemeProvider theme={theme}>
       <Box sx={navBarStyles.root}>
@@ -91,10 +96,7 @@ const NavBar = () => {
           </Typography>
         </Box>
         <Box sx={navBarStyles.menuContainer}>
-          {[
-            { value: "All", to: "/", id: 1 },
-            { value: "Favourites", to: "/favorites", id: 2 },
-          ].map((nav) => {
+          {menu.map((nav) => {
             return (
               <NavLink
                 key={nav.id}

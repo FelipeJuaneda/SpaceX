@@ -17,8 +17,7 @@ const CardList = ({ launch, rocket }) => {
   const randomImage = getRandomImage();
 
   const formatDate = (dateString) => {
-    const dateLocal = dateString;
-    const date = new Date(dateLocal);
+    const date = new Date(dateString);
     const options = { month: "long", day: "numeric", year: "numeric" };
     return date.toLocaleDateString("en-US", options);
   };
@@ -42,16 +41,18 @@ const CardList = ({ launch, rocket }) => {
       <CardContent>
         <Stack height={120} direction="column" justifyContent="center">
           <Link
-            style={{ textDecoration: "none" }}
             to={`/launcher/${launch.id}`}
+            style={{ textDecoration: "none" }}
           >
             <Typography
               color="#FFFFFF"
               gutterBottom
-              fontSize={"20px"}
-              fontStyle={"normal"}
-              fontWeight={"700"}
-              lineHeight={"32px"}
+              variant="h6"
+              sx={{
+                fontSize: "20px",
+                fontWeight: "700",
+                lineHeight: "32px",
+              }}
               component="div"
             >
               {launch.name}
@@ -61,7 +62,7 @@ const CardList = ({ launch, rocket }) => {
             sx={{
               color: "#FFFFFF",
               display: "-webkit-box",
-              WebkitLineClamp: "2",
+              WebkitLineClamp: 2,
               WebkitBoxOrient: "vertical",
               textOverflow: "ellipsis",
               overflow: "hidden",
@@ -79,7 +80,7 @@ const CardList = ({ launch, rocket }) => {
             justifyContent="space-between"
             alignItems="center"
           >
-            <Typography fontSize={"14px"}>{formattedDate}</Typography>
+            <Typography sx={{ fontSize: "14px" }}>{formattedDate}</Typography>
             <FavoriteButton id={launch.id} launch={launch} />
           </Stack>
         </Stack>

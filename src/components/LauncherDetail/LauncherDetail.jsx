@@ -3,7 +3,7 @@ import { useLaunchDetails } from "../../hooks/useLaunchDetail";
 import { Avatar, Box, Divider, Stack, Typography } from "@mui/material";
 import { IoIosArrowBack } from "react-icons/io";
 import naveDetail from "../../assets/naveDetail.svg";
-import { Loading } from "../Loading/Loading";
+import { LoadingSpinner } from "../LoadingSpinner/LoadingSpinner";
 import FavoriteButton from "../FavoriteButton/FavoriteButton";
 
 const LauncherDetail = () => {
@@ -16,7 +16,7 @@ const LauncherDetail = () => {
   };
 
   if (!launchDetails || !rocketDetails) {
-    return <Loading />;
+    return <LoadingSpinner />;
   }
 
   const formatDate = (dateString) => {

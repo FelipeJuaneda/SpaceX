@@ -9,6 +9,10 @@ const PaginationCont = ({ count, page, onChange }) => {
           "& .MuiPaginationItem-root": {
             color: "white",
           },
+          "& .MuiPaginationItem-root.Mui-selected": {
+            backgroundColor: "white",
+            color: "black",
+          },
         }}
         count={count}
         page={page}

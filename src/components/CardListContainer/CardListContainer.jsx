@@ -1,6 +1,5 @@
-// CardListContainer.jsx
 import { Box, Grid, Typography } from "@mui/material";
-import { Loading } from "../Loading/Loading";
+import { LoadingSpinner } from "../LoadingSpinner/LoadingSpinner";
 import SearchBar from "../SearchBar/SearchBar";
 import CardList from "../CardList/CardList";
 import { useLaunches } from "../../hooks/useLaunches";
@@ -33,7 +32,7 @@ const CardListContainer = () => {
         columnSpacing={{ xs: 1, sm: 2, md: 3 }}
       >
         {loading ? (
-          <Loading />
+          <LoadingSpinner />
         ) : getCurrentPageData().length === 0 ? (
           <Typography color={"white"} variant="body1">
             No se encontraron resultados.
