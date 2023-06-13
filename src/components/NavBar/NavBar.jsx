@@ -1,7 +1,7 @@
 import { Typography, createTheme, ThemeProvider, Box } from "@mui/material";
 import logo from "../../assets/logoSpaceX.svg";
 import { NavLink } from "react-router-dom";
-import "./NavBar.css";
+import "./module.NavBar.css";
 
 const theme = createTheme({
   palette: {
