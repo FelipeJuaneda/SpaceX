@@ -1,7 +1,6 @@
 import { Typography, createTheme, ThemeProvider, Box } from "@mui/material";
 import logo from "../../assets/logoSpaceX.svg";
 import { NavLink } from "react-router-dom";
-import "./module.NavBar.css";
 
 const theme = createTheme({
   palette: {
@@ -106,7 +105,7 @@ const NavBar = () => {
                   width: "100px",
                   textAlign: "center",
                 }}
-                activeclassname="active"
+                activeclassname={{ borderBottom: "2px solid white;" }}
                 to={nav.to}
               >
                 <Typography
