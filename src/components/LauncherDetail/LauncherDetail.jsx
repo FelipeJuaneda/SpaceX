@@ -9,13 +9,13 @@ import FavoriteButton from "../FavoriteButton/FavoriteButton";
 const LauncherDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { launchDetails, rocketDetails } = useLaunchDetails(id);
+  const { combinedDataDetail } = useLaunchDetails(id);
 
   const goBack = () => {
     navigate(-1);
   };
 
-  if (!launchDetails || !rocketDetails) {
+  if (!combinedDataDetail) {
     return <LoadingSpinner />;
   }
 
@@ -24,7 +24,7 @@ const LauncherDetail = () => {
     const options = { month: "long", day: "numeric", year: "numeric" };
     return date.toLocaleDateString("en-US", options);
   };
-  const formattedDate = formatDate(launchDetails.date_local);
+  const formattedDate = formatDate(combinedDataDetail.date_local);
 
   return (
     <Box>
@@ -42,7 +42,7 @@ const LauncherDetail = () => {
             sx={{
               width: "100%",
               height: "100%",
-              backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1)), url(${rocketDetails?.flickr_images[0]})`,
+              backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1)), url(${combinedDataDetail.rocket?.flickr_images[0]})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
               maskImage:
@@ -69,8 +69,8 @@ const LauncherDetail = () => {
               </Avatar>
             </Link>
             <FavoriteButton
-              id={launchDetails.id}
-              launch={launchDetails}
+              id={combinedDataDetail.id}
+              launch={combinedDataDetail}
               style={true}
             />
           </Stack>
@@ -95,11 +95,11 @@ const LauncherDetail = () => {
                   letterSpacing: "0.04em",
                 }}
               >
-                {launchDetails.name}
+                {combinedDataDetail.name}
               </Typography>
               <Typography>
-                {launchDetails.details
-                  ? launchDetails.details
+                {combinedDataDetail.details
+                  ? combinedDataDetail.details
                   : "First orbital class rocket capable of reflight"}
               </Typography>
             </Stack>
@@ -140,7 +140,7 @@ const LauncherDetail = () => {
         <Stack color={"white"} justifyContent={"center"} alignItems={"center"}>
           <Typography>ABOUT THIS LAUNCH</Typography>
           <Typography variant="subtitle1">
-            {launchDetails.details ||
+            {combinedDataDetail.details ||
               "First orbital class rocket capable of reflight"}
           </Typography>
 
@@ -164,37 +164,41 @@ const LauncherDetail = () => {
                 <Stack flexDirection={"row"} justifyContent={"space-between"}>
                   <Typography>HEIGHT </Typography>{" "}
                   <Typography>
-                    {rocketDetails.height.meters}m / {rocketDetails.height.feet}
+                    {combinedDataDetail.rocket?.height.meters}m /{" "}
+                    {combinedDataDetail.rocket?.height.feet}
                     ft
                   </Typography>
                 </Stack>
                 <Stack flexDirection={"row"} justifyContent={"space-between"}>
                   <Typography>DIAMETER </Typography>{" "}
                   <Typography>
-                    {rocketDetails.diameter.meters}m /{" "}
-                    {rocketDetails.diameter.feet}ft
+                    {combinedDataDetail.rocket?.diameter.meters}m /{" "}
+                    {combinedDataDetail.rocket?.diameter.feet}ft
                   </Typography>
                 </Stack>
                 <Stack flexDirection={"row"} justifyContent={"space-between"}>
                   <Typography>MASS </Typography>{" "}
                   <Typography>
-                    {rocketDetails.mass.kg}kg / {rocketDetails.mass.lb}lb
+                    {combinedDataDetail.rocket?.mass.kg}kg /{" "}
+                    {combinedDataDetail.rocket?.mass.lb}lb
                   </Typography>
                 </Stack>
-                {rocketDetails.payload_weights.map((element, index) => (
-                  <Stack
-                    key={index}
-                    flexDirection={"row"}
-                    justifyContent={"space-between"}
-                  >
-                    <Typography>
-                      PAYLOAD TO {element.id.toUpperCase()}{" "}
-                    </Typography>
-                    <Typography>
-                      {element.kg}kg / {element.lb}lb
-                    </Typography>
-                  </Stack>
-                ))}
+                {combinedDataDetail.rocket?.payload_weights.map(
+                  (element, index) => (
+                    <Stack
+                      key={index}
+                      flexDirection={"row"}
+                      justifyContent={"space-between"}
+                    >
+                      <Typography>
+                        PAYLOAD TO {element.id.toUpperCase()}{" "}
+                      </Typography>
+                      <Typography>
+                        {element.kg}kg / {element.lb}lb
+                      </Typography>
+                    </Stack>
+                  )
+                )}
               </Stack>
             </Stack>
             <Stack width={"400px"}>

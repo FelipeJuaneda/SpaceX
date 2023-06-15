@@ -26,7 +26,7 @@ export function useLaunchDetails(launchId) {
 
   useEffect(() => {
     const fetchRocketDetails = async () => {
-      if (launchDetails && launchDetails.rocket) {
+      if (launchDetails?.rocket) {
         try {
           setLoading(true);
           const response = await fetch(
@@ -45,5 +45,10 @@ export function useLaunchDetails(launchId) {
     fetchRocketDetails();
   }, [launchDetails]);
 
-  return { launchDetails, rocketDetails, loading };
+  const combineLauncheAndRocket = () => {
+    return { ...launchDetails, rocket: rocketDetails || null };
+  };
+  const combinedDataDetail = combineLauncheAndRocket();
+
+  return { launchDetails, rocketDetails, loading, combinedDataDetail };
 }
