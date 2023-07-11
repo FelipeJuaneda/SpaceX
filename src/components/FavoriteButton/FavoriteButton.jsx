@@ -6,6 +6,7 @@ import { IconButton } from "@mui/material";
 const FavoriteButton = ({ id, launch, style }) => {
   const { favoritelauncher, addLauncherToFavorite, removeLauncherToFavorite } =
     useFavoriteContext();
+  console.log(favoritelauncher);
 
   const [isFavorite, setIsFavorite] = useState(false);
 
