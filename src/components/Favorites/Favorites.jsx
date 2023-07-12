@@ -5,6 +5,7 @@ import usePagination from "../../hooks/usePagination";
 import PaginationCont from "../PaginationCont/PaginationCont";
 import { useFavoriteContext } from "../../context/FavoriteContext";
 import { useLaunches } from "../../hooks/useLaunches";
+import TotalResults from "../TotalResults/TotalResults";
 
 const Favorites = () => {
   const { favoritelauncher } = useFavoriteContext();
@@ -21,15 +22,16 @@ const Favorites = () => {
   return (
     <Box>
       <SearchBar setSearchTerm={setSearchTerm} />
+      <TotalResults results={favoritelauncher.length} />
       <Grid
         container
         spacing={{ xs: 1, sm: 2, md: 3 }}
         sx={{
           padding: "0 30px",
-          minHeight: "70vh",
+          minHeight: "60vh",
           backgroundColor: "#121212",
           justifyContent: "center",
-          alignItems: "center",
+          alignItems: "flex-start",
         }}
       >
         {getCurrentPageData().length === 0 ? (

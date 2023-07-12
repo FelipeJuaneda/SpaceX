@@ -5,6 +5,7 @@ import CardList from "../CardList/CardList";
 import { useLaunches } from "../../hooks/useLaunches";
 import PaginationCont from "../PaginationCont/PaginationCont";
 import usePagination from "../../hooks/usePagination";
+import TotalResults from "../TotalResults/TotalResults";
 
 const CardListContainer = () => {
   const { combinedData, loading, searchTerm, setSearchTerm } = useLaunches();
@@ -20,6 +21,7 @@ const CardListContainer = () => {
   return (
     <Box>
       <SearchBar setSearchTerm={setSearchTerm} />
+      <TotalResults results={combinedData.length} />
       <Grid
         padding={"0 30px"}
         container
