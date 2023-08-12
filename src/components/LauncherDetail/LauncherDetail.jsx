@@ -139,7 +139,10 @@ const LauncherDetail = () => {
       <Box sx={{ paddingTop: "50px", background: "#121212" }}>
         <Stack color={"white"} justifyContent={"center"} alignItems={"center"}>
           <Typography>ABOUT THIS LAUNCH</Typography>
-          <Typography variant="subtitle1">
+          <Typography
+            sx={{ padding: "0 20px", textAlign: "center" }}
+            variant="subtitle1"
+          >
             {combinedDataDetail.details ||
               "First orbital class rocket capable of reflight"}
           </Typography>
@@ -147,7 +150,7 @@ const LauncherDetail = () => {
           <Stack
             marginTop={"40px"}
             width={"70%"}
-            flexDirection={"row"}
+            flexDirection={{ xs: "column", md: "row" }}
             alignItems={"center"}
           >
             <Stack width={"100%"}>

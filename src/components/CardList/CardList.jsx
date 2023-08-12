@@ -24,26 +24,23 @@ const CardList = ({ launch, rocket }) => {
   const formattedDate = formatDate(launch.date_local);
 
   return (
-    <Card
-      sx={{
-        background:
-          "linear-gradient(0deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05)), #121212",
-      }}
-    >
-      {rocket?.flickr_images && (
-        <CardMedia
-          component="img"
-          height="140"
-          image={randomImage}
-          alt={randomImage}
-        />
-      )}
-      <CardContent>
-        <Stack height={120} direction="column" justifyContent="center">
-          <Link
-            to={`/launcher/${launch.id}`}
-            style={{ textDecoration: "none" }}
-          >
+    <Link to={`/launcher/${launch.id}`} style={{ textDecoration: "none" }}>
+      <Card
+        sx={{
+          background:
+            "linear-gradient(0deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05)), #121212",
+        }}
+      >
+        {rocket?.flickr_images && (
+          <CardMedia
+            component="img"
+            height="140"
+            image={randomImage}
+            alt={randomImage}
+          />
+        )}
+        <CardContent>
+          <Stack height={120} direction="column" justifyContent="center">
             <Typography
               color="#FFFFFF"
               gutterBottom
@@ -57,35 +54,35 @@ const CardList = ({ launch, rocket }) => {
             >
               {launch.name}
             </Typography>
-          </Link>
-          <Typography
-            sx={{
-              color: "#FFFFFF",
-              display: "-webkit-box",
-              WebkitLineClamp: 2,
-              WebkitBoxOrient: "vertical",
-              textOverflow: "ellipsis",
-              overflow: "hidden",
-            }}
-            variant="body2"
-            color="text.secondary"
-          >
-            {launch.details
-              ? launch.details
-              : "First orbital class rocket capable of reflight"}
-          </Typography>
-          <Stack
-            sx={{ color: "#ffffff78" }}
-            direction="row"
-            justifyContent="space-between"
-            alignItems="center"
-          >
-            <Typography sx={{ fontSize: "14px" }}>{formattedDate}</Typography>
-            <FavoriteButton id={launch.id} launch={launch} />
+            <Typography
+              sx={{
+                color: "#FFFFFF",
+                display: "-webkit-box",
+                WebkitLineClamp: 2,
+                WebkitBoxOrient: "vertical",
+                textOverflow: "ellipsis",
+                overflow: "hidden",
+              }}
+              variant="body2"
+              color="text.secondary"
+            >
+              {launch.details
+                ? launch.details
+                : "First orbital class rocket capable of reflight"}
+            </Typography>
+            <Stack
+              sx={{ color: "#ffffff78", zIndex: 1 }}
+              direction="row"
+              justifyContent="space-between"
+              alignItems="center"
+            >
+              <Typography sx={{ fontSize: "14px" }}>{formattedDate}</Typography>
+              <FavoriteButton id={launch.id} launch={launch} />
+            </Stack>
           </Stack>
-        </Stack>
-      </CardContent>
-    </Card>
+        </CardContent>
+      </Card>
+    </Link>
   );
 };
 

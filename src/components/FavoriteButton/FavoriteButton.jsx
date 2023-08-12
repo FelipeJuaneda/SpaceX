@@ -17,7 +17,8 @@ const FavoriteButton = ({ id, launch, style }) => {
     }
   }, [favoritelauncher, id]);
 
-  const handleToggleFavorite = () => {
+  const handleToggleFavorite = (e) => {
+    e.preventDefault();
     if (isFavorite) {
       removeLauncherToFavorite(id);
     } else {
