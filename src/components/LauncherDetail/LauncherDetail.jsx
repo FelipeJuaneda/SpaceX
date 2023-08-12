@@ -117,9 +117,10 @@ const LauncherDetail = () => {
           direction="row"
           divider={<Divider color="grey" orientation="vertical" flexItem />}
           spacing={4}
-          height={"150px"}
+          height={{ xs: "110px", md: "150px" }}
           color={"white"}
           justifyContent={"center"}
+          textAlign="center"
           alignItems={"center"}
         >
           {[
@@ -149,11 +150,11 @@ const LauncherDetail = () => {
 
           <Stack
             marginTop={"40px"}
-            width={"70%"}
+            width={{ xs: "100%", sm: "70%" }}
             flexDirection={{ xs: "column", md: "row" }}
             alignItems={"center"}
           >
-            <Stack width={"100%"}>
+            <Stack width={{ xs: "100%", md: "90%" }}>
               <Typography textAlign={"start"} paddingBottom={"20px"}>
                 OVERVIEW
               </Typography>
@@ -204,7 +205,7 @@ const LauncherDetail = () => {
                 )}
               </Stack>
             </Stack>
-            <Stack width={"400px"}>
+            <Stack width={{ xs: "200px", md: "500px" }}>
               <img width={"100%"} src={naveDetail} alt="" />
             </Stack>
           </Stack>
