@@ -1,6 +1,7 @@
 import { Typography, createTheme, ThemeProvider, Box } from "@mui/material";
 import logo from "../../assets/logoSpaceX.svg";
 import { NavLink } from "react-router-dom";
+import { motion } from "framer-motion";
 import "./NavBar.css";
 
 const theme = createTheme({
@@ -80,7 +81,10 @@ const NavBar = () => {
     <ThemeProvider theme={theme}>
       <Box sx={navBarStyles.root}>
         <Box sx={navBarStyles.logoContainer}>
-          <img
+          <motion.img
+            initial={{ y: -100 }}
+            animate={{ y: 0 }}
+            transition={{ delay: 0.2, ease: "easeOut", duration: 0.4 }}
             style={{ width: "246px", height: "30px" }}
             src={logo}
             alt="Logo de Space X"

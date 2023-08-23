@@ -4,6 +4,7 @@ import Typography from "@mui/material/Typography";
 import { Card, Stack } from "@mui/material";
 import { Link } from "react-router-dom";
 import FavoriteButton from "../FavoriteButton/FavoriteButton";
+import { motion } from "framer-motion";
 
 const CardList = ({ launch, rocket }) => {
   const getRandomImage = () => {
@@ -24,65 +25,75 @@ const CardList = ({ launch, rocket }) => {
   const formattedDate = formatDate(launch.date_local);
 
   return (
-    <Link to={`/launcher/${launch.id}`} style={{ textDecoration: "none" }}>
-      <Card
-        sx={{
-          background:
-            "linear-gradient(0deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05)), #121212",
-        }}
-      >
-        {rocket?.flickr_images && (
-          <CardMedia
-            component="img"
-            height="140"
-            image={randomImage}
-            alt={randomImage}
-          />
-        )}
-        <CardContent>
-          <Stack height={120} direction="column" justifyContent="center">
-            <Typography
-              color="#FFFFFF"
-              gutterBottom
-              variant="h6"
-              sx={{
-                fontSize: "20px",
-                fontWeight: "700",
-                lineHeight: "32px",
-              }}
-              component="div"
-            >
-              {launch.name}
-            </Typography>
-            <Typography
-              sx={{
-                color: "#FFFFFF",
-                display: "-webkit-box",
-                WebkitLineClamp: 2,
-                WebkitBoxOrient: "vertical",
-                textOverflow: "ellipsis",
-                overflow: "hidden",
-              }}
-              variant="body2"
-              color="text.secondary"
-            >
-              {launch.details
-                ? launch.details
-                : "First orbital class rocket capable of reflight"}
-            </Typography>
-            <Stack
-              sx={{ color: "#ffffff78", zIndex: 1 }}
-              direction="row"
-              justifyContent="space-between"
-              alignItems="center"
-            >
-              <Typography sx={{ fontSize: "14px" }}>{formattedDate}</Typography>
-              <FavoriteButton id={launch.id} launch={launch} />
+    <motion.div
+      whileHover={{
+        scale: 1.02,
+        boxShadow: "0px 0px 10px rgba(255, 255, 255, 0.05)",
+      }}
+      transition={{ type: "spring", stiffness: "250" }}
+    >
+      <Link to={`/launcher/${launch.id}`} style={{ textDecoration: "none" }}>
+        <Card
+          sx={{
+            background:
+              "linear-gradient(0deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05)), #121212",
+          }}
+        >
+          {rocket?.flickr_images && (
+            <CardMedia
+              component="img"
+              height="140"
+              image={randomImage}
+              alt={randomImage}
+            />
+          )}
+          <CardContent>
+            <Stack height={120} direction="column" justifyContent="center">
+              <Typography
+                color="#FFFFFF"
+                gutterBottom
+                variant="h6"
+                sx={{
+                  fontSize: "20px",
+                  fontWeight: "700",
+                  lineHeight: "32px",
+                }}
+                component="div"
+              >
+                {launch.name}
+              </Typography>
+              <Typography
+                sx={{
+                  color: "#FFFFFF",
+                  display: "-webkit-box",
+                  WebkitLineClamp: 2,
+                  WebkitBoxOrient: "vertical",
+                  textOverflow: "ellipsis",
+                  overflow: "hidden",
+                }}
+                variant="body2"
+                color="text.secondary"
+              >
+                {launch.details
+                  ? launch.details
+                  : "First orbital class rocket capable of reflight"}
+              </Typography>
+              <Stack
+                sx={{ color: "#ffffff78", zIndex: 1 }}
+                direction="row"
+                justifyContent="space-between"
+                alignItems="center"
+              >
+                <Typography sx={{ fontSize: "14px" }}>
+                  {formattedDate}
+                </Typography>
+                <FavoriteButton id={launch.id} launch={launch} />
+              </Stack>
             </Stack>
-          </Stack>
-        </CardContent>
-      </Card>
-    </Link>
+          </CardContent>
+        </Card>
+      </Link>
+    </motion.div>
   );
 };
 
