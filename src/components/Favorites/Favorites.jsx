@@ -36,7 +36,7 @@ const Favorites = () => {
       >
         {getCurrentPageData().length === 0 ? (
           <Typography color="white" variant="body1">
-            No se encontraron resultados en Favorites
+            No results found in Favorites
           </Typography>
         ) : (
           getCurrentPageData().map((favorite) => (
