@@ -10,7 +10,6 @@ import TotalResults from "../TotalResults/TotalResults";
 const CardListContainer = () => {
   const { combinedData, loading, searchTerm, setSearchTerm } = useLaunches();
   const pageSize = 9;
-
   const filteredLaunches = combinedData.filter((launch) =>
     launch.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -21,7 +20,7 @@ const CardListContainer = () => {
   return (
     <Box>
       <SearchBar setSearchTerm={setSearchTerm} />
-      <TotalResults results={combinedData.length} />
+      <TotalResults results={filteredLaunches.length} />
       <Grid
         padding={"0 30px"}
         container

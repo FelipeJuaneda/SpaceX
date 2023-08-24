@@ -22,7 +22,7 @@ const Favorites = () => {
   return (
     <Box>
       <SearchBar setSearchTerm={setSearchTerm} />
-      <TotalResults results={favoritelauncher.length} />
+      <TotalResults results={filteredLaunches.length} />
       <Grid
         container
         spacing={{ xs: 1, sm: 2, md: 3 }}
