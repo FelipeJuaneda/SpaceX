@@ -61,7 +61,7 @@ const LauncherDetail = () => {
             width="100%"
             color={"white"}
           >
-            <Link onClick={goBack}>
+            <Link to={"/"} onClick={goBack}>
               <Avatar
                 sx={{ backgroundColor: "rgba(0, 0, 0, 0.5)", margin: "0 20px" }}
               >
