@@ -1,10 +1,10 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { useLaunchDetails } from "../../hooks/useLaunchDetail";
 import { Avatar, Box, Divider, Stack, Typography } from "@mui/material";
 import { IoIosArrowBack } from "react-icons/io";
 import naveDetail from "../../assets/naveDetail.svg";
-import { LoadingSpinner } from "../LoadingSpinner/LoadingSpinner";
-import FavoriteButton from "../FavoriteButton/FavoriteButton";
+import { useLaunchDetails } from "../../hooks/useLaunchDetail";
+import { LoadingSpinner } from "../../components/LoadingSpinner/LoadingSpinner";
+import FavoriteButton from "../../components/FavoriteButton/FavoriteButton";
 
 const LauncherDetail = () => {
   const { id } = useParams();

@@ -1,19 +1,20 @@
 import { Box, Grid, Typography } from "@mui/material";
-import { LoadingSpinner } from "../LoadingSpinner/LoadingSpinner";
-import SearchBar from "../SearchBar/SearchBar";
-import CardList from "../CardList/CardList";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
+import { LoadingSpinner } from "../../components/LoadingSpinner/LoadingSpinner";
+import SearchBar from "../../components/SearchBar/SearchBar";
+import CardList from "../../components/CardList/CardList";
 import { useLaunches } from "../../hooks/useLaunches";
-import PaginationCont from "../PaginationCont/PaginationCont";
+import PaginationCont from "../../components/PaginationCont/PaginationCont";
 import usePagination from "../../hooks/usePagination";
-import TotalResults from "../TotalResults/TotalResults";
+import TotalResults from "../../components/TotalResults/TotalResults";
 
 const CardListContainer = () => {
   const { combinedData, loading, searchTerm, setSearchTerm } = useLaunches();
+  const [listRef] = useAutoAnimate();
   const pageSize = 9;
   const filteredLaunches = combinedData.filter((launch) =>
     launch.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
   const { totalPageCount, getCurrentPageData, handlePageChange, currentPage } =
     usePagination(filteredLaunches, pageSize);
 
@@ -22,7 +23,10 @@ const CardListContainer = () => {
       <SearchBar setSearchTerm={setSearchTerm} />
       <TotalResults results={filteredLaunches.length} />
       <Grid
+        ref={listRef}
         padding={"0 30px"}
+        overflow={"hidden"}
+        marginTop={0}
         container
         spacing={4}
         minHeight={"70vh"}
@@ -36,19 +40,11 @@ const CardListContainer = () => {
           <LoadingSpinner />
         ) : getCurrentPageData().length === 0 ? (
           <Typography color={"white"} variant="body1">
-            No se encontraron resultados.
+            No results found.
           </Typography>
         ) : (
           getCurrentPageData().map((launch) => (
-            <Grid
-              padding={"0"}
-              xs={12}
-              sm={6}
-              md={4}
-              lg={3}
-              item
-              key={launch.id}
-            >
+            <Grid padding={0} xs={12} sm={6} md={4} lg={3} item key={launch.id}>
               <CardList
                 launch={launch}
                 rocket={launch.rocket}

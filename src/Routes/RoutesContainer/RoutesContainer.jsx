@@ -1,8 +1,9 @@
 import { Outlet, Route, Routes } from "react-router-dom";
-import NavBar from "../NavBar/NavBar";
-import CardListContainer from "../CardListContainer/CardListContainer";
-import LauncherDetailContainer from "../LauncherDetail/LauncherDetail";
-import Favorites from "../Favorites/Favorites";
+import NavBar from "../../layouts/NavBar/NavBar";
+import Footer from "../../layouts/Footer/Footer";
+import CardListContainer from "../../Pages/CardListContainer/CardListContainer";
+import Favorites from "../../Pages/Favorites/Favorites";
+import LauncherDetail from "../../Pages/LauncherDetail/LauncherDetail";
 
 function RoutesContainer() {
   return (
@@ -13,13 +14,14 @@ function RoutesContainer() {
           <>
             <NavBar />
             <Outlet />
+            <Footer />
           </>
         }
       >
         <Route index element={<CardListContainer />} />
         <Route path="favorites" element={<Favorites />} />
       </Route>
-      <Route path="launcher/:id" element={<LauncherDetailContainer />} />
+      <Route path="launcher/:id" element={<LauncherDetail />} />
     </Routes>
   );
 }

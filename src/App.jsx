@@ -1,7 +1,8 @@
 import "./App.css";
 import { BrowserRouter } from "react-router-dom";
-import RoutesContainer from "./components/RoutesContainer/RoutesContainer";
 import FavoriteContextProvider from "./context/FavoriteContext";
+import RoutesContainer from "./Routes/RoutesContainer/RoutesContainer";
+
 function App() {
   return (
     <FavoriteContextProvider>

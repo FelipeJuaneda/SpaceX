@@ -9,7 +9,7 @@ export const LoadingSpinner = () => {
       height="100vh"
       backgroundColor="#121212"
     >
-      <CircularProgress color="inherit" />
+      <CircularProgress />
     </Stack>
   );
 };

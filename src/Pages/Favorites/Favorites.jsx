@@ -1,15 +1,17 @@
 import { Box, Grid, Typography } from "@mui/material";
-import CardList from "../CardList/CardList";
-import SearchBar from "../SearchBar/SearchBar";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
+import CardList from "../../components/CardList/CardList";
+import SearchBar from "../../components/SearchBar/SearchBar";
 import usePagination from "../../hooks/usePagination";
-import PaginationCont from "../PaginationCont/PaginationCont";
+import PaginationCont from "../../components/PaginationCont/PaginationCont";
 import { useFavoriteContext } from "../../context/FavoriteContext";
 import { useLaunches } from "../../hooks/useLaunches";
-import TotalResults from "../TotalResults/TotalResults";
+import TotalResults from "../../components/TotalResults/TotalResults";
 
 const Favorites = () => {
   const { favoritelauncher } = useFavoriteContext();
   const { searchTerm, setSearchTerm } = useLaunches();
+  const [listRef] = useAutoAnimate();
 
   const pageSize = 9;
   const filteredLaunches = favoritelauncher.filter((launch) =>
@@ -18,15 +20,17 @@ const Favorites = () => {
 
   const { totalPageCount, getCurrentPageData, handlePageChange, currentPage } =
     usePagination(filteredLaunches, pageSize);
-
   return (
     <Box>
       <SearchBar setSearchTerm={setSearchTerm} />
       <TotalResults results={filteredLaunches.length} />
       <Grid
+        ref={listRef}
         container
-        spacing={{ xs: 1, sm: 2, md: 3 }}
+        spacing={4}
+        columnSpacing={{ xs: 1, sm: 2, md: 3 }}
         sx={{
+          marginTop: "0",
           padding: "0 30px",
           minHeight: "60vh",
           backgroundColor: "#121212",
@@ -43,6 +47,7 @@ const Favorites = () => {
             <Grid
               item
               key={favorite.id}
+              marginTop={0}
               xs={12}
               sm={6}
               md={4}
