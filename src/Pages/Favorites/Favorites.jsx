@@ -20,6 +20,11 @@ const Favorites = () => {
 
   const { totalPageCount, getCurrentPageData, handlePageChange, currentPage } =
     usePagination(filteredLaunches, pageSize);
+
+  const currentPageData = getCurrentPageData();
+  if (currentPageData.length === 0 && currentPage > 0) {
+    handlePageChange(null, currentPage); // Vuelve a la página anterior
+  }
   return (
     <Box>
       <SearchBar setSearchTerm={setSearchTerm} />

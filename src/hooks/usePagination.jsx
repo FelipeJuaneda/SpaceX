@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const usePagination = (data, pageSize) => {
   const [currentPage, setCurrentPage] = useState(0);
@@ -14,6 +14,18 @@ const usePagination = (data, pageSize) => {
   const handlePageChange = (event, newPage) => {
     setCurrentPage(newPage - 1);
   };
+
+  const adjustPageIfEmpty = () => {
+    const currentPageData = getCurrentPageData();
+    if (currentPageData.length === 0 && currentPage > 0) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  useEffect(() => {
+    adjustPageIfEmpty();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data, currentPage]);
 
   return {
     currentPage,

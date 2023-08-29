@@ -15,7 +15,6 @@ const CardListContainer = () => {
   const filteredLaunches = combinedData.filter((launch) =>
     launch.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
   const { totalPageCount, getCurrentPageData, handlePageChange, currentPage } =
     usePagination(filteredLaunches, pageSize);
 
