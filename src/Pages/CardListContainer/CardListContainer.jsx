@@ -19,7 +19,7 @@ const CardListContainer = () => {
     usePagination(filteredLaunches, pageSize);
 
   return (
-    <Box>
+    <Box sx={{ backgroundColor: "#121212" }}>
       <SearchBar setSearchTerm={setSearchTerm} />
       <TotalResults results={filteredLaunches.length} />
       <Grid
