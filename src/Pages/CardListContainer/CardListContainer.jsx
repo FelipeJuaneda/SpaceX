@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { Box, Grid, Typography } from "@mui/material";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { LoadingSpinner } from "../../components/LoadingSpinner/LoadingSpinner";
@@ -7,14 +8,20 @@ import { useLaunches } from "../../hooks/useLaunches";
 import PaginationCont from "../../components/PaginationCont/PaginationCont";
 import usePagination from "../../hooks/usePagination";
 import TotalResults from "../../components/TotalResults/TotalResults";
+import useSearch from "../../hooks/useSearch";
 
 const CardListContainer = () => {
-  const { combinedData, loading, searchTerm, setSearchTerm } = useLaunches();
+  const { combinedData, loading } = useLaunches();
+  const { searchTerm, setSearchTerm } = useSearch();
   const [listRef] = useAutoAnimate();
   const pageSize = 9;
-  const filteredLaunches = combinedData.filter((launch) =>
-    launch.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+
+  const filteredLaunches = useMemo(() => {
+    return combinedData.filter((launch) =>
+      launch.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }, [combinedData, searchTerm]);
+
   const { totalPageCount, getCurrentPageData, handlePageChange, currentPage } =
     usePagination(filteredLaunches, pageSize);
 

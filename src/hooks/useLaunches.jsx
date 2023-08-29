@@ -4,7 +4,6 @@ const API_URL = "https://api.spacexdata.com";
 export function useLaunches() {
   const [responseLaunches, setResponseLaunches] = useState([]);
   const [responseRockets, setResponseRockets] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
 
   const [loading, setLoading] = useState(false);
 
@@ -54,7 +53,5 @@ export function useLaunches() {
     responseRockets,
     combinedData,
     loading,
-    setSearchTerm,
-    searchTerm,
   };
 }

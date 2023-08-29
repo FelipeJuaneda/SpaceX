@@ -5,19 +5,21 @@ import SearchBar from "../../components/SearchBar/SearchBar";
 import usePagination from "../../hooks/usePagination";
 import PaginationCont from "../../components/PaginationCont/PaginationCont";
 import { useFavoriteContext } from "../../context/FavoriteContext";
-import { useLaunches } from "../../hooks/useLaunches";
 import TotalResults from "../../components/TotalResults/TotalResults";
+import { useMemo } from "react";
+import useSearch from "../../hooks/useSearch";
 
 const Favorites = () => {
   const { favoritelauncher } = useFavoriteContext();
-  const { searchTerm, setSearchTerm } = useLaunches();
+  const { searchTerm, setSearchTerm } = useSearch();
   const [listRef] = useAutoAnimate();
-
   const pageSize = 9;
-  const filteredLaunches = favoritelauncher.filter((launch) =>
-    launch.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
 
+  const filteredLaunches = useMemo(() => {
+    return favoritelauncher.filter((launch) =>
+      launch.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }, [favoritelauncher, searchTerm]);
   const { totalPageCount, getCurrentPageData, handlePageChange, currentPage } =
     usePagination(filteredLaunches, pageSize);
 
