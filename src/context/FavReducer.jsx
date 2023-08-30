@@ -19,7 +19,27 @@ export default (state, action) => {
         ...state,
         favoritelauncher: [],
       };
-
+    case "UPDATE_SORT_LAUNCHER":
+      if (action.sortType === "ascend") {
+        return {
+          ...state,
+          favoritelauncher: state.favoritelauncher
+            .slice()
+            .sort((a, b) =>
+              a.name.toLowerCase().localeCompare(b.name.toLowerCase())
+            ),
+        };
+      } else if (action.sortType === "descend") {
+        return {
+          ...state,
+          favoritelauncher: state.favoritelauncher
+            .slice()
+            .sort((a, b) =>
+              b.name.toLowerCase().localeCompare(a.name.toLowerCase())
+            ),
+        };
+      }
+      break;
     default:
       return state;
   }

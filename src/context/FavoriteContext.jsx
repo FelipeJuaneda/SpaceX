@@ -31,6 +31,9 @@ const FavoriteContextProvider = ({ children }) => {
   const removeAllLauncherInFavorite = () => {
     dispatch({ type: "REMOVE_ALL_LAUNCHER_IN_FAVORITELAUNCHER" });
   };
+  const handleSort = (sortType) => {
+    dispatch({ type: "UPDATE_SORT_LAUNCHER", sortType });
+  };
 
   return (
     <FavoriteContext.Provider
@@ -39,6 +42,7 @@ const FavoriteContextProvider = ({ children }) => {
         addLauncherToFavorite,
         removeLauncherToFavorite,
         removeAllLauncherInFavorite,
+        handleSort,
       }}
     >
       {children}

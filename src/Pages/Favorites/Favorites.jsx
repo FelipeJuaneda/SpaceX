@@ -1,4 +1,4 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Button, Grid, Stack, Typography } from "@mui/material";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import CardList from "../../components/CardList/CardList";
 import SearchBar from "../../components/SearchBar/SearchBar";
@@ -6,15 +6,15 @@ import usePagination from "../../hooks/usePagination";
 import PaginationCont from "../../components/PaginationCont/PaginationCont";
 import { useFavoriteContext } from "../../context/FavoriteContext";
 import TotalResults from "../../components/TotalResults/TotalResults";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import useSearch from "../../hooks/useSearch";
 
 const Favorites = () => {
-  const { favoritelauncher } = useFavoriteContext();
+  const [sort, setSort] = useState(true);
+  const { favoritelauncher, handleSort } = useFavoriteContext();
   const { searchTerm, setSearchTerm } = useSearch();
   const [listRef] = useAutoAnimate();
   const pageSize = 9;
-
   const filteredLaunches = useMemo(() => {
     return favoritelauncher.filter((launch) =>
       launch.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -23,13 +23,36 @@ const Favorites = () => {
   const { totalPageCount, getCurrentPageData, handlePageChange, currentPage } =
     usePagination(filteredLaunches, pageSize);
 
+  const toggleSort = () => {
+    setSort(!sort);
+    handleSort(sort ? "ascend" : "descend");
+  };
+
   return (
-    <Box>
+    <Box sx={{ backgroundColor: "#121212" }}>
       <SearchBar setSearchTerm={setSearchTerm} />
-      <TotalResults results={filteredLaunches.length} />
+      <Stack justifyContent={"space-between"} direction="row" flexWrap="wrap">
+        <TotalResults results={filteredLaunches.length} />
+        <Button
+          sx={{
+            padding: "0 30px",
+            margin: "0 30px",
+            color: "#ffffff78",
+            borderColor: "#ffffff78",
+            ":hover": {
+              borderColor: "#FFFFFF",
+            },
+          }}
+          variant="outlined"
+          size="small"
+          onClick={toggleSort}
+        >
+          {sort ? "Sort A-Z ↑" : "Sort Z-A ↓"}
+        </Button>
+      </Stack>
       <Grid
-        ref={listRef}
         container
+        ref={listRef}
         spacing={4}
         columnSpacing={{ xs: 1, sm: 2, md: 3 }}
         sx={{
