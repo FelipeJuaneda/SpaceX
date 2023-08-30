@@ -9,7 +9,7 @@ const Footer = () => {
         background: "linear-gradient(180deg, #1E1E1E 0%, #121212 35.89%)",
         boxShadow:
           "1px 20px 0px 0px rgba(0, 0, 0, 0.14), -1px -20px 20px 15px rgba(0, 0, 0, 0.12), 0px -6px 9px 5px rgba(0, 0, 0, 0.2)",
-        padding: "1rem 0", // Ajuste el padding para dispositivos móviles
+        padding: "1rem 0",
 
         paddingTop: "2rem",
         paddingBottom: "2rem",
@@ -18,7 +18,10 @@ const Footer = () => {
       <Container maxWidth="lg">
         <Grid container justifyContent="center" alignItems="center" spacing={2}>
           <Grid item xs={12} sm={6}>
-            <Typography color="#FFFFFF" variant="h5" align="center">
+            <Typography
+              color="#FFFFFF"
+              sx={{ textAlign: "center", fontSize: "24px" }}
+            >
               Space X
             </Typography>
           </Grid>
