@@ -1,4 +1,6 @@
 # SpaceX
+
+SpaceX es una aplicación web construida sobre una base sólida de tecnologías modernas. Su desarrollo se basa principalmente en React. Las animaciones fluidas y atractivas se logran gracias a Framer Motion, mientras que las rutas dinámicas son gestionadas con React Router DOM. La estética visual y las fuentes tipográficas se logran mediante el uso de MUI. Para el enriquecimiento visual, se incorporan iconos utilizando react-icons. Además, Vite se encarga del desarrollo y la creación eficiente, mientras que ESLint garantiza la calidad del código. Con todas estas tecnologías en juego, SpaceX" ofrece una experiencia moderna y cautivadora para los usuarios.
 # Clonar y ejecutar un proyecto de React con Vite
 
 A continuación, se presentan los pasos para clonar y ejecutar un proyecto de React con Vite Sigue estas instrucciones para comenzar a trabajar en el proyecto de forma local.
