@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Stack, Typography } from "@mui/material";
+import { Box, Grid, Stack, Typography } from "@mui/material";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import CardList from "../../components/CardList/CardList";
 import SearchBar from "../../components/SearchBar/SearchBar";
@@ -6,12 +6,12 @@ import usePagination from "../../hooks/usePagination";
 import PaginationCont from "../../components/PaginationCont/PaginationCont";
 import { useFavoriteContext } from "../../context/FavoriteContext";
 import TotalResults from "../../components/TotalResults/TotalResults";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import useSearch from "../../hooks/useSearch";
+import { SortButton } from "../../components/SortButton/SortButton";
 
 const Favorites = () => {
-  const [sort, setSort] = useState(true);
-  const { favoritelauncher, handleSort } = useFavoriteContext();
+  const { favoritelauncher } = useFavoriteContext();
   const { searchTerm, setSearchTerm } = useSearch();
   const [listRef] = useAutoAnimate();
   const pageSize = 9;
@@ -23,32 +23,12 @@ const Favorites = () => {
   const { totalPageCount, getCurrentPageData, handlePageChange, currentPage } =
     usePagination(filteredLaunches, pageSize);
 
-  const toggleSort = () => {
-    setSort(!sort);
-    handleSort(sort ? "ascend" : "descend");
-  };
-
   return (
     <Box sx={{ backgroundColor: "#121212" }}>
       <SearchBar setSearchTerm={setSearchTerm} />
       <Stack justifyContent={"space-between"} direction="row" flexWrap="wrap">
         <TotalResults results={filteredLaunches.length} />
-        <Button
-          sx={{
-            padding: "0 30px",
-            margin: "0 30px",
-            color: "#ffffff78",
-            borderColor: "#ffffff78",
-            ":hover": {
-              borderColor: "#FFFFFF",
-            },
-          }}
-          variant="outlined"
-          size="small"
-          onClick={toggleSort}
-        >
-          {sort ? "Sort A-Z ↑" : "Sort Z-A ↓"}
-        </Button>
+        <SortButton />
       </Stack>
       <Grid
         container
