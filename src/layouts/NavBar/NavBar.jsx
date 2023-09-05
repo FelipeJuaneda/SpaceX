@@ -63,7 +63,8 @@ const navBarStyles = {
   },
   menuItem: {
     width: "180px",
-    fontFamily: "DIN Next LT Pro",
+    fontFamily: `"Roboto","Helvetica","Arial",sans-serif`,
+
     fontSize: "20px",
     lineHeight: "32px",
     paddingTop: "10px",

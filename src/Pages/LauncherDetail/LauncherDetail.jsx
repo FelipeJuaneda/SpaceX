@@ -1,10 +1,10 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Avatar, Box, Divider, Stack, Typography } from "@mui/material";
 import { IoIosArrowBack } from "react-icons/io";
-import naveDetail from "../../assets/naveDetail.svg";
 import { useLaunchDetails } from "../../hooks/useLaunchDetail";
 import { LoadingSpinner } from "../../components/LoadingSpinner/LoadingSpinner";
 import FavoriteButton from "../../components/FavoriteButton/FavoriteButton";
+import AboutThisLaunch from "./AboutThisLaunch";
 
 const LauncherDetail = () => {
   const { id } = useParams();
@@ -114,14 +114,15 @@ const LauncherDetail = () => {
         }}
       >
         <Stack
-          direction="row"
-          divider={<Divider color="grey" orientation="vertical" flexItem />}
+          direction={{ xs: "column", sm: "row" }}
+          divider={<Divider color="grey" orientation={"horizontal"} flexItem />}
           spacing={4}
-          height={{ xs: "110px", md: "150px" }}
+          height={{ xs: "100%", sm: "100px" }}
           color={"white"}
           justifyContent={"center"}
           textAlign="center"
           alignItems={"center"}
+          padding={{ xs: "15px 0" }}
         >
           {[
             { n: 122, text: "TOTAL LAUNCHES" },
@@ -137,80 +138,7 @@ const LauncherDetail = () => {
           })}
         </Stack>
       </Box>
-      <Box sx={{ paddingTop: "50px", background: "#121212" }}>
-        <Stack color={"white"} justifyContent={"center"} alignItems={"center"}>
-          <Typography>ABOUT THIS LAUNCH</Typography>
-          <Typography
-            sx={{ padding: "0 20px", textAlign: "center" }}
-            variant="subtitle1"
-          >
-            {combinedDataDetail.details ||
-              "First orbital class rocket capable of reflight"}
-          </Typography>
-
-          <Stack
-            marginTop={"40px"}
-            width={{ xs: "100%", sm: "70%" }}
-            flexDirection={{ xs: "column", md: "row" }}
-            alignItems={"center"}
-          >
-            <Stack width={{ xs: "100%", md: "90%" }}>
-              <Typography textAlign={"start"} paddingBottom={"20px"}>
-                OVERVIEW
-              </Typography>
-              <Stack
-                direction="column"
-                divider={
-                  <Divider color="grey" orientation="horizontal" flexItem />
-                }
-                spacing={1}
-              >
-                <Stack flexDirection={"row"} justifyContent={"space-between"}>
-                  <Typography>HEIGHT </Typography>{" "}
-                  <Typography>
-                    {combinedDataDetail.rocket?.height.meters}m /{" "}
-                    {combinedDataDetail.rocket?.height.feet}
-                    ft
-                  </Typography>
-                </Stack>
-                <Stack flexDirection={"row"} justifyContent={"space-between"}>
-                  <Typography>DIAMETER </Typography>{" "}
-                  <Typography>
-                    {combinedDataDetail.rocket?.diameter.meters}m /{" "}
-                    {combinedDataDetail.rocket?.diameter.feet}ft
-                  </Typography>
-                </Stack>
-                <Stack flexDirection={"row"} justifyContent={"space-between"}>
-                  <Typography>MASS </Typography>{" "}
-                  <Typography>
-                    {combinedDataDetail.rocket?.mass.kg}kg /{" "}
-                    {combinedDataDetail.rocket?.mass.lb}lb
-                  </Typography>
-                </Stack>
-                {combinedDataDetail.rocket?.payload_weights.map(
-                  (element, index) => (
-                    <Stack
-                      key={index}
-                      flexDirection={"row"}
-                      justifyContent={"space-between"}
-                    >
-                      <Typography>
-                        PAYLOAD TO {element.id.toUpperCase()}{" "}
-                      </Typography>
-                      <Typography>
-                        {element.kg}kg / {element.lb}lb
-                      </Typography>
-                    </Stack>
-                  )
-                )}
-              </Stack>
-            </Stack>
-            <Stack width={{ xs: "200px", md: "500px" }}>
-              <img width={"100%"} src={naveDetail} alt="" />
-            </Stack>
-          </Stack>
-        </Stack>
-      </Box>
+      <AboutThisLaunch combinedDataDetail={combinedDataDetail} />
     </Box>
   );
 };
