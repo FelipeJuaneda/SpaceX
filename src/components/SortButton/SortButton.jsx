@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import { useFavoriteContext } from "../../context/FavoriteContext";
 
 export const SortButton = () => {
-  const { handleSort } = useFavoriteContext();
+  const { handleSort, favoritelauncher } = useFavoriteContext();
+  console.log(favoritelauncher);
   const [isAscending, setIsAscending] = useState(() => {
     const storedSort = localStorage.getItem("sort");
     return storedSort ? storedSort === "ascend" : true;
@@ -30,6 +31,7 @@ export const SortButton = () => {
           borderColor: "#FFFFFF",
         },
       }}
+      disabled={favoritelauncher.length <= 1}
       variant="outlined"
       size="small"
       onClick={toggleSort}
