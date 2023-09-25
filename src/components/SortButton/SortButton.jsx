@@ -34,7 +34,7 @@ export const SortButton = () => {
       size="small"
       onClick={toggleSort}
     >
-      {isAscending ? "Sort A-Z ↑" : "Sort Z-A ↓"}
+      {isAscending ? "Sort Z-A ↓" : "Sort A-Z ↓"}
     </Button>
   );
 };
