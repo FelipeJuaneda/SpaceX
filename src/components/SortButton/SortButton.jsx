@@ -4,7 +4,7 @@ import { useFavoriteContext } from "../../context/FavoriteContext";
 
 export const SortButton = () => {
   const { handleSort, favoritelauncher } = useFavoriteContext();
-  console.log(favoritelauncher);
+
   const [isAscending, setIsAscending] = useState(() => {
     const storedSort = localStorage.getItem("sort");
     return storedSort ? storedSort === "ascend" : true;
