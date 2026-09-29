@@ -1,6 +1,6 @@
 # Downrange
 
-**The SpaceX flight record, drawn as a strip chart.** An unofficial explorer of every SpaceX launch since 2006: the next flight counting down at the pen head, two decades of cadence on one continuous roll, every flight's real T‑minus sequence, booster reuse, and the whole fleet drawn to scale.
+**The SpaceX flight record, drawn as a strip chart.** Live at **[space-x-silk-psi.vercel.app](https://space-x-silk-psi.vercel.app)**. An unofficial explorer of every SpaceX launch since 2006: the next flight counting down at the pen head, two decades of cadence on one continuous roll, every flight's real T‑minus sequence, booster reuse, and the whole fleet drawn to scale.
 
 ![Downrange home page: a live countdown to the next launch beside the recent flight trace, on green chart paper](docs/screenshots/home-desktop.png)
 
@@ -10,12 +10,12 @@
 
 Space sites tend to look alike: a starfield, a hero photo, a grid of equal cards. Downrange treats the record as what it is, telemetry, and draws it the way a strip‑chart recorder would: pens writing onto a roll of printed graph paper. Each ink has one meaning (carbon for flights, cobalt for booster landings, red only for failures, dashed for anything not yet flown), and the paper's grid is a real measuring scale.
 
-| | |
-|---|---|
-| ![Flight log grouped by year with a perforated feed margin](docs/screenshots/flight-log.png) | ![Fleet drawn to scale on the chart grid](docs/screenshots/fleet.png) |
-| **Flight log**: every flight, searchable, filters in the URL | **Fleet**: 4 px per metre, so one grid division is ten metres |
-| ![Flight sheet for Crew-13 with countdown and T-minus sequence](docs/screenshots/flight-sheet.png) | ![Flight sheet on a phone](docs/screenshots/flight-sheet-mobile.png) |
-| **Flight sheet**: a page torn off the roll at T‑0 | **Mobile**: charts change form instead of shrinking |
+|                                                                                                    |                                                                       |
+| -------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| ![Flight log grouped by year with a perforated feed margin](docs/screenshots/flight-log.png)       | ![Fleet drawn to scale on the chart grid](docs/screenshots/fleet.png) |
+| **Flight log**: every flight, searchable, filters in the URL                                       | **Fleet**: 4 px per metre, so one grid division is ten metres         |
+| ![Flight sheet for Crew-13 with countdown and T-minus sequence](docs/screenshots/flight-sheet.png) | ![Flight sheet on a phone](docs/screenshots/flight-sheet-mobile.png)  |
+| **Flight sheet**: a page torn off the roll at T‑0                                                  | **Mobile**: charts change form instead of shrinking                   |
 
 ## Features
 
@@ -38,15 +38,15 @@ The previous version read the community SpaceX API, which went offline in 2026 a
 
 ## Stack
 
-| Concern | Choice |
-|---|---|
-| Build | Vite 8, TypeScript 6 (strict) |
-| UI | React 19, CSS Modules + design tokens as custom properties ([ADR 0002](docs/adr/0002-styling.md)) |
-| Routing | React Router 7 data router, lazy route modules, loader prefetching |
-| Data | TanStack Query 5 over typed services ([ADR 0003](docs/adr/0003-typescript-and-data-layer.md)) |
-| Motion | Motion (`motion/react`), lazily loaded features, `prefers-reduced-motion` respected |
-| Icons / type | lucide-react; Archivo and Martian Mono variable fonts, self-hosted |
-| Quality | ESLint 9 (typescript-eslint, react-hooks, jsx-a11y), Prettier, Vitest + Testing Library |
+| Concern      | Choice                                                                                            |
+| ------------ | ------------------------------------------------------------------------------------------------- |
+| Build        | Vite 8, TypeScript 6 (strict)                                                                     |
+| UI           | React 19, CSS Modules + design tokens as custom properties ([ADR 0002](docs/adr/0002-styling.md)) |
+| Routing      | React Router 7 data router, lazy route modules, loader prefetching                                |
+| Data         | TanStack Query 5 over typed services ([ADR 0003](docs/adr/0003-typescript-and-data-layer.md))     |
+| Motion       | Motion (`motion/react`), lazily loaded features, `prefers-reduced-motion` respected               |
+| Icons / type | lucide-react; Archivo and Martian Mono variable fonts, self-hosted                                |
+| Quality      | ESLint 9 (typescript-eslint, react-hooks, jsx-a11y), Prettier, Vitest + Testing Library           |
 
 ESLint stays on v9 because `eslint-plugin-jsx-a11y` does not yet support v10, and accessibility linting mattered more than the newest major.
 
@@ -61,17 +61,17 @@ npm ci
 npm run dev
 ```
 
-| Script | What it does |
-|---|---|
-| `npm run dev` | Development server |
-| `npm run build` | Type-check and production build |
-| `npm run preview` | Serve the production build |
-| `npm test` | Unit and integration tests (Vitest) |
-| `npm run lint` / `npm run typecheck` / `npm run format` | Static checks and formatting |
-| `npm run sync` | Refresh the launch snapshot from Launch Library 2 |
-| `npm run sync:offline` | Rebuild the snapshot from the local cache in `.cache/ll2` |
+| Script                                                  | What it does                                              |
+| ------------------------------------------------------- | --------------------------------------------------------- |
+| `npm run dev`                                           | Development server                                        |
+| `npm run build`                                         | Type-check and production build                           |
+| `npm run preview`                                       | Serve the production build                                |
+| `npm test`                                              | Unit and integration tests (Vitest)                       |
+| `npm run lint` / `npm run typecheck` / `npm run format` | Static checks and formatting                              |
+| `npm run sync`                                          | Refresh the launch snapshot from Launch Library 2         |
+| `npm run sync:offline`                                  | Rebuild the snapshot from the local cache in `.cache/ll2` |
 
-Set `VITE_LIVE=1` to enable the live next-launch request during development. When deploying, point the `og:image` tag in `index.html` at the absolute URL of `/og.png` for link previews.
+Set `VITE_LIVE=1` to enable the live next-launch request during development. If the site moves to another domain, update the absolute `og:url` and `og:image` tags in `index.html`.
 
 ## Architecture
 
