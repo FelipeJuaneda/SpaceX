@@ -27,7 +27,7 @@ if (!("ResizeObserver" in globalThis)) {
   }
   Object.assign(globalThis, { ResizeObserver: RO });
 }
-if (!("matchMedia" in window)) {
+if (typeof window.matchMedia !== "function") {
   Object.assign(window, {
     matchMedia: (query: string) => ({
       matches: false,
