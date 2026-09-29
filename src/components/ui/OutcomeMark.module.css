@@ -1,0 +1,53 @@
+.mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-mono);
+  font-stretch: var(--stretch-mono);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.glyph {
+  flex: none;
+  overflow: visible;
+}
+
+.success rect {
+  fill: var(--pen-carbon);
+}
+
+.failure path {
+  fill: none;
+  stroke: var(--pen-red);
+  stroke-width: 2.25;
+  stroke-linecap: square;
+}
+
+.partial .outline {
+  fill: none;
+  stroke: var(--pen-red);
+  stroke-width: 1.5;
+}
+.partial path {
+  fill: var(--pen-red);
+}
+
+.upcoming .dashed {
+  fill: none;
+  stroke: var(--pen-carbon);
+  stroke-width: 1.5;
+  stroke-dasharray: 2.5 1.75;
+}
+
+.text-success,
+.text-upcoming {
+  color: var(--ink);
+}
+.text-failure,
+.text-partial {
+  color: var(--pen-red);
+}

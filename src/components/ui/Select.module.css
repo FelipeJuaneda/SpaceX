@@ -1,0 +1,35 @@
+.field {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+.control {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.select {
+  width: 100%;
+  min-height: var(--target);
+  padding: 0 40px 0 12px;
+  appearance: none;
+  border: 1.5px solid var(--ink);
+  border-radius: var(--radius-1);
+  background: var(--paper-sheet);
+  font-size: var(--text-sm);
+  font-stretch: var(--stretch-semi);
+  font-weight: 650;
+  cursor: pointer;
+}
+.select:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.chevron {
+  position: absolute;
+  right: 12px;
+  pointer-events: none;
+}

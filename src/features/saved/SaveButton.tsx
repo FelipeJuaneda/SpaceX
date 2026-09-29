@@ -1,0 +1,40 @@
+import { Bookmark, BookmarkCheck } from "lucide-react";
+import { toast } from "sonner";
+import { cn } from "@/lib/cn";
+import { savedStore, useSavedSlugs } from "./store";
+import s from "./SaveButton.module.css";
+
+interface Props {
+  slug: string;
+  mission: string;
+  /** `icon` for dense rows, `label` for sheets. */
+  variant?: "icon" | "label";
+  className?: string;
+}
+
+export function SaveButton({ slug, mission, variant = "label", className }: Props) {
+  const saved = useSavedSlugs().includes(slug);
+  const Icon = saved ? BookmarkCheck : Bookmark;
+
+  const toggle = () => {
+    const nowSaved = savedStore.toggle(slug);
+    if (nowSaved) toast(`Saved “${mission}”`);
+    else
+      toast(`Removed “${mission}”`, {
+        action: { label: "Undo", onClick: () => savedStore.toggle(slug) },
+      });
+  };
+
+  return (
+    <button
+      type="button"
+      aria-pressed={saved}
+      aria-label={variant === "icon" ? `Save ${mission}` : undefined}
+      onClick={toggle}
+      className={cn(s.button, s[variant], saved && s.on, className)}
+    >
+      <Icon aria-hidden="true" size={20} strokeWidth={1.75} />
+      {variant === "label" && <span>{saved ? "Saved" : "Save flight"}</span>}
+    </button>
+  );
+}

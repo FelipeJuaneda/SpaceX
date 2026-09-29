@@ -1,0 +1,36 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-width: var(--target);
+  min-height: var(--target);
+  color: var(--ink-2);
+  transition: color var(--dur-quick) var(--ease-out);
+}
+.button:hover {
+  color: var(--ink);
+}
+
+.label {
+  padding: 0 16px;
+  border: 1.5px solid var(--ink);
+  border-radius: var(--radius-1);
+  color: var(--ink);
+  font-size: var(--text-sm);
+  font-stretch: var(--stretch-semi);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.label:hover {
+  background: rgb(21 24 26 / 0.07);
+}
+
+.on {
+  color: var(--pen-cobalt);
+}
+.label.on {
+  border-color: var(--pen-cobalt);
+  background: var(--pen-cobalt-wash);
+}

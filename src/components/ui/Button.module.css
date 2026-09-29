@@ -1,0 +1,80 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: var(--target);
+  padding: 0 18px;
+  border: 1.5px solid var(--ink);
+  border-radius: var(--radius-1);
+  font-size: var(--text-sm);
+  font-stretch: var(--stretch-semi);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: 0.05em;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition:
+    background-color var(--dur-quick) var(--ease-out),
+    color var(--dur-quick) var(--ease-out);
+}
+.button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+.button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.ink {
+  background: var(--ink);
+  color: var(--paper-sheet);
+}
+.ink:hover:not(:disabled) {
+  background: #2c3134;
+}
+
+.line {
+  background: transparent;
+  color: var(--ink);
+}
+.line:hover:not(:disabled) {
+  background: rgb(21 24 26 / 0.07);
+}
+
+.quiet {
+  padding: 0 var(--space-2);
+  border-color: transparent;
+  background: transparent;
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25em;
+}
+.quiet:hover:not(:disabled) {
+  text-decoration-thickness: 2px;
+}
+
+.sm {
+  min-height: 36px;
+  padding: 0 12px;
+  font-size: var(--text-xs);
+}
+/* Keep a 44px hit area around small buttons. */
+.sm::before {
+  content: "";
+  position: absolute;
+  inset: -4px 0;
+}
+.sm {
+  position: relative;
+}
+
+.icon {
+  display: inline-flex;
+}
+.icon svg {
+  width: 18px;
+  height: 18px;
+}

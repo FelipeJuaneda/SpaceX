@@ -1,0 +1,110 @@
+/*
+ * Downrange design tokens.
+ * The world is a strip-chart recorder: chart paper, a printed millimetric grid, pen inks.
+ * Every length that places ink on the chart is a multiple of the 8px minor division.
+ */
+:root {
+  color-scheme: light;
+
+  /* Paper */
+  --paper: #f1f3ec;
+  --paper-sheet: #fafbf6;
+  --paper-margin: #e4e7dd;
+  --paper-shade: #d9ddd1;
+
+  /* Printed grid (green engineering paper) */
+  --grid-minor: rgb(39 110 78 / 0.1);
+  --grid-major: rgb(39 110 78 / 0.22);
+  --grid-legend: #276e4e;
+
+  /* Ink */
+  --ink: #15181a;
+  --ink-2: #3f4649;
+  --ink-3: #5a6265;
+  --rule: rgb(21 24 26 / 0.16);
+  --rule-strong: rgb(21 24 26 / 0.55);
+
+  /* Pens — each ink carries exactly one meaning */
+  --pen-carbon: var(--ink);
+  --pen-cobalt: #1b44c4;
+  --pen-red: #c01e17;
+  --pen-cobalt-wash: rgb(27 68 196 / 0.08);
+  --pen-red-wash: rgb(192 30 23 / 0.08);
+
+  --focus-ring: var(--pen-cobalt);
+
+  /* Type */
+  --font-sans: "Archivo Variable", "Archivo", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Martian Mono Variable", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+
+  --stretch-condensed: 70%;
+  --stretch-semi: 88%;
+  --stretch-normal: 100%;
+  --stretch-wide: 125%;
+  --stretch-mono: 87.5%;
+
+  --text-2xs: 0.6875rem;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-md: 1rem;
+  --text-lg: 1.1875rem;
+  --text-xl: clamp(1.375rem, 1.15rem + 0.9vw, 1.75rem);
+  --text-2xl: clamp(1.75rem, 1.25rem + 2.2vw, 2.75rem);
+  --text-3xl: clamp(2.25rem, 1.2rem + 4.4vw, 4.5rem);
+  --text-display: clamp(3.5rem, 0.9rem + 11.5vw, 8rem);
+
+  --leading-tight: 0.9;
+  --leading-snug: 1.15;
+  --leading-body: 1.55;
+  --tracking-tight: -0.025em;
+  --tracking-legend: 0.06em;
+
+  /* Grid and spacing */
+  --div: 8px;
+  --div-major: 40px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 40px;
+  --space-6: 64px;
+  --space-7: 96px;
+  --space-8: 144px;
+  --gutter: clamp(16px, 4vw, 40px);
+  --page-max: 1400px;
+  --measure: 66ch;
+
+  /* Shape */
+  --radius-0: 0;
+  --radius-1: 2px;
+  --radius-2: 4px;
+
+  /* Depth: paper sheets lifted off the roll */
+  --shadow-sheet: 0 1px 0 rgb(21 24 26 / 0.06), 0 22px 36px -24px rgb(21 24 26 / 0.4);
+  --shadow-pop: 0 2px 4px rgb(21 24 26 / 0.08), 0 14px 28px -10px rgb(21 24 26 / 0.28);
+
+  /* Layers */
+  --z-raised: 1;
+  --z-sticky: 10;
+  --z-masthead: 20;
+  --z-overlay: 40;
+  --z-toast: 50;
+
+  /* Motion */
+  --dur-instant: 90ms;
+  --dur-quick: 180ms;
+  --dur-base: 320ms;
+  --dur-draw: 900ms;
+  --dur-roll: 1600ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-pen: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Interaction */
+  --target: 44px;
+
+  /*
+   * Breakpoints (CSS media queries use the literal values):
+   * sm 480px · md 768px · lg 1024px · xl 1280px
+   */
+}

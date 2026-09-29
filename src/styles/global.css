@@ -1,0 +1,163 @@
+@import "@fontsource-variable/archivo/wdth.css";
+@import "@fontsource-variable/martian-mono/wdth.css";
+@import "./tokens.css";
+
+@layer reset, base, utilities;
+
+@layer reset {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+  * {
+    margin: 0;
+  }
+  img,
+  svg,
+  video,
+  picture {
+    display: block;
+    max-width: 100%;
+  }
+  input,
+  button,
+  select,
+  textarea {
+    font: inherit;
+    color: inherit;
+    letter-spacing: inherit;
+  }
+  button {
+    cursor: pointer;
+    background: none;
+    border: 0;
+    padding: 0;
+  }
+  /* Lists are unstyled by default; prose lists opt back in. The empty-string marker keeps
+     list semantics in Safari/VoiceOver, which drops them for `list-style: none`. */
+  ul,
+  ol {
+    list-style-type: "";
+    padding: 0;
+  }
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    scrollbar-color: var(--ink-3) var(--paper-margin);
+    accent-color: var(--pen-cobalt);
+  }
+
+  body {
+    min-height: 100dvh;
+    background-color: var(--paper);
+    /* Printed chart grid: 40px major divisions over 8px minor divisions. */
+    background-image:
+      linear-gradient(var(--grid-major) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-major) 1px, transparent 1px),
+      linear-gradient(var(--grid-minor) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-minor) 1px, transparent 1px);
+    background-size:
+      var(--div-major) var(--div-major),
+      var(--div-major) var(--div-major),
+      var(--div) var(--div),
+      var(--div) var(--div);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: var(--text-md);
+    font-stretch: var(--stretch-normal);
+    line-height: var(--leading-body);
+    caret-color: var(--pen-cobalt);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-stretch: var(--stretch-condensed);
+    font-weight: 800;
+    line-height: var(--leading-snug);
+    letter-spacing: var(--tracking-tight);
+    text-wrap: balance;
+  }
+
+  p,
+  li,
+  dd {
+    text-wrap: pretty;
+  }
+
+  a {
+    color: inherit;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.22em;
+  }
+  a:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    background: var(--pen-cobalt);
+    color: var(--paper-sheet);
+  }
+
+  code,
+  kbd,
+  samp {
+    font-family: var(--font-mono);
+    font-stretch: var(--stretch-mono);
+    font-size: 0.9em;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html:focus-within {
+      scroll-behavior: smooth;
+    }
+  }
+}
+
+@layer utilities {
+  .visually-hidden {
+    position: absolute !important;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .reading {
+    font-family: var(--font-mono);
+    font-stretch: var(--stretch-mono);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0;
+  }
+
+  .legend {
+    font-family: var(--font-mono);
+    font-stretch: var(--stretch-mono);
+    font-size: var(--text-2xs);
+    font-weight: 500;
+    letter-spacing: var(--tracking-legend);
+    text-transform: uppercase;
+    color: var(--grid-legend);
+  }
+
+  .page {
+    width: min(100% - 2 * var(--gutter), var(--page-max));
+    margin-inline: auto;
+  }
+}

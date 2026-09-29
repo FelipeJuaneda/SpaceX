@@ -1,0 +1,51 @@
+.field {
+  display: grid;
+  gap: 6px;
+}
+
+.control {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  position: absolute;
+  left: 12px;
+  color: var(--ink-3);
+  pointer-events: none;
+}
+
+.input {
+  width: 100%;
+  min-height: var(--target);
+  padding: 0 var(--target) 0 40px;
+  border: 1.5px solid var(--ink);
+  border-radius: var(--radius-1);
+  background: var(--paper-sheet);
+  font-size: var(--text-md);
+}
+.input::placeholder {
+  color: var(--ink-3);
+  opacity: 1;
+}
+.input::-webkit-search-cancel-button {
+  appearance: none;
+}
+.input:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.clear {
+  position: absolute;
+  right: 0;
+  display: grid;
+  place-items: center;
+  width: var(--target);
+  height: var(--target);
+  color: var(--ink-2);
+}
+.clear:hover {
+  color: var(--ink);
+}

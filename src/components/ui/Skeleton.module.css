@@ -1,0 +1,29 @@
+.bone {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: var(--radius-1);
+  background: var(--paper-shade);
+}
+
+/* A pen sweep across the placeholder. */
+.bone::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgb(250 251 246 / 0.6), transparent);
+  transform: translateX(-100%);
+  animation: sweep 1.4s var(--ease-in-out) infinite;
+}
+
+@keyframes sweep {
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bone::after {
+    display: none;
+  }
+}

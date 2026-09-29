@@ -1,0 +1,30 @@
+.readout {
+  display: grid;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: minmax(7.5rem, 38%) 1fr;
+  gap: var(--space-3);
+  align-items: baseline;
+  padding-block: 10px;
+  border-top: 1px solid var(--rule);
+}
+.row:last-child {
+  border-bottom: 1px solid var(--rule);
+}
+
+.value {
+  font-family: var(--font-mono);
+  font-stretch: var(--stretch-mono);
+  font-size: var(--text-sm);
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+
+.hint {
+  display: block;
+  margin-top: 2px;
+  color: var(--ink-3);
+  font-size: var(--text-xs);
+}

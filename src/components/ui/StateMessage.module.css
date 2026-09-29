@@ -1,0 +1,36 @@
+.state {
+  display: grid;
+  gap: var(--space-3);
+  justify-items: start;
+  max-width: 52ch;
+  padding-block: var(--space-5);
+}
+
+.trace {
+  width: min(240px, 100%);
+  height: 32px;
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.75;
+  stroke-linejoin: round;
+  overflow: visible;
+}
+.error .after {
+  stroke-dasharray: 4 5;
+  stroke: var(--ink-3);
+}
+
+.title {
+  font-size: var(--text-2xl);
+}
+
+.body {
+  color: var(--ink-2);
+}
+
+.action {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
