@@ -289,6 +289,11 @@
 }
 
 @media (max-width: 559px) {
+  /* One reading per line, so a late font swap can change widths but never the line count. */
+  .t0 {
+    display: grid;
+    gap: var(--space-2);
+  }
   .pager {
     grid-template-columns: 1fr;
     gap: 0;

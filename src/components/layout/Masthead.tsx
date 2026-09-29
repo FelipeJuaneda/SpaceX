@@ -26,9 +26,8 @@ export function Masthead() {
               <li key={item.to}>
                 <NavLink to={item.to} className={s.link}>
                   <span className={s.long}>{item.label}</span>
-                  <span className={s.short} aria-hidden="true">
-                    {item.short}
-                  </span>
+                  {/* Only one label is displayed at a time, so each stays in the accessibility tree. */}
+                  <span className={s.short}>{item.short}</span>
                   {item.to === "/saved" && saved > 0 && (
                     <>
                       <span className={s.count} aria-hidden="true">

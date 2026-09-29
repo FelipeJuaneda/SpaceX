@@ -6,6 +6,7 @@ import {
   metaQuery,
   rocketsQuery,
 } from "@/features/launches/queries";
+import HomeRoute from "@/routes/home/HomeRoute";
 import { LegacyLaunchRedirect } from "@/routes/legacy/LegacyLaunchRedirect";
 import { RootLayout } from "./RootLayout";
 import { RouteError } from "./RouteError";
@@ -40,9 +41,10 @@ export const router = createBrowserRouter([
         ErrorBoundary: RouteError,
         children: [
           {
+            // The landing page ships with the app bundle: one less round trip for most visits.
             index: true,
             loader: prefetch(snapshot.launches, snapshot.meta),
-            lazy: page(() => import("@/routes/home/HomeRoute")),
+            Component: HomeRoute,
           },
           {
             path: "launches",

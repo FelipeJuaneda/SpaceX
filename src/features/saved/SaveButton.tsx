@@ -1,8 +1,14 @@
 import { Bookmark, BookmarkCheck } from "lucide-react";
-import { toast } from "sonner";
+import type { ExternalToast } from "sonner";
 import { cn } from "@/lib/cn";
 import { savedStore, useSavedSlugs } from "./store";
 import s from "./SaveButton.module.css";
+
+/** Toasts load on first use, keeping the notification library out of the initial bundle. */
+async function notify(message: string, options?: ExternalToast) {
+  const { toast } = await import("sonner");
+  toast(message, options);
+}
 
 interface Props {
   slug: string;
@@ -18,9 +24,9 @@ export function SaveButton({ slug, mission, variant = "label", className }: Prop
 
   const toggle = () => {
     const nowSaved = savedStore.toggle(slug);
-    if (nowSaved) toast(`Saved “${mission}”`);
+    if (nowSaved) void notify(`Saved “${mission}”`);
     else
-      toast(`Removed “${mission}”`, {
+      void notify(`Removed “${mission}”`, {
         action: { label: "Undo", onClick: () => savedStore.toggle(slug) },
       });
   };

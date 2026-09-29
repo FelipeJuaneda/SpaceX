@@ -17,6 +17,24 @@
     <meta property="og:image" content="/og.png" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="preconnect" href="https://thespacedevs-prod.nyc3.digitaloceanspaces.com" crossorigin />
+    <!-- The display face sets the countdown and headings; loading it early avoids a late reflow. -->
+    <link
+      rel="preload"
+      href="/node_modules/@fontsource-variable/archivo/files/archivo-latin-wdth-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/node_modules/@fontsource-variable/martian-mono/files/martian-mono-latin-wdth-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <!-- Most pages read the launch index; start fetching it alongside the app bundle. -->
+    <link rel="preload" href="/data/launches.json" as="fetch" crossorigin />
+    <link rel="preload" href="/data/meta.json" as="fetch" crossorigin />
   </head>
   <body>
     <div id="root"></div>
