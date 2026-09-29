@@ -239,20 +239,26 @@ export default function FlightLogRoute() {
       ) : (
         groups.map((g) => (
           <section key={g.year} className={s.year} aria-labelledby={`year-${g.year}`}>
-            <h2 id={`year-${g.year}`} className={s.yearHead}>
-              <span className={s.yearNum}>{g.year}</span>
-              <span className={s.yearCount}>{plural(g.launches.length, "flight")}</span>
-              <span
-                className={s.band}
-                style={{ width: `${(g.launches.length / largest) * 100}%` }}
-                aria-hidden="true"
-              />
-            </h2>
-            <FlightList>
-              {g.launches.map((l) => (
-                <FlightRow key={l.slug} launch={l} />
-              ))}
-            </FlightList>
+            {/* The perforated feed margin of the roll; keeps the year in view while scrolling it. */}
+            <div className={s.feed} aria-hidden="true">
+              <span className={s.feedYear}>{g.year}</span>
+            </div>
+            <div className={s.yearBody}>
+              <h2 id={`year-${g.year}`} className={s.yearHead}>
+                <span className={s.yearNum}>{g.year}</span>
+                <span className={s.yearCount}>{plural(g.launches.length, "flight")}</span>
+                <span
+                  className={s.band}
+                  style={{ width: `${(g.launches.length / largest) * 100}%` }}
+                  aria-hidden="true"
+                />
+              </h2>
+              <FlightList>
+                {g.launches.map((l) => (
+                  <FlightRow key={l.slug} launch={l} />
+                ))}
+              </FlightList>
+            </div>
           </section>
         ))
       )}

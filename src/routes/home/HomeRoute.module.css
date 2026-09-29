@@ -21,6 +21,12 @@
   padding-bottom: var(--space-2);
 }
 
+.asOf {
+  margin-top: var(--space-3);
+  padding-top: var(--space-2);
+  border-top: 1px solid var(--rule-strong);
+}
+
 .countdown {
   margin-bottom: var(--space-5);
 }

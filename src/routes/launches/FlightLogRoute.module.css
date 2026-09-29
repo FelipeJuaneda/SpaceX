@@ -126,6 +126,49 @@
   margin-top: var(--space-5);
 }
 
+.yearBody {
+  min-width: 0;
+}
+
+/* The roll's perforated feed margin: sprocket holes every major division, the year printed along it. */
+.feed {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .year {
+    display: grid;
+    grid-template-columns: 48px minmax(0, 1fr);
+    gap: var(--space-4);
+  }
+  .feed {
+    display: block;
+    background:
+      radial-gradient(circle at 50% 20px, var(--paper) 0 5px, var(--rule-strong) 5.5px 6.25px, transparent 6.75px)
+        0 0 / 100% var(--div-major) repeat-y,
+      var(--paper-margin);
+    border-right: 1px solid var(--rule-strong);
+    border-left: 1px solid var(--rule-strong);
+  }
+  .feedYear {
+    position: sticky;
+    top: var(--space-4);
+    display: block;
+    margin-top: var(--space-7);
+    padding-block: var(--space-3);
+    background: var(--paper-margin);
+    color: var(--grid-legend);
+    font-family: var(--font-mono);
+    font-stretch: var(--stretch-mono);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-align: center;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+  }
+}
+
 .yearHead {
   position: relative;
   display: flex;

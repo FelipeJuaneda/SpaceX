@@ -18,7 +18,15 @@ import { isFlown } from "@/features/launches/selectors";
 import { useNextLaunch } from "@/features/launches/useNextLaunch";
 import { ScaleChart } from "@/features/rockets/ScaleChart";
 import { cn } from "@/lib/cn";
-import { formatDecimal, formatInt, formatLocal, formatNet, formatPercent, formatStamp, isPrecise } from "@/lib/format";
+import {
+  formatDecimal,
+  formatInt,
+  formatLocal,
+  formatNet,
+  formatPercent,
+  formatStamp,
+  isPrecise,
+} from "@/lib/format";
 import s from "./HomeRoute.module.css";
 
 const FLEET_LEADERS = ["falcon-1", "falcon-9-block-5", "falcon-heavy", "starship-v3"];
@@ -38,7 +46,9 @@ export default function HomeRoute() {
       flown,
       upcoming: launches.length - flown.length,
       latest: flown.slice(-6).reverse(),
-      scheduled: launches.filter((l) => l.outcome === "upcoming" && Date.parse(l.net) > now).slice(0, 6),
+      scheduled: launches
+        .filter((l) => l.outcome === "upcoming" && Date.parse(l.net) > now)
+        .slice(0, 6),
     };
   }, [launches, now]);
 
@@ -76,7 +86,11 @@ export default function HomeRoute() {
           <div className={s.next}>
             {next ? (
               <>
-                <Countdown net={next.launch.net} precision={next.launch.precision} className={s.countdown} />
+                <Countdown
+                  net={next.launch.net}
+                  precision={next.launch.precision}
+                  className={s.countdown}
+                />
                 <h1 id="next-title" className={s.mission}>
                   <span className="visually-hidden">Next SpaceX launch: </span>
                   {next.launch.mission}
@@ -89,9 +103,13 @@ export default function HomeRoute() {
                     </span>
                   )}
                   <span className="reading">
-                    <time dateTime={next.launch.net}>{formatStamp(next.launch.net, next.launch.precision)}</time>
+                    <time dateTime={next.launch.net}>
+                      {formatStamp(next.launch.net, next.launch.precision)}
+                    </time>
                   </span>
-                  {isPrecise(next.launch.precision) && <span className="reading">{formatLocal(next.launch.net)} your time</span>}
+                  {isPrecise(next.launch.precision) && (
+                    <span className="reading">{formatLocal(next.launch.net)} your time</span>
+                  )}
                 </p>
                 <p className={s.source}>
                   <span className={cn(s.dot, next.live && s.live)} aria-hidden="true" />
@@ -124,11 +142,19 @@ export default function HomeRoute() {
             <p className={s.lede}>
               Downrange plots every SpaceX flight on one continuous strip chart:{" "}
               <strong>{formatInt(summary.flown.length)} flown</strong> since{" "}
-              {first ? formatNet(first.net, "month") : "2006"}, <strong>{formatInt(summary.upcoming)} scheduled</strong>.
+              {first ? formatNet(first.net, "month") : "2006"},{" "}
+              <strong>{formatInt(summary.upcoming)} scheduled</strong>.
             </p>
           </div>
           <div className={s.recent}>
             <RecentTrace launches={launches} now={now} />
+            {metaQ.data && (
+              <p className={cn("legend", s.asOf)}>
+                Record as of{" "}
+                <time dateTime={metaQ.data.generatedAt}>{formatStamp(metaQ.data.generatedAt)}</time>{" "}
+                · Launch Library 2
+              </p>
+            )}
           </div>
         </div>
       </section>
@@ -138,8 +164,9 @@ export default function HomeRoute() {
           <header className={s.sectionHead}>
             <h2 id="roll-title">Two decades on one roll</h2>
             <p>
-              Every flight is a tick at its date. The trace above them counts flights in the trailing thirty days: a
-              flat line for years, then a climb no launch provider had drawn before. Failures are the only red ink.
+              Every flight is a tick at its date. The trace above them counts flights in the
+              trailing thirty days: a flat line for years, then a climb no launch provider had drawn
+              before. Failures are the only red ink.
             </p>
           </header>
           <RollChart launches={launches} now={now} />
@@ -152,9 +179,11 @@ export default function HomeRoute() {
             <h2 id="reuse-title">The boosters that came back</h2>
             {records && (
               <p>
-                {formatInt(records.landings.landed)} of {formatInt(records.landings.attempted)} landing attempts
-                recovered the booster ({formatPercent(records.landings.landed, records.landings.attempted)}).{" "}
-                {formatInt(records.reflights)} flights have flown on a booster that had flown before.
+                {formatInt(records.landings.landed)} of {formatInt(records.landings.attempted)}{" "}
+                landing attempts recovered the booster (
+                {formatPercent(records.landings.landed, records.landings.attempted)}).{" "}
+                {formatInt(records.reflights)} flights have flown on a booster that had flown
+                before.
               </p>
             )}
             {records && (
@@ -167,7 +196,8 @@ export default function HomeRoute() {
                           label: "Most-flown booster",
                           value: (
                             <Link to={`/launches/${records.mostFlownBooster.slug}`}>
-                              {records.mostFlownBooster.serial} · {records.mostFlownBooster.flights} flights
+                              {records.mostFlownBooster.serial} · {records.mostFlownBooster.flights}{" "}
+                              flights
                             </Link>
                           ),
                         },
@@ -179,13 +209,17 @@ export default function HomeRoute() {
                           label: "Fastest turnaround",
                           value: (
                             <Link to={`/launches/${records.fastestTurnaround.slug}`}>
-                              {records.fastestTurnaround.serial} · {formatDecimal(records.fastestTurnaround.days)} days
+                              {records.fastestTurnaround.serial} ·{" "}
+                              {formatDecimal(records.fastestTurnaround.days)} days
                             </Link>
                           ),
                         },
                       ]
                     : []),
-                  { label: "Success streak", value: `${formatInt(records.successStreak)} flights in a row` },
+                  {
+                    label: "Success streak",
+                    value: `${formatInt(records.successStreak)} flights in a row`,
+                  },
                   {
                     label: "People launched",
                     value: `${formatInt(records.humansFlown)} on ${formatInt(records.crewedFlights)} crewed flights`,
@@ -196,7 +230,8 @@ export default function HomeRoute() {
                           label: "Busiest year",
                           value: (
                             <Link to={`/launches?year=${records.busiestYear.year}`}>
-                              {records.busiestYear.year} · {formatInt(records.busiestYear.flights)} flights
+                              {records.busiestYear.year} · {formatInt(records.busiestYear.flights)}{" "}
+                              flights
                             </Link>
                           ),
                         },
@@ -218,8 +253,8 @@ export default function HomeRoute() {
             <header className={s.sectionHead}>
               <h2 id="fleet-title">Every vehicle, to scale</h2>
               <p>
-                One major division of this paper is ten metres. Falcon 1 would reach the fourth line up the side of
-                Starship&apos;s booster.
+                One major division of this paper is ten metres. Falcon 1 would reach the fourth line
+                up the side of Starship&apos;s booster.
               </p>
             </header>
             <ScaleChart rockets={leaders} />
@@ -241,7 +276,12 @@ export default function HomeRoute() {
                 <FlightRow key={l.slug} launch={l} />
               ))}
             </FlightList>
-            <ButtonLink to="/launches" variant="quiet" iconEnd={<ArrowRight aria-hidden="true" />} className={s.more}>
+            <ButtonLink
+              to="/launches"
+              variant="quiet"
+              iconEnd={<ArrowRight aria-hidden="true" />}
+              className={s.more}
+            >
               The whole flight log
             </ButtonLink>
           </div>
