@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-29T18:00:00Z",
+  "title": "Design System: Downrange",
+  "extensions": {
+    "colorMeta": {
+      "paper": { "role": "neutral", "displayName": "Chart Paper", "canonical": "#f1f3ec", "tonalRamp": ["color-mix(in oklch, #f1f3ec, black 80%)", "color-mix(in oklch, #f1f3ec, black 65%)", "color-mix(in oklch, #f1f3ec, black 50%)", "color-mix(in oklch, #f1f3ec, black 35%)", "color-mix(in oklch, #f1f3ec, black 20%)", "color-mix(in oklch, #f1f3ec, black 10%)", "#f1f3ec", "color-mix(in oklch, #f1f3ec, white 50%)"] },
+      "paper-margin": { "role": "neutral", "displayName": "Feed Margin", "canonical": "#e4e7dd" },
+      "grid-legend": { "role": "neutral", "displayName": "Printed Legend Green", "canonical": "#276e4e", "tonalRamp": ["color-mix(in oklch, #276e4e, black 60%)", "color-mix(in oklch, #276e4e, black 40%)", "color-mix(in oklch, #276e4e, black 20%)", "#276e4e", "color-mix(in oklch, #276e4e, white 25%)", "color-mix(in oklch, #276e4e, white 50%)", "color-mix(in oklch, #276e4e, white 75%)", "color-mix(in oklch, #276e4e, white 90%)"] },
+      "ink": { "role": "primary", "displayName": "Carbon Ink", "canonical": "#15181a", "tonalRamp": ["#15181a", "#2c3134", "#3f4649", "#5a6265", "color-mix(in oklch, #15181a, white 50%)", "color-mix(in oklch, #15181a, white 70%)", "color-mix(in oklch, #15181a, white 85%)", "color-mix(in oklch, #15181a, white 95%)"] },
+      "pen-cobalt": { "role": "secondary", "displayName": "Cobalt Pen", "canonical": "#1b44c4", "tonalRamp": ["color-mix(in oklch, #1b44c4, black 60%)", "color-mix(in oklch, #1b44c4, black 40%)", "color-mix(in oklch, #1b44c4, black 20%)", "#1b44c4", "color-mix(in oklch, #1b44c4, white 25%)", "color-mix(in oklch, #1b44c4, white 50%)", "color-mix(in oklch, #1b44c4, white 75%)", "color-mix(in oklch, #1b44c4, white 92%)"] },
+      "pen-red": { "role": "tertiary", "displayName": "Signal Red (failure only)", "canonical": "#c01e17", "tonalRamp": ["color-mix(in oklch, #c01e17, black 60%)", "color-mix(in oklch, #c01e17, black 40%)", "color-mix(in oklch, #c01e17, black 20%)", "#c01e17", "color-mix(in oklch, #c01e17, white 25%)", "color-mix(in oklch, #c01e17, white 50%)", "color-mix(in oklch, #c01e17, white 75%)", "color-mix(in oklch, #c01e17, white 92%)"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display numerals", "purpose": "The countdown and the flight number only; Archivo at 70% width." },
+      "headline": { "displayName": "Headline", "purpose": "Page titles and mission names." },
+      "reading": { "displayName": "Reading", "purpose": "Every date, stamp, spec and count; Martian Mono at 87.5% width, tabular figures." },
+      "legend": { "displayName": "Printed legend", "purpose": "Labels printed on the paper, in green uppercase mono." }
+    },
+    "shadows": [
+      { "name": "sheet", "value": "0 1px 0 rgb(21 24 26 / 0.06), 0 22px 36px -24px rgb(21 24 26 / 0.4)", "purpose": "A sheet lifted off the roll." },
+      { "name": "pop", "value": "0 2px 4px rgb(21 24 26 / 0.08), 0 14px 28px -10px rgb(21 24 26 / 0.28)", "purpose": "Toasts and the chart readout." }
+    ],
+    "motion": [
+      { "name": "ease-pen", "value": "cubic-bezier(0.22, 1, 0.36, 1)", "purpose": "The pen drawing a trace as a chart enters view (1.4–2 s, once)." },
+      { "name": "ease-out", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "State transitions (180–320 ms)." },
+      { "name": "reduced", "value": "final state", "purpose": "With prefers-reduced-motion every chart renders fully drawn and skeleton sweeps stop." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "480px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" },
+      { "name": "flight-row container", "value": "860px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Ink Button",
+      "kind": "button",
+      "refersTo": "button-ink",
+      "description": "Primary action: carbon fill, uppercase semi-condensed label.",
+      "html": "<button class=\"ds-btn-ink\">Open flight sheet</button>",
+      "css": ".ds-btn-ink { display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border: 1.5px solid #15181a; border-radius: 2px; background: #15181a; color: #fafbf6; font: 700 0.875rem/1.1 'Archivo Variable', sans-serif; font-stretch: 88%; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; } .ds-btn-ink:hover { background: #2c3134; } .ds-btn-ink:focus-visible { outline: 2px solid #1b44c4; outline-offset: 3px; } .ds-btn-ink:active { transform: translateY(1px); }"
+    },
+    {
+      "name": "Line Button",
+      "kind": "button",
+      "refersTo": "button-line",
+      "description": "Secondary action: ink outline on paper.",
+      "html": "<button class=\"ds-btn-line\">Read the roll</button>",
+      "css": ".ds-btn-line { display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border: 1.5px solid #15181a; border-radius: 2px; background: transparent; color: #15181a; font: 700 0.875rem/1.1 'Archivo Variable', sans-serif; font-stretch: 88%; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; } .ds-btn-line:hover { background: rgb(21 24 26 / 0.07); } .ds-btn-line:focus-visible { outline: 2px solid #1b44c4; outline-offset: 3px; }"
+    },
+    {
+      "name": "Search Field",
+      "kind": "input",
+      "refersTo": "input-search",
+      "description": "Sheet-coloured field with a printed legend label.",
+      "html": "<label class=\"ds-field\"><span class=\"ds-legend\">Search flights</span><input class=\"ds-input\" type=\"search\" placeholder=\"Mission, vehicle, orbit, #flight…\"></label>",
+      "css": ".ds-field { display: grid; gap: 6px; } .ds-legend { color: #276e4e; font: 500 0.6875rem 'Martian Mono Variable', monospace; letter-spacing: 0.06em; text-transform: uppercase; } .ds-input { min-height: 44px; padding: 0 12px; border: 1.5px solid #15181a; border-radius: 2px; background: #fafbf6; color: #15181a; font: 400 1rem 'Archivo Variable', sans-serif; } .ds-input:focus-visible { outline: 2px solid #1b44c4; outline-offset: 2px; }"
+    },
+    {
+      "name": "Instrument Keys",
+      "kind": "chip",
+      "refersTo": "key-selected",
+      "description": "Segmented radio group; the selected key inverts to ink.",
+      "html": "<div class=\"ds-keys\"><span class=\"ds-key ds-on\">Flown <b>732</b></span><span class=\"ds-key\">Failures <b>15</b></span><span class=\"ds-key\">Scheduled <b>128</b></span></div>",
+      "css": ".ds-keys { display: inline-flex; border: 1.5px solid #15181a; border-radius: 2px; background: #fafbf6; } .ds-key { display: inline-flex; align-items: center; gap: 6px; min-height: 42px; padding: 0 14px; font: 650 0.875rem 'Archivo Variable', sans-serif; font-stretch: 88%; } .ds-key + .ds-key { border-left: 1px solid rgb(21 24 26 / 0.55); } .ds-key b { font: 500 0.6875rem 'Martian Mono Variable', monospace; opacity: 0.75; } .ds-key:hover { background: rgb(21 24 26 / 0.07); } .ds-on, .ds-on:hover { background: #15181a; color: #fafbf6; }"
+    },
+    {
+      "name": "Outcome Mark",
+      "kind": "custom",
+      "description": "Shape plus label; red only for failure.",
+      "html": "<span class=\"ds-mark\"><svg width=\"12\" height=\"12\" viewBox=\"0 0 12 12\"><rect x=\"1.5\" y=\"1.5\" width=\"9\" height=\"9\" fill=\"#15181a\"/></svg>Success</span> <span class=\"ds-mark ds-fail\"><svg width=\"12\" height=\"12\" viewBox=\"0 0 12 12\"><path d=\"M2 2L10 10M10 2L2 10\" stroke=\"#c01e17\" stroke-width=\"2.25\"/></svg>Failure</span>",
+      "css": ".ds-mark { display: inline-flex; align-items: center; gap: 7px; margin-right: 16px; color: #15181a; font: 600 0.75rem 'Martian Mono Variable', monospace; letter-spacing: 0.04em; text-transform: uppercase; } .ds-fail { color: #c01e17; }"
+    },
+    {
+      "name": "Masthead",
+      "kind": "nav",
+      "refersTo": "masthead",
+      "description": "Wordmark underlined by one pen trace, uppercase links, active link underlined.",
+      "html": "<nav class=\"ds-nav\"><span class=\"ds-word\">Downrange</span><a class=\"ds-link ds-active\" href=\"#\">Flight log</a><a class=\"ds-link\" href=\"#\">Fleet</a><a class=\"ds-link\" href=\"#\">Saved</a></nav>",
+      "css": ".ds-nav { display: flex; align-items: center; gap: 8px; min-height: 64px; padding: 0 24px; background: #e4e7dd; border-bottom: 2px solid #15181a; } .ds-word { margin-right: 32px; font: 850 1.125rem 'Archivo Variable', sans-serif; font-stretch: 125%; letter-spacing: 0.06em; text-transform: uppercase; border-bottom: 1.5px solid #15181a; } .ds-link { position: relative; display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; color: #3f4649; font: 650 0.875rem 'Archivo Variable', sans-serif; font-stretch: 88%; letter-spacing: 0.05em; text-decoration: none; text-transform: uppercase; } .ds-link:hover, .ds-active { color: #15181a; } .ds-active::after { content: ''; position: absolute; left: 16px; right: 16px; bottom: 6px; height: 2px; background: #15181a; } .ds-link:focus-visible { outline: 2px solid #1b44c4; outline-offset: 3px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The flight record as a strip chart",
+    "overview": "Downrange draws SpaceX's entire flight history the way a strip-chart recorder draws telemetry: pens writing onto a continuous roll of printed graph paper. The home page is the head of the roll, the pen parked at now; scrolling feeds the paper back through two decades. Every screen sits on the same cool chart paper with its green millimetric grid, and every mark on it is either printed (green legends, the grid, the feed margin) or recorded (pen ink: the data).\n\nThe system refuses the category default for space sites: no starfield, no hero photo over a grid of equal cards, no neon on near-black. Its density comes from instruments and records, not decoration. It is a light world because paper is its material.",
+    "keyCharacteristics": [
+      "Chart paper with a real, measuring grid (8 px minor, 40 px major divisions).",
+      "Four pen inks, each with exactly one meaning.",
+      "Condensed display numerals like chart legends; a variable-width mono for every reading.",
+      "Charts drawn from data at runtime; the pen draws once as a chart enters view.",
+      "Photographs printed in ink (greyscale, multiplied onto the paper) until looked at closely."
+    ],
+    "rules": [
+      { "name": "The One Ink, One Meaning Rule", "body": "Red is failure and nothing else; cobalt is recovery, focus and live state. Never use either as decoration, emphasis or for app errors (a failed request is drawn as a broken carbon trace).", "section": "colors" },
+      { "name": "The Printed vs Recorded Rule", "body": "Labels, axes and legends are printed in green mono caps; data is recorded in ink. If a string describes a value, it is green; if it is the value, it is ink.", "section": "colors" },
+      { "name": "The Never Colour Alone Rule", "body": "Every outcome also differs in shape: filled square (success), cross (failure), half-filled square (partial), dashed square (scheduled); landings are filled or hollow dots.", "section": "colors" },
+      { "name": "The Mono Is Measurement Rule", "body": "Martian Mono only sets data, time, measurements and printed legends, never prose or decoration.", "section": "typography" },
+      { "name": "The Precision Honesty Rule", "body": "Dates print with no more precision than the record holds: \"Q4 2026\" never becomes a countdown to a fake second.", "section": "typography" },
+      { "name": "The Measure Equals Data Rule", "body": "Widths that look like bars are data: a year's band length is its flight count; the fleet chart is drawn at 4 px per metre, so one major division of the paper is ten metres.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do compute every figure from the snapshot or its records and show the snapshot date.",
+      "Do keep red for failures only and pair every outcome colour with its shape.",
+      "Do set dates, specs and counts in Martian Mono with tabular figures.",
+      "Do let charts change form on small screens rather than shrinking to illegibility.",
+      "Do label photographs that show the vehicle rather than the flight, and credit every image."
+    ],
+    "donts": [
+      "Don't use a starfield, nebula, glassmorphism or neon-on-black: the world is paper.",
+      "Don't build pages from equal cards, big-number stat tiles or a kicker above a heading.",
+      "Don't use colour as the only carrier of meaning, or red for anything but failure.",
+      "Don't add a countdown to a date the record only knows to the month or quarter.",
+      "Don't use monospace as a \"technical\" costume for prose."
+    ]
+  }
+}
