@@ -147,29 +147,32 @@ export function ReuseChart({ launches }: { launches: readonly LaunchSummary[] })
         <li className={s.keyReflights}>{ends.find((e) => e.key === "reflights")?.label}</li>
       </ul>
 
-      <table className="visually-hidden">
-        <caption>
-          Cumulative flights, booster landings and reflights at the end of each year
-        </caption>
-        <thead>
-          <tr>
-            <th scope="col">Year</th>
-            <th scope="col">Flights</th>
-            <th scope="col">Boosters landed</th>
-            <th scope="col">Flights on reused boosters</th>
-          </tr>
-        </thead>
-        <tbody>
-          {byYear.map(([year, p]) => (
-            <tr key={year}>
-              <th scope="row">{year}</th>
-              <td>{p.flights}</td>
-              <td>{p.landed}</td>
-              <td>{p.reflights}</td>
+      {/* Tables ignore overflow, so the hiding wrapper must be a block. */}
+      <div className="visually-hidden">
+        <table>
+          <caption>
+            Cumulative flights, booster landings and reflights at the end of each year
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">Year</th>
+              <th scope="col">Flights</th>
+              <th scope="col">Boosters landed</th>
+              <th scope="col">Flights on reused boosters</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {byYear.map(([year, p]) => (
+              <tr key={year}>
+                <th scope="row">{year}</th>
+                <td>{p.flights}</td>
+                <td>{p.landed}</td>
+                <td>{p.reflights}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </figure>
   );
 }
