@@ -23,7 +23,14 @@ describe("Flight sheet", () => {
           { t: 0, label: "Liftoff", description: null },
           { t: 146, label: "MECO", description: null },
         ],
-        spacecraft: [{ name: "Crew Dragon Endeavour", serial: "C206", destination: "ISS", crew: [{ name: "Douglas G. Hurley", role: "Commander", agency: "NASA" }] }],
+        spacecraft: [
+          {
+            name: "Crew Dragon Endeavour",
+            serial: "C206",
+            destination: "ISS",
+            crew: [{ name: "Douglas G. Hurley", role: "Commander", agency: "NASA" }],
+          },
+        ],
       }),
     );
     renderRoute(routes, "/launches/falcon-9-demo");
@@ -35,7 +42,9 @@ describe("Flight sheet", () => {
   });
 
   it("explains what went wrong on a failed flight", async () => {
-    mockFetch(() => detail({ outcome: "failure", failReason: "Support strut failure in the second stage." }));
+    mockFetch(() =>
+      detail({ outcome: "failure", failReason: "Support strut failure in the second stage." }),
+    );
     renderRoute(routes, "/launches/falcon-9-demo");
     expect(await screen.findByRole("heading", { name: /What went wrong/ })).toBeInTheDocument();
     expect(screen.getByText("Support strut failure in the second stage.")).toBeInTheDocument();
@@ -55,7 +64,9 @@ describe("Flight sheet", () => {
   it("sends an unknown flight to the flight log search", async () => {
     mockFetch(() => status(404));
     renderRoute(routes, "/launches/falcon-9-mystery");
-    expect(await screen.findByRole("heading", { name: "No flight at this address" })).toBeInTheDocument();
+    expect(
+      await screen.findByRole("heading", { name: "No flight at this address" }),
+    ).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Search the flight log" })).toHaveAttribute(
       "href",
       "/launches?q=falcon%209%20mystery&outcome=all",
@@ -67,7 +78,9 @@ describe("Flight sheet", () => {
     let fail = true;
     mockFetch(() => (fail ? status(500) : detail({ mission: "Recovered" })));
     renderRoute(routes, "/launches/falcon-9-demo");
-    expect(await screen.findByRole("heading", { name: "This flight sheet did not load" })).toBeInTheDocument();
+    expect(
+      await screen.findByRole("heading", { name: "This flight sheet did not load" }),
+    ).toBeInTheDocument();
     fail = false;
     await user.click(screen.getByRole("button", { name: "Try again" }));
     expect(await screen.findByRole("heading", { level: 1, name: "Recovered" })).toBeInTheDocument();

@@ -9,7 +9,11 @@ export const launchesQuery = () =>
   queryOptions({ queryKey: ["snapshot", "launches"], queryFn: getLaunches, ...SNAPSHOT });
 
 export const launchQuery = (slug: string) =>
-  queryOptions({ queryKey: ["snapshot", "launch", slug], queryFn: () => getLaunch(slug), ...SNAPSHOT });
+  queryOptions({
+    queryKey: ["snapshot", "launch", slug],
+    queryFn: () => getLaunch(slug),
+    ...SNAPSHOT,
+  });
 
 export const rocketsQuery = () =>
   queryOptions({ queryKey: ["snapshot", "rockets"], queryFn: getRockets, ...SNAPSHOT });

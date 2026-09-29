@@ -23,7 +23,11 @@ interface Placed {
   anchorEnd: boolean;
 }
 
-function layout(events: TimelineEvent[], x: (t: number) => number, width: number): { placed: Placed[]; rows: number } {
+function layout(
+  events: TimelineEvent[],
+  x: (t: number) => number,
+  width: number,
+): { placed: Placed[]; rows: number } {
   const rowEnds: number[] = [];
   const placed = events.map((event) => {
     const ex = x(event.t);
@@ -71,14 +75,23 @@ export function SequenceTrace({ events, planned }: Props) {
         </ol>
       </div>
       <figcaption className={s.caption}>
-        {planned ? "Planned sequence" : "Sequence as flown"} · {events.length} calls from Launch Library 2.
+        {planned ? "Planned sequence" : "Sequence as flown"} · {events.length} calls from Launch
+        Library 2.
         {wide && " Time axis compressed around T-0 (square-root scale)."}
       </figcaption>
     </figure>
   );
 }
 
-function Horizontal({ events, width, planned }: { events: TimelineEvent[]; width: number; planned: boolean }) {
+function Horizontal({
+  events,
+  width,
+  planned,
+}: {
+  events: TimelineEvent[];
+  width: number;
+  planned: boolean;
+}) {
   const reduce = useReducedMotion();
   const sq = (t: number) => Math.sign(t) * Math.sqrt(Math.abs(t));
   const lo = sq(Math.min(0, ...events.map((e) => e.t)));
@@ -106,7 +119,11 @@ function Horizontal({ events, width, planned }: { events: TimelineEvent[]; width
         <g key={t}>
           <line x1={x(t)} x2={x(t)} y1={BASE + 4} y2={BASE + 12} className={s.markTick} />
           <text x={x(t)} y={BASE + 28} textAnchor="middle" className={s.mark}>
-            {t === 0 ? "T-0" : t < 0 ? `−${Math.abs(t) >= 3600 ? "1h" : `${Math.abs(t) / 60}m`}` : `+${t >= 3600 ? "1h" : `${t / 60}m`}`}
+            {t === 0
+              ? "T-0"
+              : t < 0
+                ? `−${Math.abs(t) >= 3600 ? "1h" : `${Math.abs(t) / 60}m`}`
+                : `+${t >= 3600 ? "1h" : `${t / 60}m`}`}
           </text>
         </g>
       ))}

@@ -34,7 +34,8 @@ export function ReuseChart({ launches }: { launches: readonly LaunchSummary[] })
   const H = narrow ? 260 : 320;
   const M = { t: 16, r: narrow ? 8 : 168, b: 36, l: 40 };
   const yMax = Math.ceil(last.flights / 100) * 100;
-  const x = (t: number) => M.l + ((Math.max(t, start) - start) / (end - start)) * (width - M.l - M.r);
+  const x = (t: number) =>
+    M.l + ((Math.max(t, start) - start) / (end - start)) * (width - M.l - M.r);
   const y = (v: number) => M.t + (1 - v / yMax) * (H - M.t - M.b);
 
   const visible = points.filter((p) => p.t >= start);
@@ -46,7 +47,11 @@ export function ReuseChart({ launches }: { launches: readonly LaunchSummary[] })
   const ends = [
     { key: "flights", label: `${formatInt(last.flights)} flights`, v: last.flights },
     { key: "landed", label: `${formatInt(last.landed)} boosters landed`, v: last.landed },
-    { key: "reflights", label: `${formatInt(last.reflights)} on reused boosters`, v: last.reflights },
+    {
+      key: "reflights",
+      label: `${formatInt(last.reflights)} on reused boosters`,
+      v: last.reflights,
+    },
   ].map((e) => ({ ...e, y: y(e.v) }));
   // Keep end labels at least 18px apart.
   ends.sort((a, b) => a.y - b.y);
@@ -58,7 +63,9 @@ export function ReuseChart({ launches }: { launches: readonly LaunchSummary[] })
 
   const years: number[] = [];
   for (let yr = 2015; yr <= new Date(end).getUTCFullYear(); yr++) years.push(yr);
-  const gridValues = Array.from({ length: yMax / 200 + 1 }, (_, i) => i * 200).filter((v) => v <= yMax);
+  const gridValues = Array.from({ length: yMax / 200 + 1 }, (_, i) => i * 200).filter(
+    (v) => v <= yMax,
+  );
 
   const annotations = [
     firstLanding && { l: firstLanding, text: "First booster landing" },
@@ -72,7 +79,13 @@ export function ReuseChart({ launches }: { launches: readonly LaunchSummary[] })
           <svg width={width} height={H} className={s.svg} aria-hidden="true" focusable="false">
             {gridValues.map((v) => (
               <g key={v}>
-                <line x1={M.l} x2={width - M.r} y1={y(v)} y2={y(v)} className={v ? s.grid : s.axis} />
+                <line
+                  x1={M.l}
+                  x2={width - M.r}
+                  y1={y(v)}
+                  y2={y(v)}
+                  className={v ? s.grid : s.axis}
+                />
                 <text x={M.l - 8} y={y(v) + 4} textAnchor="end" className={s.legend}>
                   {v}
                 </text>
@@ -135,7 +148,9 @@ export function ReuseChart({ launches }: { launches: readonly LaunchSummary[] })
       </ul>
 
       <table className="visually-hidden">
-        <caption>Cumulative flights, booster landings and reflights at the end of each year</caption>
+        <caption>
+          Cumulative flights, booster landings and reflights at the end of each year
+        </caption>
         <thead>
           <tr>
             <th scope="col">Year</th>

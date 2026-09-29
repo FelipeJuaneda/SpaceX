@@ -51,7 +51,12 @@ export function Countdown({ net, precision, className }: Props) {
       </span>
       {units.map(([value, unit], i) => (
         <span key={unit} className={s.group} aria-hidden="true">
-          {i > 0 && (unit === "hrs" && c.days > 0 ? <span className={s.gap} /> : <span className={s.sep}>:</span>)}
+          {i > 0 &&
+            (unit === "hrs" && c.days > 0 ? (
+              <span className={s.gap} />
+            ) : (
+              <span className={s.sep}>:</span>
+            ))}
           <span className={s.cell}>
             <span className={s.value}>{value}</span>
             <span className={s.unit}>{unit}</span>

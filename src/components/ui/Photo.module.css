@@ -57,7 +57,12 @@
   display: grid;
   place-items: center;
   background:
-    linear-gradient(to top right, transparent calc(50% - 0.75px), var(--rule) 50%, transparent calc(50% + 0.75px)),
+    linear-gradient(
+      to top right,
+      transparent calc(50% - 0.75px),
+      var(--rule) 50%,
+      transparent calc(50% + 0.75px)
+    ),
     var(--paper-margin);
 }
 

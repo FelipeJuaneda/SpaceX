@@ -39,7 +39,11 @@ describe("Flight log", () => {
 
     await user.clear(screen.getByRole("searchbox", { name: "Search flights" }));
     await user.click(screen.getByText("Filters"));
-    await user.click(within(screen.getByRole("group", { name: "Outcome" })).getByRole("radio", { name: /Failures/ }));
+    await user.click(
+      within(screen.getByRole("group", { name: "Outcome" })).getByRole("radio", {
+        name: /Failures/,
+      }),
+    );
     await waitFor(() => expect(rows()).toEqual(["SpX CRS-7", "FalconSAT-2"]));
     expect(router.state.location.search).toBe("?outcome=failure");
   });
@@ -55,7 +59,9 @@ describe("Flight log", () => {
     const user = userEvent.setup();
     mockFetch(() => sampleLaunches);
     renderRoute(routes, "/launches?q=apollo");
-    expect(await screen.findByRole("heading", { name: "Nothing on this stretch of the roll" })).toBeInTheDocument();
+    expect(
+      await screen.findByRole("heading", { name: "Nothing on this stretch of the roll" }),
+    ).toBeInTheDocument();
     await user.click(screen.getAllByRole("button", { name: "Reset filters" })[0]!);
     expect(await screen.findByText("FalconSAT-2")).toBeInTheDocument();
   });

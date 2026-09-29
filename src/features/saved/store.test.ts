@@ -10,7 +10,9 @@ describe("saved flights store", () => {
   it("toggles a flight and persists slugs only", () => {
     expect(savedStore.toggle("falcon-9-block-5-crew-5")).toBe(true);
     expect(savedStore.has("falcon-9-block-5-crew-5")).toBe(true);
-    expect(JSON.parse(localStorage.getItem("downrange:saved") ?? "[]")).toEqual(["falcon-9-block-5-crew-5"]);
+    expect(JSON.parse(localStorage.getItem("downrange:saved") ?? "[]")).toEqual([
+      "falcon-9-block-5-crew-5",
+    ]);
     expect(savedStore.toggle("falcon-9-block-5-crew-5")).toBe(false);
     expect(savedStore.get()).toEqual([]);
   });
@@ -25,7 +27,10 @@ describe("saved flights store", () => {
     // The old app stored whole SpaceX API launch objects under "favoritelauncher".
     localStorage.setItem(
       "favoritelauncher",
-      JSON.stringify([{ id: "5eb87d46ffd86e000604b388", name: "CCtCap Demo Mission 2" }, { id: "unknown" }]),
+      JSON.stringify([
+        { id: "5eb87d46ffd86e000604b388", name: "CCtCap Demo Mission 2" },
+        { id: "unknown" },
+      ]),
     );
     localStorage.setItem("sort", "ascend");
     savedStore.reset();

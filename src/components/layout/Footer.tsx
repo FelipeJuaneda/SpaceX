@@ -20,7 +20,11 @@ export function Footer() {
           <div>
             <dt className="legend">Record as of</dt>
             <dd className="reading">
-              {meta ? <time dateTime={meta.generatedAt}>{formatStamp(meta.generatedAt)}</time> : "—"}
+              {meta ? (
+                <time dateTime={meta.generatedAt}>{formatStamp(meta.generatedAt)}</time>
+              ) : (
+                "—"
+              )}
             </dd>
           </div>
           <div>
@@ -59,9 +63,9 @@ export function Footer() {
         </nav>
 
         <p className={s.disclaimer}>
-          Unofficial. Downrange is an independent project by Felipe Juaneda and is not affiliated with,
-          endorsed by or connected to Space Exploration Technologies Corp. (SpaceX). Photographs belong
-          to their credited authors.
+          Unofficial. Downrange is an independent project by Felipe Juaneda and is not affiliated
+          with, endorsed by or connected to Space Exploration Technologies Corp. (SpaceX).
+          Photographs belong to their credited authors.
         </p>
       </div>
     </footer>

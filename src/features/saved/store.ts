@@ -55,7 +55,9 @@ function migrateLegacy(current: string[]): string[] {
   }
   const migrated = Array.isArray(legacy)
     ? legacy
-        .map((item) => (item && typeof item === "object" && "id" in item ? map[String(item.id)] : undefined))
+        .map((item) =>
+          item && typeof item === "object" && "id" in item ? map[String(item.id)] : undefined,
+        )
         .filter((slug): slug is string => Boolean(slug))
     : [];
   const merged = [...new Set([...current, ...migrated])];

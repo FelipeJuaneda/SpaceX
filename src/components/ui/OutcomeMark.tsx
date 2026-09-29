@@ -39,7 +39,12 @@ interface Props {
   className?: string;
 }
 
-export function OutcomeMark({ outcome, label = OUTCOME_LABEL[outcome], compact, className }: Props) {
+export function OutcomeMark({
+  outcome,
+  label = OUTCOME_LABEL[outcome],
+  compact,
+  className,
+}: Props) {
   return (
     <span className={cn(s.mark, s[`text-${outcome}`], className)}>
       <OutcomeGlyph outcome={outcome} />

@@ -37,7 +37,10 @@ async function fetchPages(): Promise<void> {
     }
     if (!res.ok) throw new Error(`LL2 responded ${res.status} for ${url}`);
     const body = (await res.json()) as LL2Page<LL2Launch>;
-    await writeFile(path.join(CACHE_DIR, `page-${String(page).padStart(2, "0")}.json`), JSON.stringify(body));
+    await writeFile(
+      path.join(CACHE_DIR, `page-${String(page).padStart(2, "0")}.json`),
+      JSON.stringify(body),
+    );
     console.log(`page ${page}: ${body.results.length} launches (of ${body.count})`);
     url = body.next;
     page += 1;
@@ -46,9 +49,13 @@ async function fetchPages(): Promise<void> {
 
 async function readCachedLaunches(): Promise<LL2Launch[]> {
   const files = (await readdir(CACHE_DIR)).filter((f) => f.endsWith(".json")).sort();
-  if (files.length === 0) throw new Error(`No cached pages in ${CACHE_DIR}. Run "npm run sync" first.`);
+  if (files.length === 0)
+    throw new Error(`No cached pages in ${CACHE_DIR}. Run "npm run sync" first.`);
   const pages = await Promise.all(
-    files.map(async (f) => JSON.parse(await readFile(path.join(CACHE_DIR, f), "utf8")) as LL2Page<LL2Launch>),
+    files.map(
+      async (f) =>
+        JSON.parse(await readFile(path.join(CACHE_DIR, f), "utf8")) as LL2Page<LL2Launch>,
+    ),
   );
   const expected = pages[0]?.count ?? 0;
   const launches = pages.flatMap((p) => p.results);

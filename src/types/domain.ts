@@ -8,15 +8,7 @@ export type Outcome = "success" | "failure" | "partial" | "upcoming";
 
 /** How precisely the launch time is known. Drives whether a countdown can be shown. */
 export type TimePrecision =
-  | "second"
-  | "minute"
-  | "hour"
-  | "day"
-  | "month"
-  | "quarter"
-  | "half"
-  | "year"
-  | "decade";
+  "second" | "minute" | "hour" | "day" | "month" | "quarter" | "half" | "year" | "decade";
 
 export type FamilyId = "falcon-1" | "falcon-9" | "falcon-heavy" | "starship";
 

@@ -19,7 +19,13 @@ export interface LogFilters {
 }
 
 const OUTCOMES: readonly OutcomeFilter[] = ["flown", "success", "failure", "upcoming", "all"];
-const FAMILIES: readonly (FamilyId | "all")[] = ["all", "falcon-1", "falcon-9", "falcon-heavy", "starship"];
+const FAMILIES: readonly (FamilyId | "all")[] = [
+  "all",
+  "falcon-1",
+  "falcon-9",
+  "falcon-heavy",
+  "starship",
+];
 
 export const FAMILY_LABEL: Record<FamilyId, string> = {
   "falcon-1": "Falcon 1",
@@ -76,15 +82,20 @@ export function isFiltered(f: LogFilters): boolean {
   return toSearchParams({ ...f, sort: defaultSort(f.outcome) }).toString() !== "";
 }
 
-const fold = (s: string) =>
-  s
-    .toLowerCase()
-    .normalize("NFKD")
-    .replace(/[̀-ͯ]/g, "");
+const fold = (s: string) => s.toLowerCase().normalize("NFKD").replace(/[̀-ͯ]/g, "");
 
 function haystack(l: LaunchSummary): string {
   return fold(
-    [l.name, l.mission, l.vehicle, l.site, l.pad, l.orbit, l.missionType, l.flight ? `#${l.flight}` : ""]
+    [
+      l.name,
+      l.mission,
+      l.vehicle,
+      l.site,
+      l.pad,
+      l.orbit,
+      l.missionType,
+      l.flight ? `#${l.flight}` : "",
+    ]
       .filter(Boolean)
       .join(" "),
   );
@@ -135,7 +146,13 @@ export function applyFilters(launches: readonly LaunchSummary[], f: LogFilters):
 }
 
 export function outcomeCounts(launches: readonly LaunchSummary[]): Record<OutcomeFilter, number> {
-  const counts: Record<OutcomeFilter, number> = { flown: 0, success: 0, failure: 0, upcoming: 0, all: 0 };
+  const counts: Record<OutcomeFilter, number> = {
+    flown: 0,
+    success: 0,
+    failure: 0,
+    upcoming: 0,
+    all: 0,
+  };
   for (const l of launches) {
     counts.all += 1;
     if (l.outcome === "upcoming") counts.upcoming += 1;

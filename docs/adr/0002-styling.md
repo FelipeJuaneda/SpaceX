@@ -9,11 +9,11 @@ The app used MUI 5 mostly as a box/typography toolkit with inline `sx` colours; 
 
 ## Options
 
-| Option | Benefit | Cost |
-|---|---|---|
-| Keep MUI with a full custom theme | Accessible components out of the box | Fighting Material defaults (ripples, elevation, density) on every component; ~90 KB gzip of runtime CSS-in-JS for a UI that uses almost none of it |
-| Tailwind CSS | Fast iteration, tokens via theme | Long class strings obscure the bespoke grid maths; the design relies on custom properties computed per component (grid divisions, pen positions) |
-| **CSS Modules + CSS custom properties** | Zero runtime, scoped styles, native CSS features (container queries, `@layer`, scroll-driven animations), tokens as plain variables readable in DevTools | Accessibility primitives must be built by hand |
+| Option                                  | Benefit                                                                                                                                                  | Cost                                                                                                                                               |
+| --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Keep MUI with a full custom theme       | Accessible components out of the box                                                                                                                     | Fighting Material defaults (ripples, elevation, density) on every component; ~90 KB gzip of runtime CSS-in-JS for a UI that uses almost none of it |
+| Tailwind CSS                            | Fast iteration, tokens via theme                                                                                                                         | Long class strings obscure the bespoke grid maths; the design relies on custom properties computed per component (grid divisions, pen positions)   |
+| **CSS Modules + CSS custom properties** | Zero runtime, scoped styles, native CSS features (container queries, `@layer`, scroll-driven animations), tokens as plain variables readable in DevTools | Accessibility primitives must be built by hand                                                                                                     |
 
 ## Decision
 

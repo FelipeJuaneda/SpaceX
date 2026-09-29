@@ -105,9 +105,19 @@ export interface LL2Launch {
     spacecraft_stage: LL2SpacecraftStage[] | null;
     payloads: LL2PayloadFlight[] | null;
   };
-  timeline: { relative_time: string; type: { abbrev: string; description: string | null } }[] | null;
-  vid_urls: { priority: number; title: string | null; url: string; publisher: string | null; source: string | null }[] | null;
-  info_urls: { priority: number; title: string | null; url: string; source: string | null }[] | null;
+  timeline:
+    { relative_time: string; type: { abbrev: string; description: string | null } }[] | null;
+  vid_urls:
+    | {
+        priority: number;
+        title: string | null;
+        url: string;
+        publisher: string | null;
+        source: string | null;
+      }[]
+    | null;
+  info_urls:
+    { priority: number; title: string | null; url: string; source: string | null }[] | null;
   mission_patches: { name: string; priority: number; image_url: string }[] | null;
   flightclub_url: string | null;
   agency_launch_attempt_count_year: number | null;

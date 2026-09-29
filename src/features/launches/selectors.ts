@@ -6,11 +6,18 @@ export const isFailure = (l: LaunchSummary) => l.outcome === "failure" || l.outc
 export const time = (l: LaunchSummary) => Date.parse(l.net);
 
 /** Next flight that has not yet lifted off (allowing an hour past T-0 for late status updates). */
-export function nextScheduled(launches: readonly LaunchSummary[], now: number): LaunchSummary | undefined {
+export function nextScheduled(
+  launches: readonly LaunchSummary[],
+  now: number,
+): LaunchSummary | undefined {
   return launches.find((l) => l.outcome === "upcoming" && time(l) >= now - 3_600_000);
 }
 
-export function between(launches: readonly LaunchSummary[], from: number, to: number): LaunchSummary[] {
+export function between(
+  launches: readonly LaunchSummary[],
+  from: number,
+  to: number,
+): LaunchSummary[] {
   return launches.filter((l) => {
     const t = time(l);
     return t >= from && t <= to;
@@ -76,7 +83,10 @@ export function reuseFirsts(launches: readonly LaunchSummary[]) {
 }
 
 /** Flights in the trailing 30 days, sampled weekly: the cadence trace. */
-export function cadence(launches: readonly LaunchSummary[], until: number): { t: number; n: number }[] {
+export function cadence(
+  launches: readonly LaunchSummary[],
+  until: number,
+): { t: number; n: number }[] {
   const times = launches.filter(isFlown).map(time);
   if (times.length === 0) return [];
   const WEEK = 7 * 86_400_000;
@@ -92,7 +102,9 @@ export function cadence(launches: readonly LaunchSummary[], until: number): { t:
   return points;
 }
 
-export function groupByYear(launches: readonly LaunchSummary[]): { year: number; launches: LaunchSummary[] }[] {
+export function groupByYear(
+  launches: readonly LaunchSummary[],
+): { year: number; launches: LaunchSummary[] }[] {
   const groups: { year: number; launches: LaunchSummary[] }[] = [];
   for (const l of launches) {
     const year = new Date(l.net).getUTCFullYear();

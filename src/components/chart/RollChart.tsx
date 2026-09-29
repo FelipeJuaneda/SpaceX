@@ -2,7 +2,14 @@ import { m, useReducedMotion } from "motion/react";
 import { useId, useMemo, useState, type PointerEvent } from "react";
 import { Link, useNavigate } from "react-router";
 import type { LaunchSummary } from "@/types/domain";
-import { cadence, isFailure, isFlown, time, yearStats, type YearStat } from "@/features/launches/selectors";
+import {
+  cadence,
+  isFailure,
+  isFlown,
+  time,
+  yearStats,
+  type YearStat,
+} from "@/features/launches/selectors";
 import { useElementSize } from "@/hooks/useElementSize";
 import { OUTCOME_LABEL, formatInt, formatNet } from "@/lib/format";
 import s from "./RollChart.module.css";
@@ -24,7 +31,10 @@ export function RollChart({ launches, now }: Props) {
   const flown = useMemo(() => launches.filter(isFlown), [launches]);
   const years = useMemo(() => yearStats(launches), [launches]);
   const width = size?.width ?? 0;
-  const busiest = years.reduce<YearStat | undefined>((a, b) => (!a || b.flights > a.flights ? b : a), undefined);
+  const busiest = years.reduce<YearStat | undefined>(
+    (a, b) => (!a || b.flights > a.flights ? b : a),
+    undefined,
+  );
 
   return (
     <figure className={s.figure}>
@@ -39,8 +49,8 @@ export function RollChart({ launches, now }: Props) {
       </div>
       <figcaption className={s.caption}>
         {formatInt(flown.length)} flights from {years[0]?.year} to {years.at(-1)?.year}.{" "}
-        {busiest && `The busiest year was ${busiest.year}, with ${formatInt(busiest.flights)}.`} Each year opens its
-        page of the flight log.
+        {busiest && `The busiest year was ${busiest.year}, with ${formatInt(busiest.flights)}.`}{" "}
+        Each year opens its page of the flight log.
       </figcaption>
     </figure>
   );
@@ -78,7 +88,9 @@ function Continuous({
   const maxN = Math.max(1, ...points.map((p) => p.n));
   const yCad = (n: number) => CAD_TOP + CAD_H - (n / maxN) * CAD_H;
 
-  const cadPath = points.map((p, i) => `${i ? "L" : "M"}${x(p.t).toFixed(1)},${yCad(p.n).toFixed(1)}`).join("");
+  const cadPath = points
+    .map((p, i) => `${i ? "L" : "M"}${x(p.t).toFixed(1)},${yCad(p.n).toFixed(1)}`)
+    .join("");
   let ok = "";
   let failed = "";
   let landed = "";
@@ -105,8 +117,12 @@ function Continuous({
       else hi = mid;
     }
     const candidates = [lo - 1, lo].filter((i) => i >= 0 && i < xs.length);
-    const best = candidates.sort((a, b) => Math.abs((xs[a] ?? 0) - px) - Math.abs((xs[b] ?? 0) - px))[0];
-    setHover(best !== undefined && Math.abs((xs[best] ?? 0) - px) < 12 ? (flown[best] ?? null) : null);
+    const best = candidates.sort(
+      (a, b) => Math.abs((xs[a] ?? 0) - px) - Math.abs((xs[b] ?? 0) - px),
+    )[0];
+    setHover(
+      best !== undefined && Math.abs((xs[best] ?? 0) - px) < 12 ? (flown[best] ?? null) : null,
+    );
   };
 
   const hx = hover ? x(time(hover)) : 0;
@@ -130,7 +146,16 @@ function Continuous({
 
         {years.map((y) => {
           const yx = x(Date.UTC(y.year, 0, 1));
-          return <line key={y.year} x1={yx} x2={yx} y1={CAD_TOP - 8} y2={AXIS_Y} className={s.yearLine} />;
+          return (
+            <line
+              key={y.year}
+              x1={yx}
+              x2={yx}
+              y1={CAD_TOP - 8}
+              y2={AXIS_Y}
+              className={s.yearLine}
+            />
+          );
         })}
         <line x1={0} x2={width} y1={CAD_TOP + CAD_H} y2={CAD_TOP + CAD_H} className={s.axis} />
         <line x1={0} x2={width} y1={yCad(maxN)} y2={yCad(maxN)} className={s.maxLine} />
@@ -161,9 +186,7 @@ function Continuous({
           })}
         </g>
 
-        {hover && (
-          <line x1={hx} x2={hx} y1={CAD_TOP - 8} y2={AXIS_Y} className={s.hoverLine} />
-        )}
+        {hover && <line x1={hx} x2={hx} y1={CAD_TOP - 8} y2={AXIS_Y} className={s.hoverLine} />}
         <rect
           x={0}
           y={0}
@@ -188,17 +211,27 @@ function Continuous({
       </span>
 
       {hover && (
-        <p className={s.readout} style={{ left: Math.min(Math.max(hx - 140, 0), width - 280) }} aria-hidden="true">
-          <span>#{hover.flight}</span> {formatNet(hover.net, "day")} · <strong>{hover.mission}</strong> ·{" "}
-          {OUTCOME_LABEL[hover.outcome]}
+        <p
+          className={s.readout}
+          style={{ left: Math.min(Math.max(hx - 140, 0), width - 280) }}
+          aria-hidden="true"
+        >
+          <span>#{hover.flight}</span> {formatNet(hover.net, "day")} ·{" "}
+          <strong>{hover.mission}</strong> · {OUTCOME_LABEL[hover.outcome]}
         </p>
       )}
 
       <ol className={s.years} aria-label="Flights by year">
         {years.map((y, i) => (
-          <li key={y.year} style={{ left: x(Date.UTC(y.year, 0, 1)) }} className={i % labelEvery ? s.skip : undefined}>
+          <li
+            key={y.year}
+            style={{ left: x(Date.UTC(y.year, 0, 1)) }}
+            className={i % labelEvery ? s.skip : undefined}
+          >
             <Link to={`/launches?year=${y.year}`} className={s.year}>
-              <span aria-hidden="true">{labelEvery > 1 ? `’${String(y.year).slice(2)}` : y.year}</span>
+              <span aria-hidden="true">
+                {labelEvery > 1 ? `’${String(y.year).slice(2)}` : y.year}
+              </span>
               <span className="visually-hidden">
                 {y.year}: {formatInt(y.flights)} flights
               </span>
@@ -210,7 +243,15 @@ function Continuous({
   );
 }
 
-function YearRows({ flown, years, width }: { flown: LaunchSummary[]; years: YearStat[]; width: number }) {
+function YearRows({
+  flown,
+  years,
+  width,
+}: {
+  flown: LaunchSummary[];
+  years: YearStat[];
+  width: number;
+}) {
   const reduce = useReducedMotion();
   const band = Math.max(120, width - 64 - 48);
   const byYear = useMemo(() => {
@@ -231,7 +272,10 @@ function YearRows({ flown, years, width }: { flown: LaunchSummary[]; years: Year
         let landed = "";
         for (const l of list) {
           const d = new Date(l.net);
-          const day = (Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()) - Date.UTC(y.year, 0, 1)) / 86_400_000;
+          const day =
+            (Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()) -
+              Date.UTC(y.year, 0, 1)) /
+            86_400_000;
           const lx = ((day / 366) * band).toFixed(1);
           if (isFailure(l)) failed += `M${lx},2V30`;
           else ok += `M${lx},6V26`;

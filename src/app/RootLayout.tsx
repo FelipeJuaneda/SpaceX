@@ -23,7 +23,10 @@ export function RootLayout() {
       <Suspense fallback={null}>
         <Toaster
           position="bottom-center"
-          toastOptions={{ unstyled: true, classNames: { toast: s.toast, actionButton: s.toastAction } }}
+          toastOptions={{
+            unstyled: true,
+            classNames: { toast: s.toast, actionButton: s.toastAction },
+          }}
         />
       </Suspense>
     </>

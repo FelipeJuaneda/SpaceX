@@ -11,7 +11,13 @@ interface Props {
 
 /** A placeholder block shaped like the content it stands in for. Decorative to assistive tech. */
 export function Skeleton({ width, height = "1em", className, style }: Props) {
-  return <span aria-hidden="true" className={cn(s.bone, className)} style={{ width, height, ...style }} />;
+  return (
+    <span
+      aria-hidden="true"
+      className={cn(s.bone, className)}
+      style={{ width, height, ...style }}
+    />
+  );
 }
 
 /** Announces loading once to screen readers while skeletons render. */

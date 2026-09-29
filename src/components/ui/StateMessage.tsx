@@ -18,7 +18,10 @@ interface Props {
 export function StateMessage({ variant, title, body, action, headingLevel = 2, className }: Props) {
   const Heading = `h${headingLevel}` as const;
   return (
-    <section className={cn(s.state, s[variant], className)} role={variant === "error" ? "alert" : "status"}>
+    <section
+      className={cn(s.state, s[variant], className)}
+      role={variant === "error" ? "alert" : "status"}
+    >
       <svg className={s.trace} viewBox="0 0 240 32" aria-hidden="true" focusable="false">
         {variant === "empty" ? (
           <path d="M0 16H240" />

@@ -8,7 +8,11 @@ const dayFmt = new Intl.DateTimeFormat(LOCALE, {
   year: "numeric",
   timeZone: "UTC",
 });
-const monthFmt = new Intl.DateTimeFormat(LOCALE, { month: "long", year: "numeric", timeZone: "UTC" });
+const monthFmt = new Intl.DateTimeFormat(LOCALE, {
+  month: "long",
+  year: "numeric",
+  timeZone: "UTC",
+});
 const timeFmt = new Intl.DateTimeFormat(LOCALE, {
   hour: "2-digit",
   minute: "2-digit",

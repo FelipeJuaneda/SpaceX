@@ -94,7 +94,11 @@ function linksOf(launch: LL2Launch): { videos: LinkRef[]; links: LinkRef[] } {
     .slice(0, 4)
     .map((l) => ({ title: l.title ?? l.url, url: l.url, source: l.source }));
   if (launch.flightclub_url) {
-    links.push({ title: "Trajectory simulation", url: launch.flightclub_url, source: "flightclub.io" });
+    links.push({
+      title: "Trajectory simulation",
+      url: launch.flightclub_url,
+      source: "flightclub.io",
+    });
   }
   return { videos, links };
 }
@@ -132,7 +136,8 @@ function detail(launch: LL2Launch, summary: LaunchSummary): LaunchDetail {
               attempted: s.landing.attempt,
               success: s.landing.success,
               type: s.landing.type?.name ?? null,
-              location: s.landing.landing_location?.abbrev || s.landing.landing_location?.name || null,
+              location:
+                s.landing.landing_location?.abbrev || s.landing.landing_location?.name || null,
               description: s.landing.description?.trim() || null,
             }
           : null,
@@ -221,10 +226,18 @@ function recordsOf(details: LaunchDetail[]): SnapshotRecords {
   let turnaround: SnapshotRecords["fastestTurnaround"] = null;
   for (const launch of flown) {
     for (const stage of launch.stages) {
-      if (stage.serial && stage.boosterFlight && (!booster || stage.boosterFlight > booster.flights)) {
+      if (
+        stage.serial &&
+        stage.boosterFlight &&
+        (!booster || stage.boosterFlight > booster.flights)
+      ) {
         booster = { serial: stage.serial, flights: stage.boosterFlight, slug: launch.slug };
       }
-      if (stage.serial && stage.turnaroundDays && (!turnaround || stage.turnaroundDays < turnaround.days)) {
+      if (
+        stage.serial &&
+        stage.turnaroundDays &&
+        (!turnaround || stage.turnaroundDays < turnaround.days)
+      ) {
         turnaround = { serial: stage.serial, days: stage.turnaroundDays, slug: launch.slug };
       }
     }
@@ -235,15 +248,20 @@ function recordsOf(details: LaunchDetail[]): SnapshotRecords {
   for (const launch of flown) {
     if (!launch.crewed) continue;
     crewedFlights += 1;
-    for (const sc of launch.spacecraft) for (const c of sc.crew) if (c.name !== "Starman") humans.add(c.name);
+    for (const sc of launch.spacecraft)
+      for (const c of sc.crew) if (c.name !== "Starman") humans.add(c.name);
   }
 
   let streak = 0;
   for (let i = flown.length - 1; i >= 0 && flown[i]?.outcome === "success"; i--) streak += 1;
 
   const perYear = new Map<string, number>();
-  for (const launch of flown) perYear.set(launch.net.slice(0, 4), (perYear.get(launch.net.slice(0, 4)) ?? 0) + 1);
-  const [busiestYear, busiestCount] = [...perYear.entries()].sort((a, b) => b[1] - a[1])[0] ?? ["", 0];
+  for (const launch of flown)
+    perYear.set(launch.net.slice(0, 4), (perYear.get(launch.net.slice(0, 4)) ?? 0) + 1);
+  const [busiestYear, busiestCount] = [...perYear.entries()].sort((a, b) => b[1] - a[1])[0] ?? [
+    "",
+    0,
+  ];
 
   return {
     landings: {
@@ -280,7 +298,8 @@ export function normalize(raw: LL2Launch[]): Snapshot {
   });
 
   const configs = new Map<number, LL2Config>();
-  for (const launch of sorted) configs.set(launch.rocket.configuration.id, launch.rocket.configuration);
+  for (const launch of sorted)
+    configs.set(launch.rocket.configuration.id, launch.rocket.configuration);
   const rockets = [...configs.values()]
     .map((c) => rocketOf(c, index))
     .sort((a, b) => (a.maidenFlight ?? "9999").localeCompare(b.maidenFlight ?? "9999"));

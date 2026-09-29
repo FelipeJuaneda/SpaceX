@@ -13,7 +13,15 @@ interface Props {
   className?: string;
 }
 
-export function SearchField({ id, label, value, onChange, placeholder, hideLabel, className }: Props) {
+export function SearchField({
+  id,
+  label,
+  value,
+  onChange,
+  placeholder,
+  hideLabel,
+  className,
+}: Props) {
   const input = useRef<HTMLInputElement>(null);
   return (
     <div className={cn(s.field, className)}>

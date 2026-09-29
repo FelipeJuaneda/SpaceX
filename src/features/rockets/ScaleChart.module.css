@@ -12,7 +12,11 @@
   margin-bottom: 76px;
   border-bottom: 2px solid var(--ink);
   /* Ten-metre divisions, anchored on the ground line. */
-  background: repeating-linear-gradient(to top, var(--grid-major) 0 1px, transparent 1px var(--div-major));
+  background: repeating-linear-gradient(
+    to top,
+    var(--grid-major) 0 1px,
+    transparent 1px var(--div-major)
+  );
 }
 
 .axis {

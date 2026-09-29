@@ -26,7 +26,9 @@ describe("URL state", () => {
   });
 
   it("round-trips non-default filters and omits defaults", () => {
-    const f = readFilters(params("q=crew&outcome=failure&family=falcon-9&year=2015&crewed=1&sort=oldest"));
+    const f = readFilters(
+      params("q=crew&outcome=failure&family=falcon-9&year=2015&crewed=1&sort=oldest"),
+    );
     expect(readFilters(toSearchParams(f))).toEqual(f);
     expect(toSearchParams(DEFAULT_FILTERS).toString()).toBe("");
   });
@@ -50,31 +52,41 @@ describe("applyFilters", () => {
   });
 
   it("filters by outcome, family, year and crew", () => {
-    expect(missions(applyFilters(sampleLaunches, { ...DEFAULT_FILTERS, outcome: "failure" }))).toEqual([
+    expect(
+      missions(applyFilters(sampleLaunches, { ...DEFAULT_FILTERS, outcome: "failure" })),
+    ).toEqual(["SpX CRS-7", "FalconSAT-2"]);
+    expect(applyFilters(sampleLaunches, { ...DEFAULT_FILTERS, family: "falcon-1" })).toHaveLength(
+      1,
+    );
+    expect(missions(applyFilters(sampleLaunches, { ...DEFAULT_FILTERS, year: 2015 }))).toEqual([
       "SpX CRS-7",
-      "FalconSAT-2",
     ]);
-    expect(applyFilters(sampleLaunches, { ...DEFAULT_FILTERS, family: "falcon-1" })).toHaveLength(1);
-    expect(missions(applyFilters(sampleLaunches, { ...DEFAULT_FILTERS, year: 2015 }))).toEqual(["SpX CRS-7"]);
-    expect(missions(applyFilters(sampleLaunches, { ...DEFAULT_FILTERS, outcome: "all", crewed: true }))).toEqual([
-      "Crew-13",
-      "SpX-DM2 (Demonstration Mission 2)",
-    ]);
+    expect(
+      missions(applyFilters(sampleLaunches, { ...DEFAULT_FILTERS, outcome: "all", crewed: true })),
+    ).toEqual(["Crew-13", "SpX-DM2 (Demonstration Mission 2)"]);
   });
 
   it("searches every word across the record, ignoring case and accents", () => {
-    expect(missions(applyFilters(sampleLaunches, { ...DEFAULT_FILTERS, q: "demonstration FALCON" }))).toEqual([
-      "SpX-DM2 (Demonstration Mission 2)",
-    ]);
+    expect(
+      missions(applyFilters(sampleLaunches, { ...DEFAULT_FILTERS, q: "demonstration FALCON" })),
+    ).toEqual(["SpX-DM2 (Demonstration Mission 2)"]);
     expect(applyFilters(sampleLaunches, { ...DEFAULT_FILTERS, q: "kennedy" })).toHaveLength(4);
     expect(applyFilters(sampleLaunches, { ...DEFAULT_FILTERS, q: "zzz" })).toHaveLength(0);
   });
 
   it("finds a flight by its number", () => {
-    expect(missions(applyFilters(sampleLaunches, { ...DEFAULT_FILTERS, q: "#2" }))).toEqual(["SpX CRS-7"]);
+    expect(missions(applyFilters(sampleLaunches, { ...DEFAULT_FILTERS, q: "#2" }))).toEqual([
+      "SpX CRS-7",
+    ]);
   });
 
   it("counts outcomes for the filter keys", () => {
-    expect(outcomeCounts(sampleLaunches)).toEqual({ flown: 4, success: 2, failure: 2, upcoming: 1, all: 5 });
+    expect(outcomeCounts(sampleLaunches)).toEqual({
+      flown: 4,
+      success: 2,
+      failure: 2,
+      upcoming: 1,
+      all: 5,
+    });
   });
 });

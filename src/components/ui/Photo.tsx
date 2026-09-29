@@ -27,7 +27,13 @@ export function Photo({ image, alt, ratio = "3 / 2", priority, caption = true, c
         {image && state !== "error" && (
           <>
             {image.thumb !== image.url && (
-              <img src={image.thumb} alt="" aria-hidden="true" className={s.placeholder} decoding="async" />
+              <img
+                src={image.thumb}
+                alt=""
+                aria-hidden="true"
+                className={s.placeholder}
+                decoding="async"
+              />
             )}
             <img
               src={image.url}

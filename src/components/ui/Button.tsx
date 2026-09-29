@@ -16,7 +16,15 @@ function classes(variant: Variant, size: "md" | "sm", className?: string) {
   return cn(s.button, s[variant], size === "sm" && s.sm, className);
 }
 
-function Inner({ icon, iconEnd, children }: { icon?: ReactNode; iconEnd?: ReactNode; children: ReactNode }) {
+function Inner({
+  icon,
+  iconEnd,
+  children,
+}: {
+  icon?: ReactNode;
+  iconEnd?: ReactNode;
+  children: ReactNode;
+}) {
   return (
     <>
       {icon && <span className={s.icon}>{icon}</span>}

@@ -35,7 +35,8 @@ export default function FleetRoute() {
           {rockets
             ? `${formatInt(flown.length)} vehicle configurations have flown ${formatInt(flights)} SpaceX missions. `
             : ""}
-          Every silhouette is drawn at four pixels per metre, so one major division of the paper is ten metres.
+          Every silhouette is drawn at four pixels per metre, so one major division of the paper is
+          ten metres.
         </p>
       </header>
 
@@ -70,13 +71,16 @@ export default function FleetRoute() {
           />
           <ScaleChart rockets={shown} className={s.chart} />
           <p className={s.note}>
-            Schematic silhouettes. Height and diameter are recorded values; stage, fairing and fin proportions are
-            approximate.
+            Schematic silhouettes. Height and diameter are recorded values; stage, fairing and fin
+            proportions are approximate.
           </p>
 
           <section aria-labelledby="specs-title" className={s.specs}>
             <h2 id="specs-title">Specifications and record</h2>
-            <SpecTable rockets={rockets} caption="Specifications and flight record of every SpaceX vehicle configuration" />
+            <SpecTable
+              rockets={rockets}
+              caption="Specifications and flight record of every SpaceX vehicle configuration"
+            />
           </section>
         </>
       )}

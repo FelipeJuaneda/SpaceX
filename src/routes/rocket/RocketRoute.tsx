@@ -10,7 +10,14 @@ import { FlightList, FlightRow } from "@/features/launches/FlightRow";
 import { launchesQuery, rocketsQuery } from "@/features/launches/queries";
 import { ScaleChart } from "@/features/rockets/ScaleChart";
 import { cn } from "@/lib/cn";
-import { formatInt, formatLength, formatMass, formatNet, formatPercent, plural } from "@/lib/format";
+import {
+  formatInt,
+  formatLength,
+  formatMass,
+  formatNet,
+  formatPercent,
+  plural,
+} from "@/lib/format";
 import s from "./RocketRoute.module.css";
 
 const REFERENCE = "falcon-9-block-5";
@@ -70,7 +77,10 @@ export default function RocketRoute() {
   const reference = rocketsQ.data.find((r) => r.slug === REFERENCE);
   const compare = reference && reference.slug !== rocket.slug ? [rocket, reference] : [rocket];
   const flights = (launchesQ.data ?? []).filter((l) => l.vehicleSlug === rocket.slug);
-  const latest = flights.filter((l) => l.outcome !== "upcoming").slice(-8).reverse();
+  const latest = flights
+    .filter((l) => l.outcome !== "upcoming")
+    .slice(-8)
+    .reverse();
   const r = rocket.record;
 
   return (
@@ -89,8 +99,12 @@ export default function RocketRoute() {
       <header className={s.header}>
         <h1>{rocket.name}</h1>
         <p className={s.status}>
-          <span className={cn(s.badge, rocket.active ? s.active : s.retired)}>{rocket.active ? "Active" : "Retired"}</span>
-          {rocket.maidenFlight && <span className="reading">First flight {formatNet(rocket.maidenFlight, "day")}</span>}
+          <span className={cn(s.badge, rocket.active ? s.active : s.retired)}>
+            {rocket.active ? "Active" : "Retired"}
+          </span>
+          {rocket.maidenFlight && (
+            <span className="reading">First flight {formatNet(rocket.maidenFlight, "day")}</span>
+          )}
         </p>
         {rocket.description && <p className={s.description}>{rocket.description}</p>}
       </header>
@@ -106,10 +120,16 @@ export default function RocketRoute() {
             items={[
               { label: "Height", value: formatLength(rocket.length) },
               { label: "Diameter", value: formatLength(rocket.diameter) },
-              { label: "Liftoff mass", value: rocket.launchMass === null ? "—" : `${formatInt(rocket.launchMass)} t` },
+              {
+                label: "Liftoff mass",
+                value: rocket.launchMass === null ? "—" : `${formatInt(rocket.launchMass)} t`,
+              },
               { label: "Payload to LEO", value: formatMass(rocket.leo) },
               { label: "Payload to GTO", value: formatMass(rocket.gto) },
-              { label: "Liftoff thrust", value: rocket.thrust === null ? "—" : `${formatInt(rocket.thrust)} kN` },
+              {
+                label: "Liftoff thrust",
+                value: rocket.thrust === null ? "—" : `${formatInt(rocket.thrust)} kN`,
+              },
               { label: "Stages", value: rocket.stages ?? "—" },
               { label: "Reusable", value: rocket.reusable ? "Yes" : "No" },
             ]}
@@ -117,19 +137,34 @@ export default function RocketRoute() {
           <h2 className={s.blockTitle}>Record</h2>
           <Readout
             items={[
-              { label: "Flights", value: formatInt(r.flown), hint: r.upcoming ? `${formatInt(r.upcoming)} scheduled` : undefined },
+              {
+                label: "Flights",
+                value: formatInt(r.flown),
+                hint: r.upcoming ? `${formatInt(r.upcoming)} scheduled` : undefined,
+              },
               {
                 label: "Successes",
                 value: `${formatInt(r.success)}${r.flown ? ` (${formatPercent(r.success, r.flown)})` : ""}`,
               },
-              { label: "Failures", value: formatInt(r.failure + r.partial), hint: r.partial ? `${r.partial} partial` : undefined },
+              {
+                label: "Failures",
+                value: formatInt(r.failure + r.partial),
+                hint: r.partial ? `${r.partial} partial` : undefined,
+              },
               {
                 label: "Booster landings",
                 value: r.landingsAttempted
                   ? `${formatInt(r.landingsSucceeded)} of ${formatInt(r.landingsAttempted)} attempts`
                   : "None attempted",
               },
-              ...(r.first ? [{ label: "Flying", value: `${formatNet(r.first, "month")} → ${r.last ? formatNet(r.last, "month") : "—"}` }] : []),
+              ...(r.first
+                ? [
+                    {
+                      label: "Flying",
+                      value: `${formatNet(r.first, "month")} → ${r.last ? formatNet(r.last, "month") : "—"}`,
+                    },
+                  ]
+                : []),
             ]}
           />
           {rocket.wiki && (

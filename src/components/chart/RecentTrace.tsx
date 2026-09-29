@@ -81,7 +81,12 @@ export function RecentTrace({ launches, now }: Props) {
             ))}
 
             <m.path
-              d={tracePath(past.map((l) => x(time(l))), 0, nowX, SPIKE)}
+              d={tracePath(
+                past.map((l) => x(time(l))),
+                0,
+                nowX,
+                SPIKE,
+              )}
               className={s.trace}
               initial={{ pathLength: reduce ? 1 : 0 }}
               whileInView={{ pathLength: 1 }}
@@ -111,7 +116,12 @@ export function RecentTrace({ launches, now }: Props) {
             )}
 
             <m.path
-              d={tracePath(future.map((l) => x(time(l))), nowX, width, SPIKE)}
+              d={tracePath(
+                future.map((l) => x(time(l))),
+                nowX,
+                width,
+                SPIKE,
+              )}
               className={s.future}
               initial={{ opacity: reduce ? 1 : 0 }}
               whileInView={{ opacity: 1 }}
@@ -120,7 +130,10 @@ export function RecentTrace({ launches, now }: Props) {
             />
 
             <line x1={nowX} x2={nowX} y1={16} y2={DOT_Y + 14} className={s.now} />
-            <path d={`M${nowX - 6},${BASE - 10}L${nowX},${BASE}L${nowX + 6},${BASE - 10}Z`} className={s.pen} />
+            <path
+              d={`M${nowX - 6},${BASE - 10}L${nowX},${BASE}L${nowX + 6},${BASE - 10}Z`}
+              className={s.pen}
+            />
             <text x={nowX} y={10} textAnchor="middle" className={s.nowLabel}>
               Now
             </text>
@@ -129,8 +142,9 @@ export function RecentTrace({ launches, now }: Props) {
       </div>
       <figcaption className={s.caption}>
         {plural(past.length, "flight")} in the last {PAST_DAYS} days
-        {past.length > 0 && (failures ? `, ${failures} failed` : ", none failed")}; {plural(landed, "booster")}{" "}
-        recovered. {plural(future.length, "flight")} scheduled in the next {FUTURE_DAYS} days.
+        {past.length > 0 && (failures ? `, ${failures} failed` : ", none failed")};{" "}
+        {plural(landed, "booster")} recovered. {plural(future.length, "flight")} scheduled in the
+        next {FUTURE_DAYS} days.
       </figcaption>
     </figure>
   );

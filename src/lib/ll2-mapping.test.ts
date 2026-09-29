@@ -1,5 +1,12 @@
 import { describe, expect, it } from "vitest";
-import { familyOf, missionFromName, outcomeOf, parseDuration, precisionOf, slugify } from "./ll2-mapping";
+import {
+  familyOf,
+  missionFromName,
+  outcomeOf,
+  parseDuration,
+  precisionOf,
+  slugify,
+} from "./ll2-mapping";
 
 describe("parseDuration", () => {
   it.each([

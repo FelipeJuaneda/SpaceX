@@ -144,7 +144,12 @@
   .feed {
     display: block;
     background:
-      radial-gradient(circle at 50% 20px, var(--paper) 0 5px, var(--rule-strong) 5.5px 6.25px, transparent 6.75px)
+      radial-gradient(
+          circle at 50% 20px,
+          var(--paper) 0 5px,
+          var(--rule-strong) 5.5px 6.25px,
+          transparent 6.75px
+        )
         0 0 / 100% var(--div-major) repeat-y,
       var(--paper-margin);
     border-right: 1px solid var(--rule-strong);

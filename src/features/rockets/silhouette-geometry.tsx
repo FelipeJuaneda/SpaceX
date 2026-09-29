@@ -40,8 +40,20 @@ function falcon(rocket: Rocket, L: number, heavy: boolean): Shape {
       <rect x={bx - d / 2} y={L - s1} width={d} height={s1} className={s.hull} />
       {recoverable && (
         <>
-          <rect x={bx - d / 2 - 0.9} y={L - s1 + (nose ? 0.4 : -ib + 0.6)} width={0.9} height={1.4} className={s.part} />
-          <rect x={bx + d / 2} y={L - s1 + (nose ? 0.4 : -ib + 0.6)} width={0.9} height={1.4} className={s.part} />
+          <rect
+            x={bx - d / 2 - 0.9}
+            y={L - s1 + (nose ? 0.4 : -ib + 0.6)}
+            width={0.9}
+            height={1.4}
+            className={s.part}
+          />
+          <rect
+            x={bx + d / 2}
+            y={L - s1 + (nose ? 0.4 : -ib + 0.6)}
+            width={0.9}
+            height={1.4}
+            className={s.part}
+          />
           <path
             d={`M${bx - d / 2},${L - 11}L${bx - d / 2 - legs},${L}M${bx + d / 2},${L - 11}L${bx + d / 2 + legs},${L}`}
             className={s.line}
@@ -107,7 +119,13 @@ function starship(rocket: Rocket, L: number): Shape {
           <>
             <rect x={cx - d / 2} y={ship} width={d} height={ring} className={s.band} />
             <rect x={cx - d / 2} y={ship + ring} width={d} height={booster} className={s.hull} />
-            <rect x={cx - d / 2 - 1.6} y={ship + ring + 1} width={1.6} height={3.2} className={s.part} />
+            <rect
+              x={cx - d / 2 - 1.6}
+              y={ship + ring + 1}
+              width={1.6}
+              height={3.2}
+              className={s.part}
+            />
             <rect x={cx + d / 2} y={ship + ring + 1} width={1.6} height={3.2} className={s.part} />
           </>
         )}
@@ -119,7 +137,9 @@ function starship(rocket: Rocket, L: number): Shape {
 /** The drawing for a vehicle, in metres. */
 export function silhouetteShape(rocket: Rocket): Shape {
   const L = rocket.length ?? 0;
-  return rocket.family === "starship" ? starship(rocket, L) : falcon(rocket, L, rocket.family === "falcon-heavy");
+  return rocket.family === "starship"
+    ? starship(rocket, L)
+    : falcon(rocket, L, rocket.family === "falcon-heavy");
 }
 
 export function silhouetteWidth(rocket: Rocket): number {

@@ -21,7 +21,11 @@ function Recovery({ launch }: { launch: LaunchSummary }) {
         <LandingGlyph key={i} landed={i < landed} />
       ))}
       <span className={s.landingText}>
-        {landed === attempted ? (attempted > 1 ? `${landed} landed` : "Landed") : `${landed}/${attempted} landed`}
+        {landed === attempted
+          ? attempted > 1
+            ? `${landed} landed`
+            : "Landed"
+          : `${landed}/${attempted} landed`}
       </span>
     </span>
   );

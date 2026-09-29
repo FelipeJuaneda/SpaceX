@@ -1,11 +1,6 @@
 import type { ComponentType } from "react";
 import { Navigate, createBrowserRouter } from "react-router";
-import {
-  launchQuery,
-  launchesQuery,
-  metaQuery,
-  rocketsQuery,
-} from "@/features/launches/queries";
+import { launchQuery, launchesQuery, metaQuery, rocketsQuery } from "@/features/launches/queries";
 import HomeRoute from "@/routes/home/HomeRoute";
 import { LegacyLaunchRedirect } from "@/routes/legacy/LegacyLaunchRedirect";
 import { RootLayout } from "./RootLayout";

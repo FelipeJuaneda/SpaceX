@@ -19,7 +19,12 @@ export function Select({ id, label, value, onChange, children, className }: Prop
         {label}
       </label>
       <div className={s.control}>
-        <select id={id} value={value} onChange={(e) => onChange(e.target.value)} className={s.select}>
+        <select
+          id={id}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          className={s.select}
+        >
           {children}
         </select>
         <ChevronDown aria-hidden="true" className={s.chevron} size={18} strokeWidth={1.75} />

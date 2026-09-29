@@ -1,6 +1,13 @@
 import { describe, expect, it } from "vitest";
 import { sampleLaunches } from "@/test/fixtures";
-import { cadence, cumulative, groupByYear, nextScheduled, reuseFirsts, yearStats } from "./selectors";
+import {
+  cadence,
+  cumulative,
+  groupByYear,
+  nextScheduled,
+  reuseFirsts,
+  yearStats,
+} from "./selectors";
 
 describe("selectors", () => {
   it("builds one row per year, including years without flights", () => {

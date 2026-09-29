@@ -1,0 +1,8 @@
+# Generated or vendored
+dist
+coverage
+.cache
+public/data
+src/data
+package-lock.json
+.impeccable

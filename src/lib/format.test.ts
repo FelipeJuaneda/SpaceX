@@ -1,5 +1,13 @@
 import { describe, expect, it } from "vitest";
-import { countdownParts, formatNet, formatOffset, formatStamp, isPrecise, ordinal, plural } from "./format";
+import {
+  countdownParts,
+  formatNet,
+  formatOffset,
+  formatStamp,
+  isPrecise,
+  ordinal,
+  plural,
+} from "./format";
 
 describe("formatNet", () => {
   const iso = "2026-11-15T12:00:00Z";
@@ -28,7 +36,13 @@ describe("countdown", () => {
   it("splits the remaining time and pads it", () => {
     const now = Date.UTC(2026, 0, 1, 0, 0, 0);
     const target = now + (1 * 86400 + 2 * 3600 + 3 * 60 + 4) * 1000;
-    expect(countdownParts(target, now)).toEqual({ sign: "-", days: 1, hours: "02", minutes: "03", seconds: "04" });
+    expect(countdownParts(target, now)).toEqual({
+      sign: "-",
+      days: 1,
+      hours: "02",
+      minutes: "03",
+      seconds: "04",
+    });
     expect(countdownParts(now - 5000, now).sign).toBe("+");
   });
 

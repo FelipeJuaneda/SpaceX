@@ -36,7 +36,8 @@ function coordinates(lat: number | null, lon: number | null): string | null {
 
 function landingText(stage: Stage, upcoming: boolean): string {
   const landing = stage.landing;
-  if (!landing || !landing.attempted) return upcoming ? "No landing planned" : "Expended, no landing attempt";
+  if (!landing || !landing.attempted)
+    return upcoming ? "No landing planned" : "Expended, no landing attempt";
   const result = upcoming
     ? "Planned"
     : landing.success === null
@@ -66,7 +67,9 @@ function stageItems(stages: Stage[], upcoming: boolean): ReadoutItem[] {
         label: "Recovery",
         value: (
           <span className={s.recovery}>
-            {stage.landing?.attempted && !upcoming && <LandingGlyph landed={Boolean(stage.landing.success)} />}
+            {stage.landing?.attempted && !upcoming && (
+              <LandingGlyph landed={Boolean(stage.landing.success)} />
+            )}
             {landingText(stage, upcoming)}
           </span>
         ),
@@ -94,7 +97,10 @@ export default function FlightSheetRoute() {
               title="No flight at this address"
               body="The record has no flight sheet for this link. It may have been renamed; the flight log can find it."
               action={
-                <ButtonLink to={`/launches?q=${encodeURIComponent(slug.replace(/-/g, " "))}&outcome=all`} variant="ink">
+                <ButtonLink
+                  to={`/launches?q=${encodeURIComponent(slug.replace(/-/g, " "))}&outcome=all`}
+                  variant="ink"
+                >
                   Search the flight log
                 </ButtonLink>
               }
@@ -132,9 +138,13 @@ function Sheet({ launch: l }: { launch: LaunchDetail }) {
 
   const missionItems: ReadoutItem[] = [
     ...(l.missionType ? [{ label: "Mission type", value: l.missionType }] : []),
-    ...(l.orbitName ? [{ label: "Target orbit", value: l.orbit ? `${l.orbitName} (${l.orbit})` : l.orbitName }] : []),
+    ...(l.orbitName
+      ? [{ label: "Target orbit", value: l.orbit ? `${l.orbitName} (${l.orbit})` : l.orbitName }]
+      : []),
     ...(operators.length ? [{ label: "Payload operator", value: operators.join(", ") }] : []),
-    ...(l.yearCount && !upcoming ? [{ label: "Flight of the year", value: `${ordinal(l.yearCount)} SpaceX launch of ${year}` }] : []),
+    ...(l.yearCount && !upcoming
+      ? [{ label: "Flight of the year", value: `${ordinal(l.yearCount)} SpaceX launch of ${year}` }]
+      : []),
   ];
 
   const padItems: ReadoutItem[] = [
@@ -151,7 +161,9 @@ function Sheet({ launch: l }: { launch: LaunchDetail }) {
           },
         ]
       : []),
-    ...(upcoming && l.probability !== null ? [{ label: "Weather go", value: `${l.probability}%` }] : []),
+    ...(upcoming && l.probability !== null
+      ? [{ label: "Weather go", value: `${l.probability}%` }]
+      : []),
     ...(upcoming && l.weather ? [{ label: "Weather concerns", value: l.weather }] : []),
   ];
 
@@ -189,8 +201,8 @@ function Sheet({ launch: l }: { launch: LaunchDetail }) {
           <OutcomeMark outcome={l.outcome} className={cn(s.outcome, s[l.outcome])} />
           <h1 className={s.title}>{l.mission}</h1>
           <p className={s.subtitle}>
-            {l.vehicleSlug ? <Link to={`/rockets/${l.vehicleSlug}`}>{l.vehicle}</Link> : l.vehicle} · {l.pad},{" "}
-            {l.site}
+            {l.vehicleSlug ? <Link to={`/rockets/${l.vehicleSlug}`}>{l.vehicle}</Link> : l.vehicle}{" "}
+            · {l.pad}, {l.site}
           </p>
           <dl className={s.t0}>
             <div>
@@ -215,7 +227,11 @@ function Sheet({ launch: l }: { launch: LaunchDetail }) {
           <div className={s.actions}>
             <SaveButton slug={l.slug} mission={l.mission} />
             {l.videos[0] && (
-              <ButtonAnchor href={l.videos[0].url} variant="line" icon={<Play aria-hidden="true" />}>
+              <ButtonAnchor
+                href={l.videos[0].url}
+                variant="line"
+                icon={<Play aria-hidden="true" />}
+              >
                 {upcoming ? "Webcast" : "Watch the launch"}
               </ButtonAnchor>
             )}
@@ -269,7 +285,10 @@ function Sheet({ launch: l }: { launch: LaunchDetail }) {
               items={l.payloads.map((p) => ({
                 label: p.type ?? "Payload",
                 value: p.name,
-                hint: [p.massKg ? formatMass(p.massKg) : null, p.destination].filter(Boolean).join(" · ") || undefined,
+                hint:
+                  [p.massKg ? formatMass(p.massKg) : null, p.destination]
+                    .filter(Boolean)
+                    .join(" · ") || undefined,
               }))}
             />
           )}
@@ -283,12 +302,17 @@ function Sheet({ launch: l }: { launch: LaunchDetail }) {
             items={[
               {
                 label: "Vehicle",
-                value: l.vehicleSlug ? <Link to={`/rockets/${l.vehicleSlug}`}>{l.vehicle}</Link> : l.vehicle,
+                value: l.vehicleSlug ? (
+                  <Link to={`/rockets/${l.vehicleSlug}`}>{l.vehicle}</Link>
+                ) : (
+                  l.vehicle
+                ),
               },
               ...stageItems(l.stages, upcoming),
               ...l.spacecraft.map((sc) => ({
                 label: "Spacecraft",
-                value: sc.serial && !sc.name.includes(sc.serial) ? `${sc.name} (${sc.serial})` : sc.name,
+                value:
+                  sc.serial && !sc.name.includes(sc.serial) ? `${sc.name} (${sc.serial})` : sc.name,
                 hint: sc.destination ?? undefined,
               })),
             ]}
@@ -301,7 +325,9 @@ function Sheet({ launch: l }: { launch: LaunchDetail }) {
                   <li key={`${c.craft}-${c.name}`}>
                     <span className={s.crewName}>{c.name}</span>
                     <span className={s.crewRole}>
-                      {c.name === "Starman" ? "Mannequin, not a person" : [c.role, c.agency].filter(Boolean).join(" · ")}
+                      {c.name === "Starman"
+                        ? "Mannequin, not a person"
+                        : [c.role, c.agency].filter(Boolean).join(" · ")}
                     </span>
                   </li>
                 ))}
@@ -357,7 +383,8 @@ function Sheet({ launch: l }: { launch: LaunchDetail }) {
       </nav>
 
       <p className={s.source}>
-        Flight {l.flight ? `#${formatInt(l.flight)}` : "(scheduled)"} · record from Launch Library 2 by The Space Devs.
+        Flight {l.flight ? `#${formatInt(l.flight)}` : "(scheduled)"} · record from Launch Library 2
+        by The Space Devs.
       </p>
     </article>
   );

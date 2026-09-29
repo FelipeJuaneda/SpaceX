@@ -4,7 +4,10 @@ import { PageMeta } from "@/components/layout/PageMeta";
 import { Button, ButtonLink } from "@/components/ui/Button";
 
 function isChunkError(error: unknown): boolean {
-  return error instanceof Error && /dynamically imported module|Importing a module script failed/i.test(error.message);
+  return (
+    error instanceof Error &&
+    /dynamically imported module|Importing a module script failed/i.test(error.message)
+  );
 }
 
 export function RouteError() {
@@ -18,7 +21,13 @@ export function RouteError() {
       <StateMessage
         variant="error"
         headingLevel={1}
-        title={notFound ? "This page is off the chart" : stale ? "A newer version is available" : "The recorder jammed"}
+        title={
+          notFound
+            ? "This page is off the chart"
+            : stale
+              ? "A newer version is available"
+              : "The recorder jammed"
+        }
         body={
           notFound
             ? "Nothing is plotted at this address."

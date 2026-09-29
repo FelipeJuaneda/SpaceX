@@ -43,7 +43,12 @@ export function useNextLaunch(
           mission: liveData.mission,
         } as LaunchSummary);
       return {
-        launch: { ...base, net: liveData.net, precision: liveData.precision as TimePrecision, status: liveData.status },
+        launch: {
+          ...base,
+          net: liveData.net,
+          precision: liveData.precision as TimePrecision,
+          status: liveData.status,
+        },
         live: true,
         inSnapshot: Boolean(known),
       };
@@ -64,7 +69,11 @@ function fallbackShape(name: string): Partial<LaunchSummary> {
     outcome: "upcoming",
     vehicle,
     vehicleSlug: "",
-    family: vehicle.startsWith("Starship") ? "starship" : vehicle === "Falcon Heavy" ? "falcon-heavy" : "falcon-9",
+    family: vehicle.startsWith("Starship")
+      ? "starship"
+      : vehicle === "Falcon Heavy"
+        ? "falcon-heavy"
+        : "falcon-9",
     pad: "",
     site: "",
     orbit: null,

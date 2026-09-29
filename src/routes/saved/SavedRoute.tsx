@@ -41,13 +41,22 @@ export default function SavedRoute() {
   const q = params.get("q") ?? "";
   const deferredQ = useDeferredValue(q);
   const sortParam = params.get("sort");
-  const sort: SavedSort = SORTS.includes(sortParam as SavedSort) ? (sortParam as SavedSort) : "saved";
+  const sort: SavedSort = SORTS.includes(sortParam as SavedSort)
+    ? (sortParam as SavedSort)
+    : "saved";
 
   const bySlug = useMemo(() => new Map((query.data ?? []).map((l) => [l.slug, l])), [query.data]);
-  const known = useMemo(() => saved.map((slug) => bySlug.get(slug)).filter((l): l is LaunchSummary => Boolean(l)), [saved, bySlug]);
+  const known = useMemo(
+    () => saved.map((slug) => bySlug.get(slug)).filter((l): l is LaunchSummary => Boolean(l)),
+    [saved, bySlug],
+  );
   const missing = query.data ? saved.filter((slug) => !bySlug.has(slug)) : [];
   const visible = useMemo(
-    () => sortSaved(known.filter((l) => matchesQuery(l, deferredQ)), sort),
+    () =>
+      sortSaved(
+        known.filter((l) => matchesQuery(l, deferredQ)),
+        sort,
+      ),
     [known, deferredQ, sort],
   );
 
@@ -60,7 +69,10 @@ export default function SavedRoute() {
 
   return (
     <div className={cn("page", s.saved)}>
-      <PageMeta title="Saved flights" description="Flights you bookmarked on Downrange, kept in this browser." />
+      <PageMeta
+        title="Saved flights"
+        description="Flights you bookmarked on Downrange, kept in this browser."
+      />
       <header className={s.header}>
         <h1>Saved flights</h1>
         <p>Flights you bookmark are kept in this browser only; nothing is sent anywhere.</p>
@@ -104,7 +116,9 @@ export default function SavedRoute() {
           </div>
 
           <p role="status" className={s.count}>
-            {query.data ? `${plural(visible.length, "flight")}${q ? ` matching “${q}”` : ""}` : "Loading…"}
+            {query.data
+              ? `${plural(visible.length, "flight")}${q ? ` matching “${q}”` : ""}`
+              : "Loading…"}
           </p>
 
           {query.isError ? (
@@ -125,7 +139,11 @@ export default function SavedRoute() {
               ))}
             </div>
           ) : visible.length === 0 ? (
-            <StateMessage variant="empty" title="No saved flight matches" body={`Nothing you saved matches “${q}”.`} />
+            <StateMessage
+              variant="empty"
+              title="No saved flight matches"
+              body={`Nothing you saved matches “${q}”.`}
+            />
           ) : (
             <FlightList>
               {visible.map((l) => (
@@ -137,10 +155,14 @@ export default function SavedRoute() {
           {missing.length > 0 && (
             <div className={s.missing}>
               <p>
-                {plural(missing.length, "saved flight")} {missing.length === 1 ? "is" : "are"} no longer in the record
-                (renamed or removed by the data source).
+                {plural(missing.length, "saved flight")} {missing.length === 1 ? "is" : "are"} no
+                longer in the record (renamed or removed by the data source).
               </p>
-              <Button variant="line" size="sm" onClick={() => missing.forEach((slug) => savedStore.remove(slug))}>
+              <Button
+                variant="line"
+                size="sm"
+                onClick={() => missing.forEach((slug) => savedStore.remove(slug))}
+              >
                 Remove {missing.length === 1 ? "it" : "them"}
               </Button>
             </div>

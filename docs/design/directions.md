@@ -27,14 +27,14 @@ Material families covered: screen instruments (1, 6), textile (2), transit signa
 
 ### Challengers (fused with the product, weighed on audience identification × product clarity)
 
-| Challenger | Verdict | What the direction kept (raise) |
-|---|---|---|
-| Oscilloscope on a signal bench | Competitive (audience) — loses clarity: one screen of overlaid signals cannot carry 860 browsable records | **Measure discipline:** every element sits on the chart grid; spacing is counted in grid divisions, not arbitrary pixels |
-| Spy-film dossier title sequence | Declined | **One alarm ink, one meaning:** red is reserved exclusively for failure, nowhere else in the system |
-| HyperCard shoebox stack | Declined | **Every state addressable:** filters, year, and flight live in the URL; back retraces the exact trail |
-| Coiled earthen tower | Declined | **Measure equals data:** a year's band length on the roll is its launch count, never a decorative width |
-| Wuxia painted hoarding | Declined | **The held moment:** each flight sheet is anchored on T‑0, the instant the record is about |
-| Akari light sculpture | Declined (not carried into the hand) | — |
+| Challenger                      | Verdict                                                                                                   | What the direction kept (raise)                                                                                          |
+| ------------------------------- | --------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| Oscilloscope on a signal bench  | Competitive (audience) — loses clarity: one screen of overlaid signals cannot carry 860 browsable records | **Measure discipline:** every element sits on the chart grid; spacing is counted in grid divisions, not arbitrary pixels |
+| Spy-film dossier title sequence | Declined                                                                                                  | **One alarm ink, one meaning:** red is reserved exclusively for failure, nowhere else in the system                      |
+| HyperCard shoebox stack         | Declined                                                                                                  | **Every state addressable:** filters, year, and flight live in the URL; back retraces the exact trail                    |
+| Coiled earthen tower            | Declined                                                                                                  | **Measure equals data:** a year's band length on the roll is its launch count, never a decorative width                  |
+| Wuxia painted hoarding          | Declined                                                                                                  | **The held moment:** each flight sheet is anchored on T‑0, the instant the record is about                               |
+| Akari light sculpture           | Declined (not carried into the hand)                                                                      | —                                                                                                                        |
 
 **Impeccable's pick (not built):** Mission Control console. Honest risk: it is where nearly every space UI lands; strong but familiar.
 
@@ -42,13 +42,13 @@ The user delegated the choice ("vos hacé todo"), so the assigned direction was 
 
 ## Chosen direction — DOWNRANGE, the flight record as a strip chart
 
-**Name:** *Downrange* — the distance a vehicle has travelled from its launch site; the roll unspools downrange. Logotype: the word set wide in the display face, underlined by a single pen trace that spikes once. Tagline: *The SpaceX flight record. Unofficial.*
+**Name:** _Downrange_ — the distance a vehicle has travelled from its launch site; the roll unspools downrange. Logotype: the word set wide in the display face, underlined by a single pen trace that spikes once. Tagline: _The SpaceX flight record. Unofficial._
 
 **World:** cool chart paper printed with a green millimetric grid; a perforated feed margin carries the time axis. Four pen inks: carbon (flights), cobalt (booster landings and reuse), signal red (failures only), and a dashed carbon trace for anything not yet flown. Condensed display numerals like chart legends; a variable-width mono for every reading.
 
 **Surfaces**
 
-- **Home — the head of the roll:** the pen parked at *now*; the next launch counting down ahead on the unfed paper; the last weeks of flights already drawn behind it. Scrolling feeds the paper back through two decades.
+- **Home — the head of the roll:** the pen parked at _now_; the next launch counting down ahead on the unfed paper; the last weeks of flights already drawn behind it. Scrolling feeds the paper back through two decades.
 - **Flight log (`/launches`):** the whole roll. Years are printed on the feed margin; each flight is a row with its tick. Filters are channel selectors.
 - **Flight sheet (`/launches/:slug`):** a sheet torn off at T‑0. The real countdown timeline from Launch Library 2 is plotted as a trace from T‑minus to T‑plus, with boosters, landings, orbit and payload as readings beside it.
 - **Fleet (`/rockets`):** a calibration sheet. Every vehicle is drawn to scale on the same millimetric grid, so the grid is the measuring tool.

@@ -23,7 +23,12 @@ interface LegacyLaunch {
 const MAX_DRIFT_MS = 48 * 3600 * 1000;
 
 const tokens = (s: string) =>
-  new Set(s.toLowerCase().split(/[^a-z0-9]+/).filter((w) => w.length >= 3 || /\d/.test(w)));
+  new Set(
+    s
+      .toLowerCase()
+      .split(/[^a-z0-9]+/)
+      .filter((w) => w.length >= 3 || /\d/.test(w)),
+  );
 
 function sharesAWord(a: string, b: string): boolean {
   const other = tokens(b);
@@ -64,6 +69,9 @@ for (const launch of legacy) {
   else missing.push(launch.name);
 }
 
-await writeFile(path.join(ROOT, "src", "data", "legacy-ids.json"), JSON.stringify(map, null, 0) + "\n");
+await writeFile(
+  path.join(ROOT, "src", "data", "legacy-ids.json"),
+  JSON.stringify(map, null, 0) + "\n",
+);
 console.log(`Mapped ${Object.keys(map).length} of ${legacy.length} legacy launches.`);
 if (missing.length) console.log(`Unmapped: ${missing.join(", ")}`);
