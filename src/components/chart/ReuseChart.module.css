@@ -1,0 +1,122 @@
+.figure {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.canvas {
+  position: relative;
+  width: 100%;
+}
+
+.svg {
+  display: block;
+  overflow: visible;
+}
+
+.grid {
+  stroke: var(--grid-major);
+}
+.axis {
+  stroke: var(--ink);
+}
+
+.legend {
+  fill: var(--grid-legend);
+  font-family: var(--font-mono);
+  font-stretch: var(--stretch-mono);
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.flights,
+.landed,
+.reflights {
+  fill: none;
+  stroke-linejoin: round;
+}
+.flights {
+  stroke: var(--pen-carbon);
+  stroke-width: 2;
+}
+.landed {
+  stroke: var(--pen-cobalt);
+  stroke-width: 2;
+}
+.reflights {
+  stroke: var(--pen-cobalt);
+  stroke-width: 1.5;
+  stroke-dasharray: 5 4;
+}
+
+.leader {
+  stroke: var(--ink-3);
+  stroke-width: 1;
+}
+.dot {
+  fill: var(--paper);
+  stroke: var(--pen-cobalt);
+  stroke-width: 2;
+}
+.note {
+  fill: var(--ink);
+  font-size: 13px;
+  font-stretch: var(--stretch-semi);
+  font-weight: 700;
+}
+.noteSub {
+  fill: var(--ink-3);
+  font-family: var(--font-mono);
+  font-stretch: var(--stretch-mono);
+  font-size: 11px;
+}
+
+.end-flights,
+.end-landed,
+.end-reflights {
+  font-size: 13px;
+  font-stretch: var(--stretch-semi);
+  font-weight: 700;
+}
+.end-flights {
+  fill: var(--pen-carbon);
+}
+.end-landed,
+.end-reflights {
+  fill: var(--pen-cobalt);
+}
+
+.key {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+  font-size: var(--text-sm);
+  font-weight: 650;
+}
+.key li {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.key li::before {
+  content: "";
+  width: 22px;
+  border-top: 2px solid;
+}
+.keyFlights {
+  color: var(--pen-carbon);
+}
+.keyLanded {
+  color: var(--pen-cobalt);
+}
+.keyReflights {
+  color: var(--pen-cobalt);
+}
+.keyReflights::before {
+  border-top-style: dashed !important;
+}
+
+@media (min-width: 640px) {
+  .key {
+    display: none;
+  }
+}

@@ -1,0 +1,31 @@
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-4);
+  color: var(--grid-legend);
+  font-family: var(--font-mono);
+  font-stretch: var(--stretch-mono);
+  font-size: var(--text-2xs);
+  font-weight: 500;
+  letter-spacing: var(--tracking-legend);
+  text-transform: uppercase;
+}
+.legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  white-space: nowrap;
+}
+
+.landing {
+  flex: none;
+  overflow: visible;
+}
+.landed {
+  fill: var(--pen-cobalt);
+}
+.lost {
+  fill: none;
+  stroke: var(--pen-cobalt);
+  stroke-width: 1.5;
+}

@@ -1,0 +1,103 @@
+.rocket {
+  padding-top: var(--space-4);
+}
+
+.crumbs {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--target);
+  font-family: var(--font-mono);
+  font-stretch: var(--stretch-mono);
+  font-size: var(--text-xs);
+}
+.crumbs [aria-current] {
+  color: var(--ink-3);
+}
+
+.header {
+  display: grid;
+  gap: var(--space-3);
+  padding-block: var(--space-3) var(--space-5);
+  border-bottom: 2px solid var(--ink);
+}
+.header h1 {
+  font-size: var(--text-3xl);
+  line-height: 0.95;
+}
+
+.status {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--text-sm);
+}
+.badge {
+  padding: 2px 8px;
+  border: 1.5px solid;
+  border-radius: var(--radius-1);
+  font-size: var(--text-xs);
+  font-weight: 750;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.active {
+  border-color: var(--ink);
+}
+.retired {
+  border-color: var(--ink-3);
+  color: var(--ink-3);
+}
+
+.description {
+  max-width: var(--measure);
+  color: var(--ink-2);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: var(--space-6);
+  align-items: start;
+  margin-top: var(--space-5);
+}
+.chartCol,
+.dataCol {
+  min-width: 0;
+}
+
+.note {
+  color: var(--ink-3);
+  font-size: var(--text-sm);
+}
+
+.blockTitle {
+  margin-block: var(--space-5) var(--space-3);
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--rule-strong);
+  font-size: var(--text-xl);
+}
+.dataCol > .blockTitle:first-child {
+  margin-top: 0;
+}
+
+.wiki {
+  margin-top: var(--space-4);
+}
+.wiki a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--target);
+  font-weight: 650;
+}
+
+.flights {
+  margin-top: var(--space-6);
+}
+
+@media (max-width: 1023px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

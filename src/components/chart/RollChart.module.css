@@ -1,0 +1,186 @@
+.figure {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.canvas {
+  position: relative;
+  width: 100%;
+}
+
+.placeholder {
+  height: 320px;
+}
+
+.continuous {
+  position: relative;
+}
+
+.svg {
+  display: block;
+  overflow: visible;
+}
+
+.yearLine {
+  stroke: var(--grid-major);
+  stroke-width: 1;
+}
+.axis {
+  stroke: var(--ink);
+  stroke-width: 1;
+}
+.maxLine {
+  stroke: var(--rule);
+  stroke-dasharray: 2 4;
+}
+
+.cadence {
+  fill: none;
+  stroke: var(--pen-carbon);
+  stroke-width: 1.75;
+  stroke-linejoin: round;
+}
+
+.tick {
+  fill: none;
+  stroke: var(--pen-carbon);
+  stroke-width: 1;
+  stroke-opacity: 0.85;
+}
+.failTick {
+  fill: none;
+  stroke: var(--pen-red);
+  stroke-width: 2;
+}
+.failMark {
+  fill: none;
+  stroke: var(--pen-red);
+  stroke-width: 1.75;
+  stroke-linecap: round;
+}
+.landTick {
+  fill: none;
+  stroke: var(--pen-cobalt);
+  stroke-width: 1;
+  stroke-opacity: 0.9;
+}
+.lostTick {
+  fill: none;
+  stroke: var(--ink-3);
+  stroke-width: 1;
+}
+
+.hit {
+  cursor: crosshair;
+}
+.hoverLine {
+  stroke: var(--pen-cobalt);
+  stroke-width: 1.5;
+}
+
+.channel {
+  position: absolute;
+  left: 0;
+  padding-right: var(--space-2);
+  background: var(--paper);
+  color: var(--grid-legend);
+  font-family: var(--font-mono);
+  font-stretch: var(--stretch-mono);
+  font-size: var(--text-2xs);
+  font-weight: 500;
+  letter-spacing: var(--tracking-legend);
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.readout {
+  position: absolute;
+  top: -4px;
+  width: 280px;
+  padding: 6px 10px;
+  background: var(--ink);
+  color: var(--paper-sheet);
+  font-family: var(--font-mono);
+  font-stretch: var(--stretch-mono);
+  font-size: var(--text-2xs);
+  line-height: 1.5;
+  box-shadow: var(--shadow-pop);
+  pointer-events: none;
+}
+.readout strong {
+  font-weight: 700;
+}
+
+.years {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: var(--target);
+}
+.years li {
+  position: absolute;
+  top: 0;
+  transform: translateX(-2px);
+}
+.years li.skip {
+  display: none;
+}
+.year {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--target);
+  padding-inline: 4px;
+  color: var(--grid-legend);
+  font-family: var(--font-mono);
+  font-stretch: var(--stretch-mono);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  text-decoration: none;
+}
+.year:hover {
+  color: var(--ink);
+  text-decoration: underline;
+}
+
+/* Narrow screens: a year per row, newest first. */
+.rows {
+  display: grid;
+}
+.row {
+  display: grid;
+  grid-template-columns: 56px 1fr 40px;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--div-major);
+  border-bottom: 1px solid var(--grid-major);
+}
+.rowYear {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--target);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-stretch: var(--stretch-mono);
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+.band {
+  display: block;
+  overflow: visible;
+}
+.rowBase {
+  stroke: var(--rule);
+}
+.rowCount {
+  justify-self: end;
+  font-family: var(--font-mono);
+  font-stretch: var(--stretch-mono);
+  font-size: var(--text-xs);
+  font-variant-numeric: tabular-nums;
+}
+
+.caption {
+  max-width: 64ch;
+  color: var(--ink-2);
+  font-size: var(--text-sm);
+}

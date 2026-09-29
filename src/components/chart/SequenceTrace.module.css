@@ -1,0 +1,132 @@
+.figure {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.canvas {
+  position: relative;
+  width: 100%;
+}
+
+.svg {
+  display: block;
+  overflow: visible;
+}
+
+.trace {
+  fill: none;
+  stroke: var(--pen-carbon);
+  stroke-width: 1.75;
+  stroke-linejoin: round;
+}
+.planned {
+  stroke: var(--ink-2);
+  stroke-dasharray: 4 4;
+}
+
+.zeroLine {
+  stroke: var(--ink);
+  stroke-width: 2;
+}
+
+.leader {
+  stroke: var(--rule-strong);
+  stroke-width: 1;
+  stroke-dasharray: 1 2;
+}
+
+.offset {
+  fill: var(--ink-3);
+  font-family: var(--font-mono);
+  font-stretch: var(--stretch-mono);
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+}
+
+.eventLabel {
+  fill: var(--ink);
+  font-family: var(--font-mono);
+  font-stretch: var(--stretch-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+.zeroLabel {
+  font-weight: 800;
+}
+
+.markTick {
+  stroke: var(--grid-legend);
+}
+.mark {
+  fill: var(--grid-legend);
+  font-family: var(--font-mono);
+  font-stretch: var(--stretch-mono);
+  font-size: 11px;
+  font-weight: 500;
+}
+
+/* Narrow screens: the same calls as a vertical trace. */
+.list {
+  display: grid;
+  margin: 0;
+  padding: 0 0 0 var(--space-4);
+  list-style: none;
+  border-left: 1.75px solid var(--pen-carbon);
+}
+.plannedList {
+  border-left-style: dashed;
+  border-left-color: var(--ink-2);
+}
+
+.item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 7.5rem 1fr;
+  column-gap: var(--space-3);
+  padding-block: 10px;
+  border-bottom: 1px solid var(--rule);
+}
+.item::before {
+  content: "";
+  position: absolute;
+  left: calc(-1 * var(--space-4) - 1px);
+  top: 18px;
+  width: 10px;
+  border-top: 1.75px solid var(--pen-carbon);
+}
+.zero {
+  padding-block: var(--space-3);
+}
+.zero::before {
+  width: 22px;
+  border-top-width: 4px;
+  top: 22px;
+}
+.zero .label {
+  font-weight: 800;
+  font-size: var(--text-lg);
+}
+
+.time {
+  font-size: var(--text-xs);
+  color: var(--ink-2);
+  padding-top: 2px;
+}
+.label {
+  font-weight: 700;
+  font-stretch: var(--stretch-semi);
+}
+.desc {
+  grid-column: 2;
+  color: var(--ink-3);
+  font-size: var(--text-sm);
+}
+
+.caption {
+  color: var(--ink-3);
+  font-family: var(--font-mono);
+  font-stretch: var(--stretch-mono);
+  font-size: var(--text-2xs);
+}

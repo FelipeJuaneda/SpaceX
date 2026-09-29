@@ -1,0 +1,84 @@
+.figure {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.canvas {
+  position: relative;
+  width: 100%;
+}
+
+.svg {
+  display: block;
+  overflow: visible;
+}
+
+.monthLine {
+  stroke: var(--grid-major);
+  stroke-width: 1;
+}
+
+.month {
+  fill: var(--grid-legend);
+  font-family: var(--font-mono);
+  font-stretch: var(--stretch-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.trace {
+  fill: none;
+  stroke: var(--pen-carbon);
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.fail {
+  fill: none;
+  stroke: var(--pen-red);
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+
+.landed {
+  fill: var(--pen-cobalt);
+}
+.lost {
+  fill: none;
+  stroke: var(--pen-cobalt);
+  stroke-width: 1.25;
+}
+
+.future {
+  fill: none;
+  stroke: var(--ink-2);
+  stroke-width: 1.25;
+  stroke-dasharray: 3 3;
+  stroke-linejoin: round;
+}
+
+.now {
+  stroke: var(--ink);
+  stroke-width: 1.5;
+}
+.pen {
+  fill: var(--ink);
+}
+.nowLabel {
+  fill: var(--ink);
+  font-family: var(--font-mono);
+  font-stretch: var(--stretch-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.caption {
+  max-width: 52ch;
+  color: var(--ink-2);
+  font-size: var(--text-sm);
+}

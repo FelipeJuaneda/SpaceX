@@ -1,0 +1,57 @@
+.about {
+  padding-top: var(--space-6);
+}
+
+.header {
+  padding-bottom: var(--space-5);
+  border-bottom: 2px solid var(--ink);
+}
+.header h1 {
+  font-size: var(--text-3xl);
+  line-height: 0.95;
+}
+.lede {
+  max-width: 48ch;
+  margin-top: var(--space-3);
+  color: var(--ink-2);
+  font-size: var(--text-lg);
+}
+
+.body {
+  display: grid;
+  gap: var(--space-6);
+  max-width: 72ch;
+  margin-top: var(--space-6);
+}
+.body section {
+  display: grid;
+  gap: var(--space-3);
+}
+.body h2 {
+  font-size: var(--text-2xl);
+}
+.body p {
+  color: var(--ink-2);
+}
+.body a {
+  font-weight: 650;
+}
+
+.readout {
+  margin-top: var(--space-2);
+}
+
+.legend {
+  padding-block: var(--space-2);
+}
+
+.list {
+  display: grid;
+  gap: var(--space-3);
+  padding-left: 1.1em;
+  list-style-type: square;
+  color: var(--ink-2);
+}
+.list strong {
+  color: var(--ink);
+}

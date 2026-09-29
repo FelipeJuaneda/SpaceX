@@ -1,0 +1,136 @@
+.scroller {
+  overflow-x: auto;
+  padding-bottom: var(--space-2);
+  scrollbar-width: thin;
+}
+
+.chart {
+  position: relative;
+  min-width: max-content;
+  margin-left: 48px;
+  margin-top: var(--space-4);
+  margin-bottom: 76px;
+  border-bottom: 2px solid var(--ink);
+  /* Ten-metre divisions, anchored on the ground line. */
+  background: repeating-linear-gradient(to top, var(--grid-major) 0 1px, transparent 1px var(--div-major));
+}
+
+.axis {
+  position: absolute;
+  inset: 0 auto 0 -48px;
+  width: 40px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.axis li {
+  position: absolute;
+  right: 0;
+  transform: translateY(50%);
+  color: var(--grid-legend);
+  font-family: var(--font-mono);
+  font-stretch: var(--stretch-mono);
+  font-size: var(--text-2xs);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.vehicles {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-2);
+  height: 100%;
+  padding-inline: var(--space-3);
+}
+
+.vehicle {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 100%;
+}
+
+.link {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 100%;
+  width: 100%;
+  color: var(--ink);
+  text-decoration: none;
+}
+.link:hover .hull {
+  fill: var(--paper-margin);
+}
+.link:hover .name {
+  text-decoration: underline;
+}
+
+.label {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+  width: 100%;
+  min-width: 76px;
+  transform: translateX(-50%);
+  text-align: center;
+}
+.name {
+  font-size: var(--text-xs);
+  font-stretch: var(--stretch-semi);
+  font-weight: 700;
+  line-height: 1.2;
+}
+.height {
+  color: var(--ink-3);
+  font-family: var(--font-mono);
+  font-stretch: var(--stretch-mono);
+  font-size: var(--text-2xs);
+}
+
+.silhouette {
+  display: block;
+  overflow: visible;
+}
+
+.hull {
+  fill: var(--paper-sheet);
+  stroke: var(--ink);
+  stroke-width: 1.25;
+  vector-effect: non-scaling-stroke;
+  stroke-linejoin: round;
+  transition: fill var(--dur-quick) var(--ease-out);
+}
+.band,
+.part {
+  fill: var(--ink);
+  stroke: var(--ink);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+.line {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.25;
+  vector-effect: non-scaling-stroke;
+}
+
+.current .hull {
+  fill: var(--pen-cobalt-wash);
+  stroke: var(--pen-cobalt);
+}
+.current .band,
+.current .part {
+  fill: var(--pen-cobalt);
+  stroke: var(--pen-cobalt);
+}
+.current .line {
+  stroke: var(--pen-cobalt);
+}
+.current .name {
+  color: var(--pen-cobalt);
+}

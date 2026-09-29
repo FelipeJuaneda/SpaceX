@@ -1,0 +1,53 @@
+.fleet {
+  padding-top: var(--space-6);
+}
+
+.header {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: var(--space-3) var(--space-5);
+  align-items: end;
+  padding-bottom: var(--space-5);
+  margin-bottom: var(--space-4);
+  border-bottom: 2px solid var(--ink);
+}
+.header h1 {
+  font-size: var(--text-3xl);
+  line-height: 0.95;
+}
+.header p {
+  max-width: var(--measure);
+  color: var(--ink-2);
+}
+
+.chart {
+  margin-top: var(--space-3);
+}
+
+.note {
+  max-width: 60ch;
+  color: var(--ink-3);
+  font-size: var(--text-sm);
+}
+
+.specs {
+  margin-top: var(--space-7);
+}
+.specs h2 {
+  margin-bottom: var(--space-4);
+  font-size: var(--text-2xl);
+}
+
+.skeleton {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-6);
+  height: 540px;
+  padding-left: 60px;
+}
+
+@media (max-width: 1023px) {
+  .header {
+    grid-template-columns: 1fr;
+  }
+}
