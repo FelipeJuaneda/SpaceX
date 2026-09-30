@@ -24,12 +24,14 @@ import {
 import { launchesQuery } from "@/features/launches/queries";
 import { groupByYear } from "@/features/launches/selectors";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
+import { useI18n } from "@/i18n/useI18n";
 import { cn } from "@/lib/cn";
-import { formatInt, plural } from "@/lib/format";
 import type { FamilyId } from "@/types/domain";
 import s from "./FlightLogRoute.module.css";
 
 export default function FlightLogRoute() {
+  const { m } = useI18n();
+  const t = m.log;
   const query = useQuery(launchesQuery());
   const [params, setParams] = useSearchParams();
   const filters = useMemo(() => readFilters(params), [params]);
@@ -72,35 +74,29 @@ export default function FlightLogRoute() {
   };
 
   const outcomeOptions: { value: OutcomeFilter; label: string; count?: number }[] = [
-    { value: "flown", label: "Flown", count: counts?.flown },
-    { value: "success", label: "Successes", count: counts?.success },
-    { value: "failure", label: "Failures", count: counts?.failure },
-    { value: "upcoming", label: "Scheduled", count: counts?.upcoming },
-    { value: "all", label: "All", count: counts?.all },
+    { value: "flown", label: t.flown, count: counts?.flown },
+    { value: "success", label: t.successes, count: counts?.success },
+    { value: "failure", label: t.failures, count: counts?.failure },
+    { value: "upcoming", label: t.scheduled, count: counts?.upcoming },
+    { value: "all", label: t.all, count: counts?.all },
   ];
 
   return (
     <div className={cn("page", s.log)}>
-      <PageMeta
-        title="Flight log"
-        description="Every SpaceX flight since 2006: search by mission, vehicle or orbit, filter by outcome and year, and open any flight's sheet."
-      />
+      <PageMeta title={t.title} description={t.description} />
 
       <header className={s.header}>
-        <h1>Flight log</h1>
-        <p>
-          The whole roll, a year at a time. Search by mission, vehicle, pad, orbit or flight number
-          (try “#100” or “crew dragon”).
-        </p>
+        <h1>{t.title}</h1>
+        <p>{t.intro}</p>
       </header>
 
       <form role="search" className={s.controls} onSubmit={(e) => e.preventDefault()}>
         <SearchField
           id="log-search"
-          label="Search flights"
+          label={t.search}
           value={filters.q}
           onChange={(q) => update({ q }, true)}
-          placeholder="Mission, vehicle, orbit, #flight…"
+          placeholder={t.placeholder}
           className={s.search}
         />
         <details
@@ -112,12 +108,12 @@ export default function FlightLogRoute() {
         >
           <summary className={s.summary}>
             <SlidersHorizontal aria-hidden="true" size={18} strokeWidth={1.75} />
-            Filters
-            {activeFilters > 0 && <span className={s.active}>{activeFilters} active</span>}
+            {t.filters}
+            {activeFilters > 0 && <span className={s.active}>{t.active(activeFilters)}</span>}
           </summary>
           <div className={s.filterGrid}>
             <Choice
-              legend="Outcome"
+              legend={t.outcome}
               name="outcome"
               options={outcomeOptions}
               value={filters.outcome}
@@ -126,11 +122,11 @@ export default function FlightLogRoute() {
             />
             <Select
               id="log-family"
-              label="Vehicle family"
+              label={t.family}
               value={filters.family}
               onChange={(family) => update({ family: family as FamilyId | "all", vehicle: null })}
             >
-              <option value="all">All vehicles</option>
+              <option value="all">{t.allVehicles}</option>
               {(Object.keys(FAMILY_LABEL) as FamilyId[]).map((f) => (
                 <option key={f} value={f}>
                   {FAMILY_LABEL[f]}
@@ -139,11 +135,11 @@ export default function FlightLogRoute() {
             </Select>
             <Select
               id="log-year"
-              label="Year"
+              label={t.year}
               value={filters.year === null ? "" : String(filters.year)}
               onChange={(y) => update({ year: y ? Number(y) : null })}
             >
-              <option value="">Every year</option>
+              <option value="">{t.everyYear}</option>
               {years.map((y) => (
                 <option key={y} value={y}>
                   {y}
@@ -151,11 +147,11 @@ export default function FlightLogRoute() {
               ))}
             </Select>
             <Choice
-              legend="Order"
+              legend={t.order}
               name="sort"
               options={[
-                { value: "newest", label: "Newest first" },
-                { value: "oldest", label: "Oldest first" },
+                { value: "newest", label: t.newest },
+                { value: "oldest", label: t.oldest },
               ]}
               value={filters.sort}
               onChange={(sort) => update({ sort })}
@@ -166,7 +162,7 @@ export default function FlightLogRoute() {
                 checked={filters.crewed}
                 onChange={(e) => update({ crewed: e.target.checked })}
               />
-              Crewed flights only
+              {t.crewed}
             </label>
           </div>
         </details>
@@ -174,8 +170,8 @@ export default function FlightLogRoute() {
 
       <div className={s.status}>
         <p role="status" className={s.count}>
-          {launches ? plural(results.length, "flight") : "Loading flights…"}
-          {vehicleName && ` on ${vehicleName}`}
+          {launches ? t.count(results.length) : t.loadingCount}
+          {vehicleName && t.onVehicle(vehicleName)}
         </p>
         {filters.vehicle && (
           <Button
@@ -185,7 +181,7 @@ export default function FlightLogRoute() {
             onClick={() => update({ vehicle: null })}
           >
             {vehicleName ?? filters.vehicle}
-            <span className="visually-hidden"> — remove vehicle filter</span>
+            <span className="visually-hidden">{t.removeVehicle}</span>
           </Button>
         )}
         {isFiltered(filters) && (
@@ -194,7 +190,7 @@ export default function FlightLogRoute() {
             size="sm"
             onClick={() => setParams({}, { preventScrollReset: true })}
           >
-            Reset filters
+            {m.common.resetFilters}
           </Button>
         )}
       </div>
@@ -202,17 +198,17 @@ export default function FlightLogRoute() {
       {query.isError ? (
         <StateMessage
           variant="error"
-          title="The flight log did not load"
-          body="The launch snapshot could not be fetched."
+          title={t.errorTitle}
+          body={t.errorBody}
           action={
             <Button variant="ink" onClick={() => query.refetch()}>
-              Try again
+              {m.common.tryAgain}
             </Button>
           }
         />
       ) : !launches ? (
         <div aria-busy="true">
-          <LoadingNote>Loading the flight log…</LoadingNote>
+          <LoadingNote>{t.loading}</LoadingNote>
           {Array.from({ length: 8 }, (_, i) => (
             <div key={i} className={s.skeletonRow}>
               <Skeleton width={48} height={14} />
@@ -224,15 +220,11 @@ export default function FlightLogRoute() {
       ) : results.length === 0 ? (
         <StateMessage
           variant="empty"
-          title="Nothing on this stretch of the roll"
-          body={
-            filters.q
-              ? `No flight matches “${filters.q}” with these filters.`
-              : "No flight matches this combination of filters."
-          }
+          title={t.emptyTitle}
+          body={filters.q ? t.emptyQuery(filters.q) : t.emptyFilters}
           action={
             <Button variant="ink" onClick={() => setParams({}, { preventScrollReset: true })}>
-              Reset filters
+              {m.common.resetFilters}
             </Button>
           }
         />
@@ -246,7 +238,7 @@ export default function FlightLogRoute() {
             <div className={s.yearBody}>
               <h2 id={`year-${g.year}`} className={s.yearHead}>
                 <span className={s.yearNum}>{g.year}</span>
-                <span className={s.yearCount}>{plural(g.launches.length, "flight")}</span>
+                <span className={s.yearCount}>{t.yearCount(g.launches.length)}</span>
                 <span
                   className={s.band}
                   style={{ width: `${(g.launches.length / largest) * 100}%` }}
@@ -264,9 +256,7 @@ export default function FlightLogRoute() {
       )}
 
       {launches && results.length > 0 && (
-        <p className={s.end}>
-          End of roll · {formatInt(results.length)} of {formatInt(launches.length)} flights shown
-        </p>
+        <p className={s.end}>{t.end(results.length, launches.length)}</p>
       )}
     </div>
   );

@@ -1,6 +1,7 @@
 import { m, useReducedMotion } from "motion/react";
 import type { TimelineEvent } from "@/types/domain";
 import { useElementSize } from "@/hooks/useElementSize";
+import { useI18n } from "@/i18n/useI18n";
 import { cn } from "@/lib/cn";
 import { formatOffset } from "@/lib/format";
 import s from "./SequenceTrace.module.css";
@@ -56,6 +57,7 @@ interface Props {
  * plotted on a square-root time axis so the seconds around T-0 get room.
  */
 export function SequenceTrace({ events, planned }: Props) {
+  const msg = useI18n().m;
   const [ref, size] = useElementSize<HTMLDivElement>();
   const width = size?.width ?? 0;
   const wide = width >= 720;
@@ -75,9 +77,9 @@ export function SequenceTrace({ events, planned }: Props) {
         </ol>
       </div>
       <figcaption className={s.caption}>
-        {planned ? "Planned sequence" : "Sequence as flown"} · {events.length} calls from Launch
-        Library 2.
-        {wide && " Time axis compressed around T-0 (square-root scale)."}
+        {planned ? msg.charts.sequencePlanned : msg.charts.sequenceFlown}
+        {msg.charts.sequenceCalls(events.length)}
+        {wide && msg.charts.sequenceScale}
       </figcaption>
     </figure>
   );

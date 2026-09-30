@@ -3,7 +3,8 @@ import { useMemo } from "react";
 import type { LaunchSummary } from "@/types/domain";
 import { cumulative, reuseFirsts, time } from "@/features/launches/selectors";
 import { useElementSize } from "@/hooks/useElementSize";
-import { formatInt, formatNet } from "@/lib/format";
+import { useI18n } from "@/i18n/useI18n";
+import { formatNet } from "@/lib/format";
 import s from "./ReuseChart.module.css";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -13,6 +14,7 @@ const EASE = [0.22, 1, 0.36, 1] as const;
  * flights on flight-proven boosters (dashed cobalt).
  */
 export function ReuseChart({ launches }: { launches: readonly LaunchSummary[] }) {
+  const msg = useI18n().m;
   const [ref, size] = useElementSize<HTMLDivElement>();
   const reduce = useReducedMotion();
   const points = useMemo(() => cumulative(launches), [launches]);
@@ -45,11 +47,11 @@ export function ReuseChart({ launches }: { launches: readonly LaunchSummary[] })
     series.map((p, i) => `${i ? "L" : "M"}${x(p.t).toFixed(1)},${y(p[key]).toFixed(1)}`).join("");
 
   const ends = [
-    { key: "flights", label: `${formatInt(last.flights)} flights`, v: last.flights },
-    { key: "landed", label: `${formatInt(last.landed)} boosters landed`, v: last.landed },
+    { key: "flights", label: msg.charts.endFlights(last.flights), v: last.flights },
+    { key: "landed", label: msg.charts.endLanded(last.landed), v: last.landed },
     {
       key: "reflights",
-      label: `${formatInt(last.reflights)} on reused boosters`,
+      label: msg.charts.endReflights(last.reflights),
       v: last.reflights,
     },
   ].map((e) => ({ ...e, y: y(e.v) }));
@@ -68,8 +70,8 @@ export function ReuseChart({ launches }: { launches: readonly LaunchSummary[] })
   );
 
   const annotations = [
-    firstLanding && { l: firstLanding, text: "First booster landing" },
-    firstReflight && { l: firstReflight, text: "First reflight" },
+    firstLanding && { l: firstLanding, text: msg.charts.firstLanding },
+    firstReflight && { l: firstReflight, text: msg.charts.firstReflight },
   ].filter(Boolean) as { l: LaunchSummary; text: string }[];
 
   return (
@@ -150,15 +152,13 @@ export function ReuseChart({ launches }: { launches: readonly LaunchSummary[] })
       {/* Tables ignore overflow, so the hiding wrapper must be a block. */}
       <div className="visually-hidden">
         <table>
-          <caption>
-            Cumulative flights, booster landings and reflights at the end of each year
-          </caption>
+          <caption>{msg.charts.reuseTable}</caption>
           <thead>
             <tr>
-              <th scope="col">Year</th>
-              <th scope="col">Flights</th>
-              <th scope="col">Boosters landed</th>
-              <th scope="col">Flights on reused boosters</th>
+              <th scope="col">{msg.charts.year}</th>
+              <th scope="col">{msg.charts.flights}</th>
+              <th scope="col">{msg.charts.boostersLanded}</th>
+              <th scope="col">{msg.charts.reusedFlights}</th>
             </tr>
           </thead>
           <tbody>

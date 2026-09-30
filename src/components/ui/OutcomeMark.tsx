@@ -1,6 +1,6 @@
 import type { Outcome } from "@/types/domain";
 import { cn } from "@/lib/cn";
-import { OUTCOME_LABEL } from "@/lib/format";
+import { useI18n } from "@/i18n/useI18n";
 import s from "./OutcomeMark.module.css";
 
 /**
@@ -39,12 +39,9 @@ interface Props {
   className?: string;
 }
 
-export function OutcomeMark({
-  outcome,
-  label = OUTCOME_LABEL[outcome],
-  compact,
-  className,
-}: Props) {
+export function OutcomeMark({ outcome, label, compact, className }: Props) {
+  const { m } = useI18n();
+  label ??= m.outcome[outcome];
   return (
     <span className={cn(s.mark, s[`text-${outcome}`], className)}>
       <OutcomeGlyph outcome={outcome} />

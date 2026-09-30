@@ -11,7 +11,8 @@ import {
   type YearStat,
 } from "@/features/launches/selectors";
 import { useElementSize } from "@/hooks/useElementSize";
-import { OUTCOME_LABEL, formatInt, formatNet } from "@/lib/format";
+import { useI18n } from "@/i18n/useI18n";
+import { formatNet } from "@/lib/format";
 import s from "./RollChart.module.css";
 
 const START = Date.UTC(2006, 0, 1);
@@ -27,6 +28,7 @@ interface Props {
  * narrow screens get the same record stacked a year per row, newest at the top.
  */
 export function RollChart({ launches, now }: Props) {
+  const msg = useI18n().m;
   const [ref, size] = useElementSize<HTMLDivElement>();
   const flown = useMemo(() => launches.filter(isFlown), [launches]);
   const years = useMemo(() => yearStats(launches), [launches]);
@@ -48,9 +50,9 @@ export function RollChart({ launches, now }: Props) {
         )}
       </div>
       <figcaption className={s.caption}>
-        {formatInt(flown.length)} flights from {years[0]?.year} to {years.at(-1)?.year}.{" "}
-        {busiest && `The busiest year was ${busiest.year}, with ${formatInt(busiest.flights)}.`}{" "}
-        Each year opens its page of the flight log.
+        {msg.charts.rollCaption(flown.length, years[0]?.year ?? 0, years.at(-1)?.year ?? 0)}
+        {busiest && msg.charts.rollBusiest(busiest.year, busiest.flights)}
+        {msg.charts.rollHint}
       </figcaption>
     </figure>
   );
@@ -70,6 +72,7 @@ function Continuous({
   now: number;
 }) {
   const reduce = useReducedMotion();
+  const msg = useI18n().m;
   const navigate = useNavigate();
   const clipId = useId();
   const [hover, setHover] = useState<LaunchSummary | null>(null);
@@ -201,13 +204,13 @@ function Continuous({
       </svg>
 
       <span className={s.channel} style={{ top: CAD_TOP - 24 }}>
-        Flights in the trailing 30 days · peak {maxN}
+        {msg.charts.channelCadence(maxN)}
       </span>
       <span className={s.channel} style={{ top: FL_TOP - 22 }}>
-        Each flight · failures in red
+        {msg.charts.channelFlights}
       </span>
       <span className={s.channel} style={{ top: LD_TOP + LD_H + 12, left: "auto", right: 0 }}>
-        Booster landings
+        {msg.charts.channelLandings}
       </span>
 
       {hover && (
@@ -217,11 +220,11 @@ function Continuous({
           aria-hidden="true"
         >
           <span>#{hover.flight}</span> {formatNet(hover.net, "day")} ·{" "}
-          <strong>{hover.mission}</strong> · {OUTCOME_LABEL[hover.outcome]}
+          <strong>{hover.mission}</strong> · {msg.outcome[hover.outcome]}
         </p>
       )}
 
-      <ol className={s.years} aria-label="Flights by year">
+      <ol className={s.years} aria-label={msg.charts.byYear}>
         {years.map((y, i) => (
           <li
             key={y.year}
@@ -232,9 +235,7 @@ function Continuous({
               <span aria-hidden="true">
                 {labelEvery > 1 ? `’${String(y.year).slice(2)}` : y.year}
               </span>
-              <span className="visually-hidden">
-                {y.year}: {formatInt(y.flights)} flights
-              </span>
+              <span className="visually-hidden">{msg.charts.yearFlights(y.year, y.flights)}</span>
             </Link>
           </li>
         ))}
@@ -253,6 +254,7 @@ function YearRows({
   width: number;
 }) {
   const reduce = useReducedMotion();
+  const msg = useI18n().m;
   const band = Math.max(120, width - 64 - 48);
   const byYear = useMemo(() => {
     const map = new Map<number, LaunchSummary[]>();
@@ -292,7 +294,7 @@ function YearRows({
           >
             <Link to={`/launches?year=${y.year}`} className={s.rowYear}>
               {y.year}
-              <span className="visually-hidden">: {formatInt(y.flights)} flights</span>
+              <span className="visually-hidden">: {msg.charts.endFlights(y.flights)}</span>
             </Link>
             <svg width={band} height={38} className={s.band} aria-hidden="true" focusable="false">
               <line x1={0} x2={band} y1={16} y2={16} className={s.rowBase} />

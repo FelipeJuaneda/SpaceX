@@ -2,27 +2,30 @@ import { Link, NavLink } from "react-router";
 import { Logotype } from "@/components/brand/Logotype";
 import { PenLegend } from "@/components/chart/PenLegend";
 import { useSavedSlugs } from "@/features/saved/store";
+import { LanguageSwitch } from "@/i18n/LanguageSwitch";
+import { useI18n } from "@/i18n/useI18n";
 import { cn } from "@/lib/cn";
 import s from "./Masthead.module.css";
 
-const NAV = [
-  { to: "/launches", label: "Flight log", short: "Log" },
-  { to: "/rockets", label: "Fleet", short: "Fleet" },
-  { to: "/saved", label: "Saved", short: "Saved" },
-  { to: "/about", label: "About", short: "About" },
-] as const;
-
 export function Masthead() {
+  const { m } = useI18n();
   const saved = useSavedSlugs().length;
+  const nav = [
+    { to: "/launches", label: m.nav.log, short: m.nav.logShort },
+    { to: "/rockets", label: m.nav.fleet, short: m.nav.fleet },
+    { to: "/saved", label: m.nav.saved, short: m.nav.saved },
+    { to: "/about", label: m.nav.about, short: m.nav.aboutShort },
+  ];
+
   return (
     <header className={s.masthead}>
       <div className={cn("page", s.inner)}>
-        <Link to="/" className={s.home} aria-label="Downrange, home">
+        <Link to="/" className={s.home} aria-label={m.nav.home}>
           <Logotype />
         </Link>
-        <nav aria-label="Primary" className={s.nav}>
+        <nav aria-label={m.nav.primary} className={s.nav}>
           <ul className={s.list}>
-            {NAV.map((item) => (
+            {nav.map((item) => (
               <li key={item.to}>
                 <NavLink to={item.to} className={s.link}>
                   <span className={s.long}>{item.label}</span>
@@ -33,7 +36,7 @@ export function Masthead() {
                       <span className={s.count} aria-hidden="true">
                         {saved}
                       </span>
-                      <span className="visually-hidden">, {saved} flights</span>
+                      <span className="visually-hidden">{m.nav.savedCount(saved)}</span>
                     </>
                   )}
                 </NavLink>
@@ -41,7 +44,10 @@ export function Masthead() {
             ))}
           </ul>
         </nav>
-        <PenLegend className={s.legend} />
+        <div className={s.tools}>
+          <PenLegend className={s.legend} />
+          <LanguageSwitch />
+        </div>
       </div>
     </header>
   );

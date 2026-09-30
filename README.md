@@ -25,6 +25,7 @@ Space sites tend to look alike: a starfield, a hero photo, a grid of equal cards
 - **Flight sheets.** Outcome, what went wrong on failures, the real countdown sequence plotted on a square‑root time axis, boosters with flight counts, turnaround and landing, crew, payloads, pad coordinates, webcasts.
 - **Fleet to scale.** Silhouettes computed from each vehicle's recorded length and diameter, with a full specification and record table.
 - **Saved flights.** Bookmarks kept in the browser (ids only), sortable A–Z / Z–A / by date, migrated automatically from the previous version of the app.
+- **English and Spanish.** The interface follows the browser language on first visit and remembers the EN/ES switch in the masthead. Dates, numbers, ordinals and quarters follow each language's conventions (`Q4 2026` / `T4 2026`, `1,234` / `1.234`). Mission descriptions and event names come from the source in English and are shown as published.
 
 ## Data source and its limits
 
@@ -90,8 +91,9 @@ src/
     chart/          recent trace, roll chart, reuse chart, T-minus sequence, pen legend
     ui/             button, choice keys, search field, select, readout, photo, skeleton, state messages
     layout/         masthead, footer, page metadata
+  i18n/             EN/ES messages, locale store (useSyncExternalStore), language switch
   services/         http, snapshot and live Launch Library 2 clients
-  lib/              formatting, LL2 → domain mapping (shared with the sync script)
+  lib/              locale-aware formatting, LL2 → domain mapping (shared with the sync script)
   styles/           tokens.css, global.css
   types/domain.ts   the only data shapes the UI knows
 ```

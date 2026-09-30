@@ -5,15 +5,19 @@ import type { LaunchSummary } from "@/types/domain";
 import { LandingGlyph } from "@/components/chart/PenLegend";
 import { OutcomeGlyph, OutcomeMark } from "@/components/ui/OutcomeMark";
 import { SaveButton } from "@/features/saved/SaveButton";
+import { useI18n } from "@/i18n/useI18n";
 import { cn } from "@/lib/cn";
 import { formatStamp } from "@/lib/format";
 import s from "./FlightRow.module.css";
 
 function Recovery({ launch }: { launch: LaunchSummary }) {
+  const { m } = useI18n();
   const { attempted, landed } = launch.landings;
   if (launch.outcome === "upcoming") return <span className={s.none} aria-hidden="true" />;
   if (attempted === 0) {
-    return <span className={s.expended}>{launch.family === "falcon-1" ? "—" : "Expended"}</span>;
+    return (
+      <span className={s.expended}>{launch.family === "falcon-1" ? "—" : m.row.expended}</span>
+    );
   }
   return (
     <span className={s.landings}>
@@ -23,9 +27,9 @@ function Recovery({ launch }: { launch: LaunchSummary }) {
       <span className={s.landingText}>
         {landed === attempted
           ? attempted > 1
-            ? `${landed} landed`
-            : "Landed"
-          : `${landed}/${attempted} landed`}
+            ? m.row.allLanded(landed)
+            : m.row.landed
+          : m.row.someLanded(landed, attempted)}
       </span>
     </span>
   );
@@ -38,6 +42,7 @@ export function FlightList({ children }: { children: ReactNode }) {
 
 /** One flight on the roll: its tick, number, date, mission, recovery and outcome. */
 export function FlightRow({ launch }: { launch: LaunchSummary }) {
+  const { m } = useI18n();
   return (
     <li className={cn(s.row, s[launch.outcome])}>
       <span className={s.tick} aria-hidden="true">
@@ -46,12 +51,12 @@ export function FlightRow({ launch }: { launch: LaunchSummary }) {
       <span className={cn("reading", s.flight)}>
         {launch.flight ? (
           <>
-            <span className="visually-hidden">Flight </span>
+            <span className="visually-hidden">{m.row.flight}</span>
             <span aria-hidden="true">#</span>
             {launch.flight}
           </>
         ) : (
-          <span className={s.scheduled}>NET</span>
+          <span className={s.scheduled}>{m.row.net}</span>
         )}
       </span>
       <time className={cn("reading", s.date)} dateTime={launch.net}>
@@ -69,14 +74,14 @@ export function FlightRow({ launch }: { launch: LaunchSummary }) {
           {launch.orbit && (
             <>
               <span aria-hidden="true"> · </span>
-              <span className="visually-hidden">, orbit </span>
+              <span className="visually-hidden">{m.row.orbit}</span>
               {launch.orbit}
             </>
           )}
           {launch.crewed && (
             <span className={s.crew}>
               <UsersRound aria-hidden="true" size={14} strokeWidth={2} />
-              Crew
+              {m.row.crew}
             </span>
           )}
         </span>

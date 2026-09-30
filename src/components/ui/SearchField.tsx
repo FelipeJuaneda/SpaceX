@@ -1,5 +1,6 @@
 import { Search, X } from "lucide-react";
 import { useRef } from "react";
+import { useI18n } from "@/i18n/useI18n";
 import { cn } from "@/lib/cn";
 import s from "./SearchField.module.css";
 
@@ -22,6 +23,7 @@ export function SearchField({
   hideLabel,
   className,
 }: Props) {
+  const { m } = useI18n();
   const input = useRef<HTMLInputElement>(null);
   return (
     <div className={cn(s.field, className)}>
@@ -46,7 +48,7 @@ export function SearchField({
           <button
             type="button"
             className={s.clear}
-            aria-label="Clear search"
+            aria-label={m.common.clearSearch}
             onClick={() => {
               onChange("");
               input.current?.focus();

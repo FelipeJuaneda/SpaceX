@@ -1,12 +1,13 @@
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it } from "vitest";
+import { setLocale } from "@/i18n/store";
 import {
   countdownParts,
+  formatInt,
   formatNet,
   formatOffset,
   formatStamp,
   isPrecise,
   ordinal,
-  plural,
 } from "./format";
 
 describe("formatNet", () => {
@@ -54,7 +55,7 @@ describe("countdown", () => {
 });
 
 describe("text helpers", () => {
-  it("writes ordinals and plurals", () => {
+  it("writes ordinals", () => {
     expect([1, 2, 3, 4, 11, 12, 13, 21, 22, 37].map(ordinal)).toEqual([
       "1st",
       "2nd",
@@ -67,7 +68,19 @@ describe("text helpers", () => {
       "22nd",
       "37th",
     ]);
-    expect(plural(1, "flight")).toBe("1 flight");
-    expect(plural(1234, "flight")).toBe("1,234 flights");
+  });
+});
+
+describe("Spanish interface", () => {
+  afterEach(() => setLocale("en"));
+  it("follows Spanish date and number conventions", () => {
+    setLocale("es");
+    const iso = "2026-11-15T12:00:00Z";
+    expect(formatNet(iso, "quarter")).toBe("T4 2026");
+    expect(formatNet(iso, "half")).toBe("S2 2026");
+    expect(formatNet(iso, "month")).toMatch(/^noviembre (de )?2026$/);
+    expect(formatInt(1234)).toBe("1.234");
+    expect(ordinal(37)).toBe("37.º");
+    expect(document.documentElement.lang).toBe("es");
   });
 });

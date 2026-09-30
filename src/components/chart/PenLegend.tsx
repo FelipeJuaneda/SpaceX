@@ -1,26 +1,28 @@
 import { OutcomeGlyph } from "@/components/ui/OutcomeMark";
+import { useI18n } from "@/i18n/useI18n";
 import { cn } from "@/lib/cn";
 import s from "./PenLegend.module.css";
 
 /** Key to the pen inks, printed like the legend strip on recorder paper. */
 export function PenLegend({ className }: { className?: string }) {
+  const { m } = useI18n();
   return (
-    <ul aria-label="Chart key" className={cn(s.legend, className)}>
+    <ul aria-label={m.legend.key} className={cn(s.legend, className)}>
       <li>
         <OutcomeGlyph outcome="success" />
-        Flight
+        {m.legend.flight}
       </li>
       <li>
         <OutcomeGlyph outcome="failure" />
-        Failure
+        {m.legend.failure}
       </li>
       <li>
         <LandingGlyph landed />
-        Booster landed
+        {m.legend.landed}
       </li>
       <li>
         <OutcomeGlyph outcome="upcoming" />
-        Scheduled
+        {m.legend.scheduled}
       </li>
     </ul>
   );

@@ -1,5 +1,6 @@
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from "react";
 import { Link, type LinkProps } from "react-router";
+import { useI18n } from "@/i18n/useI18n";
 import { cn } from "@/lib/cn";
 import s from "./Button.module.css";
 
@@ -81,11 +82,12 @@ export function ButtonAnchor({
   children,
   ...rest
 }: Common & AnchorHTMLAttributes<HTMLAnchorElement>) {
+  const { m } = useI18n();
   return (
     <a className={classes(variant, size, className)} target="_blank" rel="noreferrer" {...rest}>
       <Inner icon={icon} iconEnd={iconEnd}>
         {children}
-        <span className="visually-hidden"> (opens in a new tab)</span>
+        <span className="visually-hidden">{m.common.newTab}</span>
       </Inner>
     </a>
   );

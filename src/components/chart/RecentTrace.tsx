@@ -3,7 +3,8 @@ import { useMemo } from "react";
 import type { LaunchSummary } from "@/types/domain";
 import { between, isFailure, isFlown, time } from "@/features/launches/selectors";
 import { useElementSize } from "@/hooks/useElementSize";
-import { isPrecise, plural } from "@/lib/format";
+import { useI18n } from "@/i18n/useI18n";
+import { formatMonthShort, isPrecise } from "@/lib/format";
 import s from "./RecentTrace.module.css";
 
 const DAY = 86_400_000;
@@ -15,8 +16,6 @@ const SPIKE = 44;
 const FAIL_SPIKE = 86;
 const DOT_Y = 142;
 const LABEL_Y = 188;
-
-const monthFmt = new Intl.DateTimeFormat("en-GB", { month: "short", timeZone: "UTC" });
 
 /** A baseline with one spike per flight: what a recorder pen draws. */
 function tracePath(xs: number[], x0: number, x1: number, height: number): string {
@@ -35,6 +34,7 @@ interface Props {
 /** The head of the roll: the last 60 days already drawn, the next 30 dashed ahead of the pen. */
 export function RecentTrace({ launches, now }: Props) {
   const [ref, size] = useElementSize<HTMLDivElement>();
+  const msg = useI18n().m;
   const reduce = useReducedMotion();
   const from = now - PAST_DAYS * DAY;
   const to = now + FUTURE_DAYS * DAY;
@@ -60,7 +60,7 @@ export function RecentTrace({ launches, now }: Props) {
     const d = new Date(from);
     let cursor = Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + 1, 1);
     while (cursor < to) {
-      months.push({ x: x(cursor), label: monthFmt.format(cursor) });
+      months.push({ x: x(cursor), label: formatMonthShort(cursor) });
       const c = new Date(cursor);
       cursor = Date.UTC(c.getUTCFullYear(), c.getUTCMonth() + 1, 1);
     }
@@ -135,16 +135,13 @@ export function RecentTrace({ launches, now }: Props) {
               className={s.pen}
             />
             <text x={nowX} y={10} textAnchor="middle" className={s.nowLabel}>
-              Now
+              {msg.charts.now}
             </text>
           </svg>
         )}
       </div>
       <figcaption className={s.caption}>
-        {plural(past.length, "flight")} in the last {PAST_DAYS} days
-        {past.length > 0 && (failures ? `, ${failures} failed` : ", none failed")};{" "}
-        {plural(landed, "booster")} recovered. {plural(future.length, "flight")} scheduled in the
-        next {FUTURE_DAYS} days.
+        {msg.charts.recentCaption(past.length, failures, landed, future.length)}
       </figcaption>
     </figure>
   );

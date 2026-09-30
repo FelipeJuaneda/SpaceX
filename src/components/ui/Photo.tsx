@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { ImageRef } from "@/types/domain";
+import { useI18n } from "@/i18n/useI18n";
 import { cn } from "@/lib/cn";
 import s from "./Photo.module.css";
 
@@ -19,6 +20,7 @@ interface Props {
  * The provider thumbnail stands in, blurred, until the full image arrives.
  */
 export function Photo({ image, alt, ratio = "3 / 2", priority, caption = true, className }: Props) {
+  const { m } = useI18n();
   const [state, setState] = useState<"loading" | "loaded" | "error">(image ? "loading" : "error");
 
   return (
@@ -49,15 +51,15 @@ export function Photo({ image, alt, ratio = "3 / 2", priority, caption = true, c
         )}
         {state === "error" && (
           <div className={s.missing}>
-            <span className="legend">No photograph on file</span>
+            <span className="legend">{m.photo.none}</span>
           </div>
         )}
       </div>
       {caption && image && state !== "error" && (
         <figcaption className={s.caption}>
-          {image.generic && <span>Vehicle photograph, not from this flight. </span>}
+          {image.generic && <span>{m.photo.generic}</span>}
           <span>
-            {image.credit ? `Credit: ${image.credit}` : "Credit not recorded"}
+            {image.credit ? m.photo.credit(image.credit) : m.photo.noCredit}
             {image.license && ` · ${image.license}`}
           </span>
         </figcaption>

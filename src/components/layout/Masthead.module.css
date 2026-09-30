@@ -76,8 +76,11 @@
   letter-spacing: 0;
 }
 
-.legend {
+.tools {
+  display: flex;
+  align-items: center;
   justify-self: end;
+  gap: var(--space-4);
 }
 
 @media (max-width: 1099px) {
@@ -87,15 +90,21 @@
 }
 
 @media (max-width: 767px) {
+  /* Wordmark and language keys share the first row; navigation takes the second. */
   .inner {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr auto;
     gap: 0;
     padding-top: var(--space-2);
   }
   .nav {
+    grid-column: 1 / -1;
+    grid-row: 2;
     margin-inline: calc(-1 * var(--space-3));
     overflow-x: auto;
     scrollbar-width: none;
+  }
+  .link {
+    padding: 0 12px;
   }
   .long {
     display: none;
