@@ -1,21 +1,21 @@
 {
-  "generatedAt": "2026-10-01T06:50:13.569Z",
+  "generatedAt": "2026-10-02T06:48:40.864Z",
   "source": {
     "name": "Launch Library 2 — The Space Devs",
     "url": "https://thespacedevs.com/llapi"
   },
   "counts": {
     "launches": 865,
-    "flown": 732,
-    "upcoming": 133,
+    "flown": 734,
+    "upcoming": 131,
     "rockets": 12
   },
   "records": {
     "landings": {
-      "attempted": 704,
-      "landed": 676
+      "attempted": 706,
+      "landed": 678
     },
-    "reflights": 620,
+    "reflights": 622,
     "mostFlownBooster": {
       "serial": "B1067",
       "flights": 37,
@@ -26,9 +26,9 @@
       "days": 9.2,
       "slug": "falcon-9-block-5-nrol-57"
     },
-    "crewedFlights": 21,
-    "humansFlown": 74,
-    "successStreak": 217,
+    "crewedFlights": 22,
+    "humansFlown": 77,
+    "successStreak": 219,
     "busiestYear": {
       "year": 2025,
       "flights": 170
