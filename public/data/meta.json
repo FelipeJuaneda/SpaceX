@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-10-08T06:50:59.344Z",
+  "generatedAt": "2026-10-09T06:51:01.043Z",
   "source": {
     "name": "Launch Library 2 — The Space Devs",
     "url": "https://thespacedevs.com/llapi"
   },
   "counts": {
-    "launches": 867,
+    "launches": 868,
     "flown": 735,
-    "upcoming": 132,
+    "upcoming": 133,
     "rockets": 12
   },
   "records": {
