@@ -1,21 +1,21 @@
 {
-  "generatedAt": "2026-11-21T14:47:09.342Z",
+  "generatedAt": "2026-11-22T14:43:28.127Z",
   "source": {
     "name": "Launch Library 2 — The Space Devs",
     "url": "https://thespacedevs.com/llapi"
   },
   "counts": {
     "launches": 883,
-    "flown": 747,
-    "upcoming": 136,
+    "flown": 748,
+    "upcoming": 135,
     "rockets": 12
   },
   "records": {
     "landings": {
-      "attempted": 720,
-      "landed": 691
+      "attempted": 721,
+      "landed": 692
     },
-    "reflights": 634,
+    "reflights": 635,
     "mostFlownBooster": {
       "serial": "B1067",
       "flights": 37,
@@ -28,7 +28,7 @@
     },
     "crewedFlights": 22,
     "humansFlown": 77,
-    "successStreak": 232,
+    "successStreak": 233,
     "busiestYear": {
       "year": 2025,
       "flights": 170
